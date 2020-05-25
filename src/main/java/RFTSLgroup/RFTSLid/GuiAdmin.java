@@ -1,6 +1,7 @@
 package RFTSLgroup.RFTSLid;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -48,6 +50,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new GridLayout(2, 4));
+		
+		CardLayout card = new CardLayout();
 		
 		jlHeading = new JLabel("Admin", SwingConstants.CENTER);
 		jlHeading.setFont(new Font("Serif", Font.BOLD, 24));
@@ -85,12 +89,19 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		jlistInfo = new JList(infoModel);
 		
 		btnAddPilot = new JButton("Add Pilot");
+		btnAddPilot.addActionListener(this);
 		btnAddAir = new JButton("Add Aircraft");
+		btnAddAir.addActionListener(this);
 		btnAddEmp = new JButton("Add Employee");
+		btnAddEmp.addActionListener(this);
 		btnAddDis = new JButton("Add Discount");
+		btnAddDis.addActionListener(this);
 		btnRemPilot = new JButton("Remove Pilot");
+		btnRemPilot.addActionListener(this);
 		btnRemAir = new JButton("Remove Aircraft");
+		btnRemAir.addActionListener(this);
 		btnRemEmp = new JButton("Remove Employee");
+		btnRemEmp.addActionListener(this);
 		
 		mainPanel.add(topPanel);
 		topPanel.add(jlHeading);
@@ -117,25 +128,52 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		
 		
 		
-		add(mainPanel);
-		//add(topPanel);
-		//add(centerPanel);
-		
+		add(mainPanel);	
 		
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		if (e.getSource() == btnAddPilot) {
+			infoModel.addElement("Adding Pilot");
+			InputDialog id = new InputDialog();
+			id.showAddPilotDialog();
+		} 
+		else if (e.getSource() == btnAddEmp) {
+			infoModel.addElement("Adding Employee");
+			InputDialog id = new InputDialog();
+			id.showAddEmployeeDialog();
+		} 
+		else if (e.getSource() == btnAddAir) {
+			infoModel.addElement("Adding Aircraft");
+			InputDialog id = new InputDialog();
+			id.showAddAircraftDialog();
+		}
+		else if (e.getSource() == btnAddDis) {
+			infoModel.addElement("Adding Discount");
+			InputDialog id = new InputDialog();
+			id.showAddDiscountDialog();
+		}
+		else if (e.getSource() == btnRemAir) {
+			infoModel.addElement("Removing Aircraft");
+		}
+		else if (e.getSource() == btnRemPilot) {
+			infoModel.addElement("Removing Pilot");
+		}
+		else if (e.getSource() == btnRemEmp) {
+			infoModel.addElement("Removing Employee");
+		}
+		
 		
 	}
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Database");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GuiAdmin adminUI = new GuiAdmin();
-		frame.add(adminUI);
-		frame.pack();
-		frame.setVisible(true);
-	}
-	
+//	public static void main(String[] args) {
+//		JFrame frame = new JFrame("Database");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		GuiAdmin adminUI = new GuiAdmin();
+//		frame.add(adminUI);
+//		frame.pack();
+//		frame.setVisible(true);
+//	}
+//	
 }

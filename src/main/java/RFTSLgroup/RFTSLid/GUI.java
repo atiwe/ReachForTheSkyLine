@@ -2,6 +2,7 @@ package RFTSLgroup.RFTSLid;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -40,6 +41,7 @@ public class GUI extends JPanel implements ActionListener{
 		bottomPanel2.setLayout(new GridLayout(1,3));
 		
 		jlemp = new JLabel("Employees", SwingConstants.CENTER);
+		jlemp.setFont(new Font("Serif", Font.BOLD, 24));
 		jlsf = new JLabel("Scheduled flights", SwingConstants.CENTER);
 		jlfl = new JLabel("Flight lines", SwingConstants.CENTER);
 		
@@ -84,16 +86,15 @@ public class GUI extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	
-//	public static void main(String args[]) {
-//		JFrame frame = new JFrame("Databas");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		GUI ui = new GUI();
-//		frame.add(ui);
-//		frame.pack();
-//		frame.setVisible(true);
-//	}
+	public static void main(String args[]) {
+		JFrame frame = new JFrame("Databas");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		GUI ui = new GUI();
+		frame.add(ui);
+		frame.pack();
+		frame.setVisible(true);
+	}
 }

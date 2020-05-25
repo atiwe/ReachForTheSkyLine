@@ -7,6 +7,8 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Session;
 
+import Repository.KeySpaceRepository;
+
 public class App 
 {
 	
@@ -35,7 +37,7 @@ public class App
         cluster.close();
     }
     
-/*    public void createKeySpace(String keySpaceName, String replicationStrategy, int replicationFactor)
+    public void createKeySpace(String keySpaceName, String replicationStrategy, int replicationFactor)
     {
     	StringBuilder sb = new StringBuilder("CREATE KEYSPACE IF NOT EXISTS ").append(keySpaceName).append(" WITH replication = {")
     			.append("'class':'").append(replicationStrategy).append("','replication_factor':")
@@ -68,30 +70,33 @@ public class App
     	session.execute(query);
     }
     
-    public void insertEmployeeByTitle()
-    {
-    	StringBuilder sb = new StringBuilder("INSERT INTO ")
-    			.append(TABLE_NAME).append(" ADD ")
-    			.append(columnName).append()
-    			.append(columnType).append(";");
-    	
-    	String query = sb.toString();
-    	session.execute(query);
-    }
-/*    private KeyspaceRepository schemaRepository;
+//    public void insertEmployeeByTitle()
+//    {
+//    	StringBuilder sb = new StringBuilder("INSERT INTO ")
+//    			.append(TABLE_NAME).append(" ADD ")
+//    			.append(columnName).append()
+//    			.append(columnType).append(";");
+//    	
+//    	String query = sb.toString();
+//    	session.execute(query);
+//    } 
+
+   // private KeySpaceRepository schemaRepository;
     
-    @Before
-    public void connect()
-    {
-    	CassandraConnector client = new CassandraConnector();
-    	client.connect("127.0.0.1", 9042);
-    	this.session = client.getSession();
-    	schemaRepository = new KeyspaceRepository(session);
-    }*/
+    
+//    public void connect()
+//    {
+//    	CassandraConnect client = new CassandraConnect();
+//    	client.connect("127.0.0.1", 9042);
+//    	this.session = client.getSession();
+//    	schemaRepository = new KeySpaceRepository(session);
+//    }
+    
     
     public static void main( String[] args )
     {
     	App app = new App();
     	app.connect("127.0.0.1", 9042);
+    	app.createKeySpace("TestJava2", "SimpleStrategy", 1);
     }
 }

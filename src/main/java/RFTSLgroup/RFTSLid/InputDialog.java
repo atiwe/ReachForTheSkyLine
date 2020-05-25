@@ -68,10 +68,43 @@ public class InputDialog {
 	public String[] showAddPilotDialog() {
 		Object[] field = {
 				"Name", field1,
-				"Pilop License", field2,
+				"Pilot License", field2,
 				"Telephone", field3,
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Pilot", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3};
+		return dialogToArray(fields);
+	}
+	
+	public String[] showAddEmployeeDialog() {
+		Object[] field = {
+				"Name", field1,
+				"Employee Number", field2,
+				"Telephone", field3,
+			};
+		JOptionPane.showConfirmDialog(null, field, "Add Employee", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3};
+		return dialogToArray(fields);
+	}
+	
+	public String[] showAddAircraftDialog() {
+		Object[] field = {
+				"Model", field1,
+				"Producer", field2,
+				"Capacity", field3,
+			};
+		JOptionPane.showConfirmDialog(null, field, "Add Aircraft", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3};
+		return dialogToArray(fields);
+	}
+	
+	public String[] showAddDiscountDialog() {
+		Object[] field = {
+				"Discount code", field1,
+				"Reduction", field2,
+				"Start Date", field3,
+			};
+		JOptionPane.showConfirmDialog(null, field, "Add Discount", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3};
 		return dialogToArray(fields);
 	}
@@ -84,20 +117,20 @@ public class InputDialog {
 		return arr;
 	}
 	
-//	public static void main(String[] args) {
-//		InputDialog input = new InputDialog();
-//		String[] arr = input.showEditFlightDialog();
-//		for(int i = 0; i<arr.length; i++) {
-//			System.out.println(arr[i]);
-//		}
-//		arr = input.showBookFlightDialog();
-//		for(int i = 0; i<arr.length; i++) {
-//			System.out.println(arr[i]);
-//		}
-//		arr = input.showAddPilotDialog();
-//		for(int i = 0; i<arr.length; i++) {
-//			System.out.println(arr[i]);
-//		}
-//	}
+	public static void main(String[] args) {
+		InputDialog input = new InputDialog();
+		String[] arr = input.showEditFlightDialog();
+		for(int i = 0; i<arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		arr = input.showBookFlightDialog();
+		for(int i = 0; i<arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		arr = input.showAddPilotDialog();
+		for(int i = 0; i<arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
 
 }
