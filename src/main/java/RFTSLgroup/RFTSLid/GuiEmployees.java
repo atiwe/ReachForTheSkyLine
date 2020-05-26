@@ -1,3 +1,4 @@
+
 package RFTSLgroup.RFTSLid;
 
 import java.awt.BorderLayout;
@@ -17,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-public class GUI extends JPanel implements ActionListener{
+public class GuiEmployees extends JPanel implements ActionListener{
 	JLabel jlemp;
 	JLabel jlsf;
 	JLabel jlfl;
@@ -29,8 +30,9 @@ public class GUI extends JPanel implements ActionListener{
 	
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
+	private Controller controller;
 	
-	public GUI() {
+	public GuiEmployees() {
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 700));
 		JPanel centrePanel = new JPanel();
@@ -40,38 +42,37 @@ public class GUI extends JPanel implements ActionListener{
 		JPanel bottomPanel2 = new JPanel();
 		bottomPanel2.setLayout(new GridLayout(1,3));
 		
+		//Labels
 		jlemp = new JLabel("Employees", SwingConstants.CENTER);
 		jlemp.setFont(new Font("Serif", Font.BOLD, 24));
 		jlsf = new JLabel("Scheduled flights", SwingConstants.CENTER);
 		jlfl = new JLabel("Flight lines", SwingConstants.CENTER);
 		
-		
+		//List views for flights
 		modelsf = new DefaultListModel<String>();
 		modelfl = new DefaultListModel<String>();
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
 		
+		//Add buttons with action listeners
 		btnAddFlight = new JButton("Add Flight");
 		btnAddFlightLine = new JButton("Add Flight Line");
 		btnRemoveFlight = new JButton("Remove Flight");
 		btnEditFlight = new JButton("Edit Flight");
 		btnPlaceBooking = new JButton("Place Booking");
+		btnAddFlight.addActionListener(this);
+		btnAddFlightLine.addActionListener(this);
+		btnRemoveFlight.addActionListener(this);
+		btnEditFlight.addActionListener(this);
+		btnPlaceBooking.addActionListener(this);
+		
+		//Add components to panel
 		bottomPanel.add(btnAddFlight);
 		bottomPanel.add(btnAddFlightLine);
 		bottomPanel2.add(btnRemoveFlight);
 		bottomPanel2.add(btnEditFlight);
 		bottomPanel2.add(btnPlaceBooking);
 		
-		String hej = "sdfsdf";
-		String då = "asdas";
-		modelsf.addElement( hej);
-		modelsf.addElement(då);
-		modelsf.addElement( hej);
-		modelsf.addElement(då);
-		modelsf.addElement( hej);
-		modelsf.addElement(då);
-		modelfl.addElement( hej);
-		modelfl.addElement(då);
 		centrePanel.add(jlemp);
 		centrePanel.add(jlsf);
 		centrePanel.add(new JScrollPane(jlistsf));
@@ -81,20 +82,47 @@ public class GUI extends JPanel implements ActionListener{
 		centrePanel.add(bottomPanel);
 		centrePanel.add(emp2);
 		centrePanel.add(bottomPanel2);
+		
 		add(centrePanel);
 
 	}
-
-	public void actionPerformed(ActionEvent e) {
-		
+	
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
 	
-	public static void main(String args[]) {
+	public void createUI() {
 		JFrame frame = new JFrame("Databas");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GUI ui = new GUI();
+		GuiEmployees ui = new GuiEmployees();
 		frame.add(ui);
 		frame.pack();
 		frame.setVisible(true);
 	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAddFlight) {
+			InputDialog id = new InputDialog();
+			String[] arr = id.showAddFlightDialog();
+			controller.addFlight(arr[0], arr[1], arr[2]);
+		} 
+		else if (e.getSource() == btnAddFlightLine) {
+			InputDialog id = new InputDialog();
+			String[] arr = id.showAddFlightLineDialog();
+			
+		}
+		else if (e.getSource() == btnRemoveFlight) {
+			
+		}
+		else if (e.getSource() == btnEditFlight) {
+			InputDialog id = new InputDialog();
+			id.showEditFlightDialog();
+		}
+		else if (e.getSource() == btnPlaceBooking) {
+			InputDialog id = new InputDialog();
+			id.showBookFlightDialog();
+		}
+		
+	}
+
 }

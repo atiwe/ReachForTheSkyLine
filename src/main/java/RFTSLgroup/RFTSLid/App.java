@@ -1,12 +1,9 @@
 package RFTSLgroup.RFTSLid;
 
 
-import java.awt.print.Book;
-
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Session;
-
 import Repository.EmployeeRepository;
 import Repository.KeySpaceRepository;
 
@@ -14,6 +11,7 @@ public class App
 {
 	
     private Cluster cluster;
+    private GuiEmployees ui;
     
     private static Session session;
     
@@ -49,5 +47,6 @@ public class App
     	keyspace.useKeyspace(keyspaceName);
     	EmployeeRepository employee = new EmployeeRepository(session);
     	employee.createTable();
+    	Controller controller = new Controller(employee);
     }
 }

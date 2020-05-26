@@ -1,13 +1,17 @@
+
 package RFTSLgroup.RFTSLid;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -17,7 +21,7 @@ import javax.swing.SwingUtilities;
 
 public class HomePage implements ActionListener {
 	
-	JFrame frame = new JFrame("CardLayout");
+	JFrame frame = new JFrame("Reach For The Sky Line");
 	JPanel panelContainer = new JPanel();
 	CardLayout cardLayout = new CardLayout();
 	
@@ -25,20 +29,45 @@ public class HomePage implements ActionListener {
 	JMenu menu;
 	JMenuItem menuItemAdmin, menuItemCust, menuItemEmp;
 	
+	JLabel jlHeading;
+	JButton btnAdmin, btnCust, btnEmp;
+	
+	JPanel startPage;
 	GuiAdmin guiAdmin = new GuiAdmin();
 	GuiCustomers guiCustomer = new GuiCustomers();
-	GUI guiEmployees = new GUI();
+	GuiEmployees guiEmployees = new GuiEmployees();
 	
 	public HomePage() {
 		
 		panelContainer.setLayout(cardLayout);
-
+		
+		//Start page panel
+		startPage = new JPanel();
+		
+		startPage.setBackground(Color.CYAN);
+		jlHeading = new JLabel("Choose your role");
+		jlHeading.setFont(new Font("Serif", Font.BOLD, 24));
+		startPage.add(jlHeading);
+		
+		btnAdmin = new JButton("Administrator");
+		btnCust = new JButton("Customer");
+		btnEmp = new JButton("Employee");
+		
+		btnAdmin.addActionListener(this);
+		btnCust.addActionListener(this);
+		btnEmp.addActionListener(this);
+		
+		startPage.add(btnAdmin);
+		startPage.add(btnCust);
+		startPage.add(btnEmp);
+		
 		//Different views for different users profiles
+		panelContainer.add(startPage, "Start");
 		panelContainer.add(guiAdmin, "GuiAdmin");
 		panelContainer.add(guiCustomer, "GuiCustomer");
 		panelContainer.add(guiEmployees, "GuiEmployee");
 		
-		cardLayout.show(panelContainer, "GuiCustomer");
+		cardLayout.show(panelContainer, "Start");
 		
 		//Menu bar
 		menuBar = new JMenuBar();
@@ -76,6 +105,15 @@ public class HomePage implements ActionListener {
 			cardLayout.show(panelContainer, "GuiCustomer");
 		} 
 		else if (e.getSource() == menuItemEmp) {
+			cardLayout.show(panelContainer, "GuiEmployee");
+		}
+		else if (e.getSource() == btnAdmin) {
+			cardLayout.show(panelContainer, "GuiAdmin");
+		}
+		else if (e.getSource() == btnCust) {
+			cardLayout.show(panelContainer, "GuiCustomer");
+		}
+		else if (e.getSource() == btnEmp) {
 			cardLayout.show(panelContainer, "GuiEmployee");
 		}
 	}

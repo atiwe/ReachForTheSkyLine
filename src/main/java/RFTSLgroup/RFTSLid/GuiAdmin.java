@@ -33,6 +33,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 	
 	
 	public GuiAdmin() {
+		
+		// Panels with grid layout
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 600));
 		
@@ -51,13 +53,13 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new GridLayout(2, 4));
 		
-		CardLayout card = new CardLayout();
-		
+		// Labels
 		jlHeading = new JLabel("Admin", SwingConstants.CENTER);
 		jlHeading.setFont(new Font("Serif", Font.BOLD, 24));
 		jlInfo = new JLabel("Info", SwingConstants.CENTER);
 		jlChoose = new JLabel("Choose what information you want to see");
 		
+		//Radio Buttons
 		String pilot = "Pilots";
 		rbtnPilot = new JRadioButton(pilot);
 		rbtnPilot.setMnemonic(KeyEvent.VK_B);
@@ -79,15 +81,18 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		rbtnDis.setMnemonic(KeyEvent.VK_B);
 		rbtnDis.setActionCommand(discount);
 		
+		//Radio button group
 		btnGroup = new ButtonGroup();
 		btnGroup.add(rbtnPilot);
 		btnGroup.add(rbtnAir);
 		btnGroup.add(rbtnEmp);
 		btnGroup.add(rbtnDis);
 		
+		//List view for information - depends on which radio button is chosen
 		infoModel = new DefaultListModel<String>();
 		jlistInfo = new JList(infoModel);
 		
+		//Buttons with action listeners
 		btnAddPilot = new JButton("Add Pilot");
 		btnAddPilot.addActionListener(this);
 		btnAddAir = new JButton("Add Aircraft");
@@ -102,7 +107,9 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		btnRemAir.addActionListener(this);
 		btnRemEmp = new JButton("Remove Employee");
 		btnRemEmp.addActionListener(this);
+		;
 		
+		//Adding components to panels
 		mainPanel.add(topPanel);
 		topPanel.add(jlHeading);
 		topPanel.add(jlInfo);
@@ -125,13 +132,12 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		bottomPanel.add(btnRemAir);
 		bottomPanel.add(btnRemEmp);
 		bottomPanel.add(btnRemPilot);
-		
-		
-		
+			
 		add(mainPanel);	
 		
 	}
 
+	// Actions perfomed when buttons clicked
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == btnAddPilot) {
@@ -167,13 +173,4 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		
 	}
 
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame("Database");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		GuiAdmin adminUI = new GuiAdmin();
-//		frame.add(adminUI);
-//		frame.pack();
-//		frame.setVisible(true);
-//	}
-//	
 }

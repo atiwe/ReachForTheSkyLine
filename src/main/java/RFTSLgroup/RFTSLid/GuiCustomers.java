@@ -29,7 +29,12 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
 	
+	Object[] dreamFlights;
+	
+	
 	public GuiCustomers() {
+		
+		//Panels with grid layout
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 700));
 		JPanel centrePanel = new JPanel();
@@ -39,35 +44,32 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		JPanel bottomPanel2 = new JPanel();
 		bottomPanel2.setLayout(new GridLayout(1,1));
 		
+		//Labels
 		jlemp = new JLabel("Customers", SwingConstants.CENTER);
 		jlemp.setFont(new Font("Serif", Font.BOLD, 24));
 		jlsf = new JLabel("Scheduled flights", SwingConstants.CENTER);
 		jlfl = new JLabel("Flight lines", SwingConstants.CENTER);
 		
-		
+		//Lists
 		modelsf = new DefaultListModel<String>();
 		modelfl = new DefaultListModel<String>();
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
 		
-		btnBookFlight = new JButton("Book Flight");
-		btnCancelFlight = new JButton("Cancel Flight");
-	
-		bottomPanel.add(btnBookFlight);
-
-		bottomPanel2.add(btnCancelFlight);
+		
+		modelsf.addElement("Hi");
 	
 		
-		String hej = "sdfsdf";
-		String då = "asdas";
-		modelsf.addElement( hej);
-		modelsf.addElement(då);
-		modelsf.addElement( hej);
-		modelsf.addElement(då);
-		modelsf.addElement( hej);
-		modelsf.addElement(då);
-		modelfl.addElement( hej);
-		modelfl.addElement(då);
+		//Buttons with action listeners
+		btnBookFlight = new JButton("Book Flight");
+		btnCancelFlight = new JButton("Cancel Flight");
+		btnBookFlight.addActionListener(this);
+		btnCancelFlight.addActionListener(this);
+	
+		//Adding components to panels
+		bottomPanel.add(btnBookFlight);
+		bottomPanel2.add(btnCancelFlight);
+	
 		centrePanel.add(jlemp);
 		centrePanel.add(jlsf);
 		centrePanel.add(new JScrollPane(jlistsf));
@@ -81,19 +83,16 @@ public class GuiCustomers extends JPanel implements ActionListener {
 
 	}
 
+	//Action performed on button clicks
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == btnBookFlight) {
+			
+		} 
+		else if (e.getSource() == btnCancelFlight) {
+			
+		}
 		
 	}
 	
-	public static void main(String args[]) {
-		JFrame frame = new JFrame("Databas");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GuiCustomers ui = new GuiCustomers();
-		frame.add(ui);
-		frame.pack();
-		frame.setVisible(true);
-	}
 }
 	
-
