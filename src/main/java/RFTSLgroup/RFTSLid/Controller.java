@@ -5,10 +5,13 @@ import java.util.UUID;
 import Domain.Airplane;
 import Domain.Employee;
 import Domain.Pilot;
+import Domain.ScheduledFlight;
 import Repository.AirplaneRepository;
 import Repository.CustomerRepository;
 import Repository.EmployeeRepository;
 import Repository.PilotRepository;
+import Repository.RoutesRepository;
+import Repository.ScheduledFlightRepository;
 
 public class Controller {
 	private GuiEmployees guiEmployee;
@@ -16,14 +19,18 @@ public class Controller {
     private CustomerRepository customerRepository;
     private EmployeeRepository employeeRepository;
     private PilotRepository pilotRepository;
+    private RoutesRepository routesRepository;
+    private ScheduledFlightRepository scheduledFlightRepository;
 	private GuiAdmin guiAdmin;
 	private HomePage homePage;
 	
-	public Controller(AirplaneRepository airplaneRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, PilotRepository pilotRepository) {
+	public Controller(AirplaneRepository airplaneRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, PilotRepository pilotRepository, RoutesRepository routesRepository, ScheduledFlightRepository scheduledFlightRepository) {
 		this.airplaneRepository = airplaneRepository;
 		this.customerRepository = customerRepository;
 		this.employeeRepository = employeeRepository;
 		this.pilotRepository = pilotRepository;
+		this.routesRepository = routesRepository;
+		this.scheduledFlightRepository = scheduledFlightRepository;
 		createUI();
 	}
 	
@@ -32,13 +39,16 @@ public class Controller {
 	}
     
     public void addEmployee(String id, String name, String email, String telephone, String ssn, String empDate) {
-    	UUID uuid = new UUID(234234, 0);
+    	UUID uuid = new UUID(234230, 0);
     	Employee employee = new Employee(uuid, name, email, telephone, ssn, empDate);
     	employeeRepository.insertEmployee(employee);
     }
     
-    void addFlight(String t, String t2, String t3) {
-    	
+    void addFlight(String id, String estimatedStart, String estimatedLanding, String flightTime, String pilot, String routeID) {
+    	UUID uuid = new UUID(23456, 1);
+    	UUID uuid2 = new UUID(2342345, 2);
+    	ScheduledFlight scheduledFlight = new ScheduledFlight(uuid, estimatedStart, estimatedLanding, flightTime, pilot, uuid2);
+    	scheduledFlightRepository.insertFlight(scheduledFlight);
     }
     
     public void addAircraft(String id, String model, String producer, String capacity, String flightHours) {

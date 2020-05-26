@@ -28,9 +28,9 @@ public class InputDialog {
 	
 	public String[] showAddFlightDialog() {
 		Object[] field = {
-				"Date", field1,
-				"Time", field2,
-				"Plane", field3,
+				"Estimated Start", field1,
+				"Estimated Landing", field2,
+				"Flight Time", field3,
 				"Pilot", field4
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Flight", JOptionPane.OK_CANCEL_OPTION);

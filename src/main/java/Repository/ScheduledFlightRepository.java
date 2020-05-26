@@ -51,7 +51,7 @@ public class ScheduledFlightRepository {
 	public void insertFlight(ScheduledFlight flight) {
 		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME).append("(id, estimated_start, estimated_landing, flightTime, pilot, route_id) ")
 				.append("VALUES (").append(flight.getID()).append(", '").append(flight.getEstimatedStart()).append("', '").append(flight.getEstimatedLanding()).append("', '")
-				.append(flight.getFlightTime()).append("', '").append(flight.getPilot()).append("', '").append(flight.getRouteID()).append("');");
+				.append(flight.getFlightTime()).append("', '").append(flight.getPilot()).append("', ").append(flight.getRouteID()).append(");");
 		
 		final String query = sb.toString();
 		session.execute(query);
