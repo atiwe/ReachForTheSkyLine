@@ -152,12 +152,20 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		frame.setVisible(true);
 	}
 
+//	"Name", field1,
+//	"Pilot License", field2,
+//	"Telephone", field3,
+//	"Email", field4,
+//	"Social Security #", field5,
+//	"Employment Date", field6,
+	
 	// Actions perfomed when buttons clicked
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == btnAddPilot) {
 			InputDialog id = new InputDialog();
-			id.showAddPilotDialog();
+			String[] arr = id.showAddPilotDialog();
+			controller.addPilot("123", arr[0], arr[3], arr[2], arr[4], arr[5], arr[1]);
 		} 
 		else if (e.getSource() == btnAddEmp) {
 			InputDialog id = new InputDialog();
