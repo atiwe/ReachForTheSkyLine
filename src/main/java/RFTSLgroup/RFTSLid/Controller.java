@@ -5,21 +5,25 @@ import java.util.UUID;
 import Domain.Airplane;
 import Domain.Employee;
 import Domain.Pilot;
+import Repository.AirplaneRepository;
+import Repository.CustomerRepository;
 import Repository.EmployeeRepository;
 import Repository.PilotRepository;
 
 public class Controller {
 	private GuiEmployees guiEmployee;
-	private EmployeeRepository employeeRepository;
+    private AirplaneRepository airplaneRepository;
+    private CustomerRepository customerRepository;
+    private EmployeeRepository employeeRepository;
+    private PilotRepository pilotRepository;
 	private GuiAdmin guiAdmin;
-<<<<<<< HEAD
 	private HomePage homePage;
-=======
-	private PilotRepository pilotRepo;
->>>>>>> d9baf99f6516708481d2336197ce51ce86d3b110
 	
-	public Controller(EmployeeRepository employeeRepository) {
+	public Controller(AirplaneRepository airplaneRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, PilotRepository pilotRepository) {
+		this.airplaneRepository = airplaneRepository;
+		this.customerRepository = customerRepository;
 		this.employeeRepository = employeeRepository;
+		this.pilotRepository = pilotRepository;
 		createUI();
 	}
 	
@@ -48,7 +52,6 @@ public class Controller {
     	String lastFlight = null;
     	String nextFlight = null;
     	Pilot pilot = new Pilot(uuid, name, email, telephone, ssn, empDate, pilotLic, weeklyFlightHours, lastFlight, nextFlight);
-    	pilotRepo.insertPilot(pilot);
+    	pilotRepository.insertPilot(pilot);
     }
-
 }

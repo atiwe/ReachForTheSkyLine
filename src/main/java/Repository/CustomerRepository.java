@@ -24,7 +24,7 @@ public class CustomerRepository {
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
 				.append("id uuid PRIMARY KEY, ").append("name text,").append("email text,").append("telephone text,")
-				.append("social_security_number text,").append("bank text,").append("discount_code text);").append("scheduled_flight uuid);");
+				.append("social_security_number text,").append("bank text,").append("discount_code text,").append("scheduled_flight uuid);");
 		
 		final String query = sb.toString();
 		session.execute(query);
