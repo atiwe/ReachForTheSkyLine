@@ -1,9 +1,11 @@
+
 package RFTSLgroup.RFTSLid;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-public class GuiCustomers extends JPanel implements ActionListener {
+public class GuiEmployees extends JPanel implements ActionListener{
 	JLabel jlemp;
 	JLabel jlsf;
 	JLabel jlfl;
@@ -24,52 +26,52 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	JLabel emp2 = new JLabel("");
 	JList jlistsf;
 	JList jlistfl;
-	JButton btnBookFlight, btnCancelFlight;
+	JButton btnAddFlight, btnAddFlightLine, btnRemoveFlight, btnEditFlight, btnPlaceBooking;
 	
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
 	
-	Object[] dreamFlights;
-	
-	
-	public GuiCustomers() {
-		
-		//Panels with grid layout
+	public GuiEmployees() {
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 700));
 		JPanel centrePanel = new JPanel();
 		centrePanel.setLayout(new GridLayout(10,0));
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new GridLayout(1,1));
+		bottomPanel.setLayout(new GridLayout(1,3));
 		JPanel bottomPanel2 = new JPanel();
-		bottomPanel2.setLayout(new GridLayout(1,1));
+		bottomPanel2.setLayout(new GridLayout(1,3));
 		
 		//Labels
-		jlemp = new JLabel("Customers", SwingConstants.CENTER);
+		jlemp = new JLabel("Employees", SwingConstants.CENTER);
 		jlemp.setFont(new Font("Serif", Font.BOLD, 24));
 		jlsf = new JLabel("Scheduled flights", SwingConstants.CENTER);
 		jlfl = new JLabel("Flight lines", SwingConstants.CENTER);
 		
-		//Lists
+		//List views for flights
 		modelsf = new DefaultListModel<String>();
 		modelfl = new DefaultListModel<String>();
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
 		
+		//Add buttons with action listeners
+		btnAddFlight = new JButton("Add Flight");
+		btnAddFlightLine = new JButton("Add Flight Line");
+		btnRemoveFlight = new JButton("Remove Flight");
+		btnEditFlight = new JButton("Edit Flight");
+		btnPlaceBooking = new JButton("Place Booking");
+		btnAddFlight.addActionListener(this);
+		btnAddFlightLine.addActionListener(this);
+		btnRemoveFlight.addActionListener(this);
+		btnEditFlight.addActionListener(this);
+		btnPlaceBooking.addActionListener(this);
 		
-		modelsf.addElement("Hi");
-	
+		//Add components to panel
+		bottomPanel.add(btnAddFlight);
+		bottomPanel.add(btnAddFlightLine);
+		bottomPanel2.add(btnRemoveFlight);
+		bottomPanel2.add(btnEditFlight);
+		bottomPanel2.add(btnPlaceBooking);
 		
-		//Buttons with action listeners
-		btnBookFlight = new JButton("Book Flight");
-		btnCancelFlight = new JButton("Cancel Flight");
-		btnBookFlight.addActionListener(this);
-		btnCancelFlight.addActionListener(this);
-	
-		//Adding components to panels
-		bottomPanel.add(btnBookFlight);
-		bottomPanel2.add(btnCancelFlight);
-	
 		centrePanel.add(jlemp);
 		centrePanel.add(jlsf);
 		centrePanel.add(new JScrollPane(jlistsf));
@@ -79,20 +81,32 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		centrePanel.add(bottomPanel);
 		centrePanel.add(emp2);
 		centrePanel.add(bottomPanel2);
+		
 		add(centrePanel);
 
 	}
 
-	//Action performed on button clicks
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnBookFlight) {
-			
+		if (e.getSource() == btnAddFlight) {
+			InputDialog id = new InputDialog();
+			id.showAddAircraftDialog();
 		} 
-		else if (e.getSource() == btnCancelFlight) {
+		else if (e.getSource() == btnAddFlightLine) {
+			InputDialog id = new InputDialog();
+			id.showAddFlightLineDialog();
+		}
+		else if (e.getSource() == btnRemoveFlight) {
 			
+		}
+		else if (e.getSource() == btnEditFlight) {
+			InputDialog id = new InputDialog();
+			id.showEditFlightDialog();
+		}
+		else if (e.getSource() == btnPlaceBooking) {
+			InputDialog id = new InputDialog();
+			id.showBookFlightDialog();
 		}
 		
 	}
-	
+
 }
-	

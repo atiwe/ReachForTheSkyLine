@@ -1,3 +1,4 @@
+
 package RFTSLgroup.RFTSLid;
 
 import java.awt.CardLayout;
@@ -17,7 +18,7 @@ import javax.swing.SwingUtilities;
 
 public class HomePage implements ActionListener {
 	
-	JFrame frame = new JFrame("CardLayout");
+	JFrame frame = new JFrame("Reach For The Sky Line");
 	JPanel panelContainer = new JPanel();
 	CardLayout cardLayout = new CardLayout();
 	
@@ -27,7 +28,7 @@ public class HomePage implements ActionListener {
 	
 	GuiAdmin guiAdmin = new GuiAdmin();
 	GuiCustomers guiCustomer = new GuiCustomers();
-	GUI guiEmployees = new GUI();
+	GuiEmployees guiEmployees = new GuiEmployees();
 	
 	public HomePage() {
 		
