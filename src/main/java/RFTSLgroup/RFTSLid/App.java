@@ -37,61 +37,6 @@ public class App
         cluster.close();
     }
     
-    public void createKeySpace(String keySpaceName, String replicationStrategy, int replicationFactor)
-    {
-    	StringBuilder sb = new StringBuilder("CREATE KEYSPACE IF NOT EXISTS ").append(keySpaceName).append(" WITH replication = {")
-    			.append("'class':'").append(replicationStrategy).append("','replication_factor':")
-    			.append(replicationFactor).append("};");
-    	
-    	String query = sb.toString();
-    	session.execute(query);
-    }
-    
-    public void createTable()
-    {
-    	StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ")
-    			.append(TABLE_NAME).append("(")
-    			.append("id uuid PRIMARY KEY, ")
-    			.append("title text,")
-    			.append("subject text);");
-    	
-    	String query = sb.toString();
-    	session.execute(query);
-    }
-    
-    public void alterTableEmployee(String columnName, String columnType)
-    {
-    	StringBuilder sb = new StringBuilder("ALTER TABLE ")
-    			.append(TABLE_NAME).append(" ADD ")
-    			.append(columnName).append(" ")
-    			.append(columnType).append(";");
-    	
-    	String query = sb.toString();
-    	session.execute(query);
-    }
-    
-//    public void insertEmployeeByTitle()
-//    {
-//    	StringBuilder sb = new StringBuilder("INSERT INTO ")
-//    			.append(TABLE_NAME).append(" ADD ")
-//    			.append(columnName).append()
-//    			.append(columnType).append(";");
-//    	
-//    	String query = sb.toString();
-//    	session.execute(query);
-//    } 
-
-   // private KeySpaceRepository schemaRepository;
-    
-    
-//    public void connect()
-//    {
-//    	CassandraConnect client = new CassandraConnect();
-//    	client.connect("127.0.0.1", 9042);
-//    	this.session = client.getSession();
-//    	schemaRepository = new KeySpaceRepository(session);
-//    }
-    
     
     public static void main( String[] args )
     {
