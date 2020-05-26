@@ -30,6 +30,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 	
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
+	private Controller controller;
 	
 	public GuiEmployees() {
 		setLayout(new BorderLayout());
@@ -85,15 +86,30 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		add(centrePanel);
 
 	}
+	
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
+	public void createUI() {
+		JFrame frame = new JFrame("Databas");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		GuiEmployees ui = new GuiEmployees();
+		frame.add(ui);
+		frame.pack();
+		frame.setVisible(true);
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAddFlight) {
 			InputDialog id = new InputDialog();
-			id.showAddAircraftDialog();
+			String[] arr = id.showAddFlightDialog();
+			controller.addFlight(arr[0], arr[1], arr[2]);
 		} 
 		else if (e.getSource() == btnAddFlightLine) {
 			InputDialog id = new InputDialog();
-			id.showAddFlightLineDialog();
+			String[] arr = id.showAddFlightLineDialog();
+			
 		}
 		else if (e.getSource() == btnRemoveFlight) {
 			
