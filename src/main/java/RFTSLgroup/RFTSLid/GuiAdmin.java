@@ -25,7 +25,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 	
 	JLabel jlHeading, jlInfo, jlChoose; 
 	JList jlistInfo; 
-	JButton btnAddPilot, btnAddAir, btnAddEmp, btnAddDis, btnRemPilot, btnRemAir, btnRemEmp;
+	JButton btnAddPilot, btnAddAir, btnAddEmp, btnAddDis, btnRemPilot, btnRemAir, btnRemEmp, btnEditPilot;
 	JRadioButton rbtnPilot, rbtnAir, rbtnEmp, rbtnDis;
 	ButtonGroup btnGroup;
 	
@@ -66,21 +66,25 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		rbtnPilot.setMnemonic(KeyEvent.VK_B);
 		rbtnPilot.setActionCommand(pilot);
 		rbtnPilot.setSelected(true);
+		rbtnPilot.addActionListener(this);
 		
 		String aircraft = "Aircrafts";
 		rbtnAir = new JRadioButton(aircraft);
 		rbtnAir.setMnemonic(KeyEvent.VK_B);
 		rbtnAir.setActionCommand(aircraft);
+		rbtnAir.addActionListener(this);
 		
 		String employee = "Employees";
 		rbtnEmp = new JRadioButton(employee);
 		rbtnEmp.setMnemonic(KeyEvent.VK_B);
 		rbtnEmp.setActionCommand(employee);
+		rbtnEmp.addActionListener(this);
 		
 		String discount = "Discounts";
 		rbtnDis = new JRadioButton(discount);
 		rbtnDis.setMnemonic(KeyEvent.VK_B);
 		rbtnDis.setActionCommand(discount);
+		rbtnDis.addActionListener(this);
 		
 		//Radio button group
 		btnGroup = new ButtonGroup();
@@ -108,6 +112,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		btnRemAir.addActionListener(this);
 		btnRemEmp = new JButton("Remove Employee");
 		btnRemEmp.addActionListener(this);
+		btnEditPilot = new JButton("Edit Pilot Info");
+		btnEditPilot.addActionListener(this);
 		;
 		
 		//Adding components to panels
@@ -133,6 +139,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		bottomPanel.add(btnRemAir);
 		bottomPanel.add(btnRemEmp);
 		bottomPanel.add(btnRemPilot);
+		bottomPanel.add(btnEditPilot);
 			
 		add(mainPanel);	
 	}
@@ -153,23 +160,19 @@ public class GuiAdmin extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == btnAddPilot) {
-			infoModel.addElement("Adding Pilot");
 			InputDialog id = new InputDialog();
 			id.showAddPilotDialog();
 		} 
 		else if (e.getSource() == btnAddEmp) {
-			infoModel.addElement("Adding Employee");
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddEmployeeDialog();
 			controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
 		} 
 		else if (e.getSource() == btnAddAir) {
-			infoModel.addElement("Adding Aircraft");
 			InputDialog id = new InputDialog();
 			id.showAddAircraftDialog();
 		}
 		else if (e.getSource() == btnAddDis) {
-			infoModel.addElement("Adding Discount");
 			InputDialog id = new InputDialog();
 			id.showAddDiscountDialog();
 		}
@@ -181,6 +184,10 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		}
 		else if (e.getSource() == btnRemEmp) {
 			infoModel.addElement("Removing Employee");
+		}
+		else if (e.getSource() == btnEditPilot) {
+			InputDialog id = new InputDialog();
+			id.showEditPilotDialog();
 		}
 		else if (rbtnPilot.isSelected()) {
 			infoModel.addElement("looking at pilots");

@@ -87,6 +87,19 @@ public class InputDialog {
 		return dialogToArray(fields);
 	}
 	
+	public String[] showEditPilotDialog() {
+		Object[] field = {
+				"Name", field1,
+				"Weekly Flight Hours", field2,
+				"Last Flight", field3,
+				"Next Flight", field4,
+				
+			};
+		JOptionPane.showConfirmDialog(null, field, "Add Pilot", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3, field4};
+		return dialogToArray(fields);
+	}
+	
 	public String[] showAddEmployeeDialog() {
 		Object[] field = {
 				"ID", field1,
