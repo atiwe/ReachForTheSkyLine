@@ -10,12 +10,20 @@ public class InputDialog {
 	JTextField field2;
 	JTextField field3;
 	JTextField field4;
+	JTextField field5;
+	JTextField field6;
+	JTextField field7;
+	JTextField field8;
 	
 	public InputDialog() {
 		field1 = new JTextField();
 		field2 = new JTextField();
 		field3 = new JTextField();
 		field4 = new JTextField();
+		field5 = new JTextField();
+		field6 = new JTextField();
+		field7 = new JTextField();
+		field8 = new JTextField();
 	}
 	
 	public String[] showAddFlightDialog() {
@@ -78,12 +86,15 @@ public class InputDialog {
 	
 	public String[] showAddEmployeeDialog() {
 		Object[] field = {
-				"Name", field1,
-				"Employee Number", field2,
-				"Telephone", field3,
+				"ID", field1,
+				"Name", field2,
+				"Email", field3,
+				"Telephone", field4,
+				"Social", field5,
+				"Employment date", field6
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Employee", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3};
+		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
 		return dialogToArray(fields);
 	}
 	
