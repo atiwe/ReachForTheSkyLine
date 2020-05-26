@@ -182,6 +182,18 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		else if (e.getSource() == btnRemEmp) {
 			infoModel.addElement("Removing Employee");
 		}
+		else if (rbtnPilot.isSelected()) {
+			infoModel.addElement("looking at pilots");
+		}
+		else if (rbtnEmp.isSelected()) {
+			infoModel.addElement("looking at emps");
+		}
+		else if(rbtnDis.isSelected()) {
+			infoModel.addElement("looking at Discounts");
+		}
+		else if (rbtnAir.isSelected()) {
+			infoModel.addElement("looking at aircrafts");
+		}
 		
 		
 	}

@@ -33,7 +33,7 @@ public class Controller {
     
     public void addEmployee(String id, String name, String email, String telephone, String ssn, String empDate) {
     	UUID uuid = new UUID(234234, 0);
-    	Employee employee = new Employee(uuid, name, email, telephone, ssn,empDate);
+    	Employee employee = new Employee(uuid, name, email, telephone, ssn, empDate);
     	employeeRepository.insertEmployee(employee);
     }
     

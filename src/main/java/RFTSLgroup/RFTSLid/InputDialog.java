@@ -78,9 +78,12 @@ public class InputDialog {
 				"Name", field1,
 				"Pilot License", field2,
 				"Telephone", field3,
+				"Email", field4,
+				"Social Security #", field5,
+				"Employment Date", field6,
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Pilot", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3};
+		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
 		return dialogToArray(fields);
 	}
 	
@@ -103,9 +106,10 @@ public class InputDialog {
 				"Model", field1,
 				"Producer", field2,
 				"Capacity", field3,
+				"Flight Hours", field4
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Aircraft", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3};
+		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
 	
@@ -114,9 +118,10 @@ public class InputDialog {
 				"Discount code", field1,
 				"Reduction", field2,
 				"Start Date", field3,
+				"End Date", field4
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Discount", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3};
+		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
 	
