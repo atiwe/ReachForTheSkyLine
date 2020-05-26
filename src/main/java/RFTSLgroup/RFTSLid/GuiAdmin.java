@@ -30,6 +30,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 	ButtonGroup btnGroup;
 	
 	DefaultListModel<String> infoModel; 
+	private Controller controller;
 	
 	
 	public GuiAdmin() {
@@ -134,7 +135,18 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		bottomPanel.add(btnRemPilot);
 			
 		add(mainPanel);	
-		
+	}
+	
+	void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
+	public void createUI() {
+		JFrame frame = new JFrame("Databas");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(this);
+		frame.pack();
+		frame.setVisible(true);
 	}
 
 	// Actions perfomed when buttons clicked
@@ -148,7 +160,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		else if (e.getSource() == btnAddEmp) {
 			infoModel.addElement("Adding Employee");
 			InputDialog id = new InputDialog();
-			id.showAddEmployeeDialog();
+			String[] arr = id.showAddEmployeeDialog();
+			controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
 		} 
 		else if (e.getSource() == btnAddAir) {
 			infoModel.addElement("Adding Aircraft");

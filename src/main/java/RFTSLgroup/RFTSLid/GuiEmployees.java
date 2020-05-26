@@ -109,7 +109,6 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		else if (e.getSource() == btnAddFlightLine) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddFlightLineDialog();
-			
 		}
 		else if (e.getSource() == btnRemoveFlight) {
 			
@@ -122,7 +121,5 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			InputDialog id = new InputDialog();
 			id.showBookFlightDialog();
 		}
-		
 	}
-
 }
