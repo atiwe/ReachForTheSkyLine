@@ -32,7 +32,8 @@ public class GuiEmployees extends JPanel implements ActionListener{
 	DefaultListModel<String> modelfl;
 	private Controller controller;
 	
-	public GuiEmployees() {
+	public GuiEmployees(Controller controller) {
+		this.controller = controller;
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 700));
 		JPanel centrePanel = new JPanel();
@@ -85,19 +86,6 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		
 		add(centrePanel);
 
-	}
-	
-	public void setController(Controller controller) {
-		this.controller = controller;
-	}
-	
-	public void createUI() {
-		JFrame frame = new JFrame("Databas");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GuiEmployees ui = new GuiEmployees();
-		frame.add(ui);
-		frame.pack();
-		frame.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {

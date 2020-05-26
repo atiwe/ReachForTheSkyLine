@@ -33,8 +33,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 	private Controller controller;
 	
 	
-	public GuiAdmin() {
-		
+	public GuiAdmin(Controller controller) {
+		this.controller = controller;
 		// Panels with grid layout
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 600));
@@ -135,10 +135,6 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		bottomPanel.add(btnRemPilot);
 			
 		add(mainPanel);	
-	}
-	
-	void setController(Controller controller) {
-		this.controller = controller;
 	}
 	
 	public void createUI() {

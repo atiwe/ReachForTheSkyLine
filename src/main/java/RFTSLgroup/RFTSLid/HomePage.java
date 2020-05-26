@@ -33,12 +33,16 @@ public class HomePage implements ActionListener {
 	JButton btnAdmin, btnCust, btnEmp;
 	
 	JPanel startPage;
-	GuiAdmin guiAdmin = new GuiAdmin();
-	GuiCustomers guiCustomer = new GuiCustomers();
-	GuiEmployees guiEmployees = new GuiEmployees();
+	GuiAdmin guiAdmin;
+	GuiCustomers guiCustomer;
+	GuiEmployees guiEmployees;
+	private Controller controller;
 	
-	public HomePage() {
-		
+	public HomePage(Controller controller) {
+		this.controller = controller;
+		guiAdmin = new GuiAdmin(controller);
+		guiCustomer = new GuiCustomers();
+		guiEmployees = new GuiEmployees(controller);
 		panelContainer.setLayout(cardLayout);
 		
 		//Start page panel
@@ -119,14 +123,14 @@ public class HomePage implements ActionListener {
 	}
 	
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				 new HomePage();
-			}
-		});
-	
-		
-	}
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				 new HomePage();
+//			}
+//		});
+//	
+//		
+//	}
 
 }
