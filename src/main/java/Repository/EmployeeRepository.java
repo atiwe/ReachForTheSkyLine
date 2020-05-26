@@ -23,7 +23,7 @@ public class EmployeeRepository {
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
 				.append("id uuid PRIMARY KEY, ").append("name text,").append("email text,").append("telephone text,")
-				.append("personal number text,").append("employment date text);");
+				.append("social_security_number text,").append("employment_date text);");
 		
 		final String query = sb.toString();
 		session.execute(query);
@@ -46,7 +46,7 @@ public class EmployeeRepository {
 	}
 	
 	public void insertEmployee(Employee employee) {
-		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME).append("(id, name, email, telephone, personal number, employment date) ")
+		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME).append("(id, name, email, telephone, social_security_number, employment_date) ")
 				.append("VALUES (").append(employee.getID()).append(", '").append(employee.getName()).append("', '").append(employee.getEmail()).append("', '")
 				.append(employee.getTelephone()).append("', '").append(employee.getPersonalNumber()).append("', '").append(employee.getEmploymentDate())
 				.append("');");
@@ -64,7 +64,7 @@ public class EmployeeRepository {
 	}
 	
 	public void insertEmployeeBatch(Employee employee) {
-		StringBuilder sb = new StringBuilder("BEGIN BATCH ").append("INSERT INTO ").append(TABLE_NAME).append("(id, name, email, telephone, personal number, employment date) ")
+		StringBuilder sb = new StringBuilder("BEGIN BATCH ").append("INSERT INTO ").append(TABLE_NAME).append("(id, name, email, telephone, social_security_number, employment_date) ")
 				.append("VALUES (").append(employee.getID()).append(", '").append(employee.getName()).append("', '").append(employee.getEmail()).append("', '")
 				.append(employee.getTelephone()).append("', '").append(employee.getPersonalNumber()).append("', '").append(employee.getEmploymentDate())
 				.append("');").append("INSERT INTO ").append(TABLE_NAME_BY_NAME).append("(id, name) ").append("VALUES (")
@@ -100,7 +100,7 @@ public class EmployeeRepository {
 		List<Employee> employees = new ArrayList<Employee>();
 		
 		for(Row r : rs) {
-			Employee employee = new Employee(r.getUUID("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("personal number"), r.getString("employment date"));
+			Employee employee = new Employee(r.getUUID("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("employment_date"));
 			
 			employees.add(employee);
 		}

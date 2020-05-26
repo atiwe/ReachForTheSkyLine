@@ -7,6 +7,7 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Session;
 
+import Repository.EmployeeRepository;
 import Repository.KeySpaceRepository;
 
 public class App 
@@ -14,7 +15,7 @@ public class App
 	
     private Cluster cluster;
     
-    private Session session;
+    private static Session session;
     
     private static final String TABLE_NAME = "EMPLOYEES";
  
@@ -40,7 +41,13 @@ public class App
     
     public static void main( String[] args )
     {
+    	String keyspaceName = "ReachForTheSkyLine";
     	App app = new App();
     	app.connect("127.0.0.1", 9042);
+    	KeySpaceRepository keyspace = new KeySpaceRepository(session);
+    	keyspace.createKeySpace(keyspaceName, "SimpleStrategy", 1);
+    	keyspace.useKeyspace(keyspaceName);
+    	EmployeeRepository employee = new EmployeeRepository(session);
+    	employee.createTable();
     }
 }
