@@ -42,6 +42,5 @@ public class App
     {
     	App app = new App();
     	app.connect("127.0.0.1", 9042);
-    	app.createKeySpace("TestJava2", "SimpleStrategy", 1);
     }
 }
