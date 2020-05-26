@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 public class HomePage implements ActionListener {
@@ -24,6 +26,9 @@ public class HomePage implements ActionListener {
 	JFrame frame = new JFrame("Reach For The Sky Line");
 	JPanel panelContainer = new JPanel();
 	CardLayout cardLayout = new CardLayout();
+	
+	JLabel background;
+	ImageIcon icon;
 	
 	JMenuBar menuBar;
 	JMenu menu;
@@ -39,17 +44,27 @@ public class HomePage implements ActionListener {
 	private Controller controller;
 	
 	public HomePage(Controller controller) {
+		
 		this.controller = controller;
 		guiAdmin = new GuiAdmin(controller);
 		guiCustomer = new GuiCustomers();
 		guiEmployees = new GuiEmployees(controller);
 		panelContainer.setLayout(cardLayout);
 		
+		icon = new ImageIcon("C:/Users/dalvi/ReachForTheSkyLineNew/src/main/java/RFTSLgroup/RFTSLid/airplane.jpg");
+		background = new JLabel(icon);
+		//background.setIcon(icon);
+		
+	
+		
 		//Start page panel
 		startPage = new JPanel();
-		
 		startPage.setBackground(Color.CYAN);
-		jlHeading = new JLabel("Choose your role");
+		startPage.setLayout(new GridLayout(3, 1));
+		JPanel middlePanel = new JPanel(new GridLayout(3,1));
+		
+		
+		jlHeading = new JLabel("Choose your role", SwingConstants.CENTER);
 		jlHeading.setFont(new Font("Serif", Font.BOLD, 24));
 		startPage.add(jlHeading);
 		
@@ -61,9 +76,13 @@ public class HomePage implements ActionListener {
 		btnCust.addActionListener(this);
 		btnEmp.addActionListener(this);
 		
-		startPage.add(btnAdmin);
-		startPage.add(btnCust);
-		startPage.add(btnEmp);
+		startPage.add(middlePanel);
+		middlePanel.add(btnAdmin);
+		middlePanel.add(btnCust);
+		middlePanel.add(btnEmp);
+		startPage.add(background);
+		
+			
 		
 		//Different views for different users profiles
 		panelContainer.add(startPage, "Start");
@@ -94,6 +113,7 @@ public class HomePage implements ActionListener {
 		menuItemEmp.addActionListener(this);
 		
 		//Main frame
+	
 		frame.add(panelContainer);
 		frame.setJMenuBar(menuBar);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -122,15 +142,6 @@ public class HomePage implements ActionListener {
 		}
 	}
 	
-	
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(new Runnable() {
-//			public void run() {
-//				 new HomePage();
-//			}
-//		});
-//	
-//		
-//	}
 
 }
+
