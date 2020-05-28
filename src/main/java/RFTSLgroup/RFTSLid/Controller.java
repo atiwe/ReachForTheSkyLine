@@ -3,6 +3,7 @@ package RFTSLgroup.RFTSLid;
 import java.util.List;
 import Domain.Airplane;
 import Domain.Campaign;
+import Domain.Customer;
 import Domain.Employee;
 import Domain.Pilot;
 import Domain.Route;
@@ -53,7 +54,7 @@ public class Controller {
     	if((employees.size())<1){
     		id = 1;
     	}else {
-    		    	id = (employees.get(employees.size()-1).getID())+1;
+    		id = (employees.get(employees.size()-1).getID())+1;
     	}
     	Employee employee = new Employee(id, name, email, telephone, ssn, empDate);
     	employeeRepository.insertEmployee(employee);
@@ -66,7 +67,7 @@ public class Controller {
     	if((flights.size())<1){
     		id = 1;
     	}else {
-    		    	id = (flights.get(flights.size()-1).getID())+1;
+    		id = (flights.get(flights.size()-1).getID())+1;
     	}
     	ScheduledFlight scheduledFlight = new ScheduledFlight(id, estimatedStart, estimatedLanding, flightTime, pilot, routeID);
     	scheduledFlightRepository.insertFlight(scheduledFlight);
@@ -100,12 +101,12 @@ public class Controller {
     }
 
     public void addCampaign(String startDate, String endDate, String reduction, String discountCode) {
-    	List<Campaign> campaigns = getDiscount();
+    	List<Campaign> campaigns = getDiscounts();
     	int id;
     	if((campaigns.size())<1){
     		id = 1;
     	}else {
-    		    	id = (campaigns.get(campaigns.size()-1).getID())+1;
+    		id = (campaigns.get(campaigns.size()-1).getID())+1;
     	}
     	Campaign campaign = new Campaign(id, startDate, endDate, reduction, discountCode);
     	campaignRepository.insertCampaign(campaign);
@@ -117,14 +118,36 @@ public class Controller {
     	if((routes.size())<1){
     		id = 1;
     	}else {
-    		    	id = (routes.get(routes.size()-1).getID())+1;
+    		id = (routes.get(routes.size()-1).getID())+1;
     	}
     	Route route = new Route(id, deptCity, arrCity, flightDuration, price);
     	routesRepository.insertRoute(route);
     }
     
-    public void editPilot(String name, String weeklyHours, String lastFlight, String nextFlight) {
+    public void bookFlight(String name, String email, String phone, String personalNumber, String bank, String discountCode, int scheduledFlightID) {
+    	List<Customer> customers = getCustomers();
+    	int id;
+    	if((customers.size())<1){
+    		id = 1;
+    	}else {
+    		id = (customers.get(customers.size()-1).getID())+1;
+    	}
+    }
+    
+    public void editPilot(int id, String name, String weeklyHours, String lastFlight, String nextFlight) {
     	
+    }
+    
+    public void removeAircraft(int planeID) {
+    	airplaneRepository.deleteAirplaneByID(planeID);
+    }
+    
+    public void removePilot(int pilotID) {
+    	pilotRepository.deletePilotByID(pilotID);
+    }
+    
+    public void removeEmployee(int employeeID) {
+    	employeeRepository.deleteEmployeeByID(employeeID);
     }
     
     public List<Pilot> getPilots() {
@@ -139,7 +162,7 @@ public class Controller {
     	return employeeRepository.selectAll();
     }
     
-    public List<Campaign> getDiscount() {
+    public List<Campaign> getDiscounts() {
     	return campaignRepository.selectAll();
     }
     
@@ -151,6 +174,8 @@ public class Controller {
     	return routesRepository.selectAll();
     }
     
-    
+    public List<Customer> getCustomers(){
+    	return customerRepository.selectAll();
+    }
     
 }

@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -20,6 +21,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+
+import Domain.Airplane;
+import Domain.Campaign;
+import Domain.Employee;
 
 public class GuiAdmin extends JPanel implements ActionListener {
 	
@@ -197,7 +202,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		else if (e.getSource() == btnEditPilot) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showEditPilotDialog();
-			//controller.editPilot(arr[0], arr[1], arr[2], arr[3], arr[4]);
+			//controller.addPilot(name, email, telephone, ssn, empDate, pilotLic);
 		}
 		else if (rbtnPilot.isSelected()) {
 			infoModel.addElement("looking at pilots");
@@ -205,15 +210,15 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		}
 		else if (rbtnEmp.isSelected()) {
 			infoModel.addElement("looking at emps");
-			//controller.showEmployees();
+			List<Employee> employees = controller.getEmployees();
 		}
 		else if(rbtnDis.isSelected()) {
 			infoModel.addElement("looking at Discounts");
-			//controller.showDiscounts();
+			List<Campaign> discounts = controller.getDiscounts();
 		}
 		else if (rbtnAir.isSelected()) {
 			infoModel.addElement("looking at aircrafts");
-			//controller.showAircrafts();
+			List<Airplane> airplanes = controller.getAircrafts();
 		}
 	}
 

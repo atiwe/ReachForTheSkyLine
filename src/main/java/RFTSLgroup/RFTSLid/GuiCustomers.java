@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import Domain.Customer;
+
 public class GuiCustomers extends JPanel implements ActionListener {
 	JLabel jlemp;
 	JLabel jlsf;
@@ -87,7 +89,9 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	//Action performed on button clicks
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnBookFlight) {
-			//controller.bookFlight();
+			InputDialog id = new InputDialog();
+			String[] arr = id.showBookFlightDialog();
+			//controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], Ta från listan);
 		} 
 		else if (e.getSource() == btnCancelFlight) {
 			//controller.cancelFlight();

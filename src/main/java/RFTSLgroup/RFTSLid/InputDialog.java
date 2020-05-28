@@ -64,12 +64,30 @@ public class InputDialog {
 		return dialogToArray(fields);
 	}
 	
+//	private int id;
+//	
+//	private String name;
+//	
+//	private String email;
+//	
+//	private String telephone;
+//	
+//	private String personalNumber;
+//	
+//	private String bank;
+//	
+//	private String discountCode;
+//	
+//	private int scheduledFlightID;
+	
 	public String[] showBookFlightDialog() {
 		Object[] field = {
 				"Name", field1,
-				"Telephone", field2,
-				"Social Security Number", field3,
-				"Discount code", field4
+				"Mail", field2,
+				"Telephone", field3,
+				"Social Security Number", field4,
+				"Bank", field5,
+				"Discount code", field6
 			};
 		JOptionPane.showConfirmDialog(null, field, "Book Flight", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
