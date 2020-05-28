@@ -1,5 +1,7 @@
 package RFTSLgroup.RFTSLid;
 
+import java.util.UUID;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -89,14 +91,15 @@ public class InputDialog {
 	
 	public String[] showEditPilotDialog() {
 		Object[] field = {
-				"Name", field1,
-				"Weekly Flight Hours", field2,
-				"Last Flight", field3,
-				"Next Flight", field4,
+				"ID", field1,
+				"Name", field2,
+				"Weekly Flight Hours", field3,
+				"Last Flight", field4,
+				"Next Flight", field5,
 				
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Pilot", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3, field4};
+		JOptionPane.showConfirmDialog(null, field, "Edit Pilot", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3, field4, field5};
 		return dialogToArray(fields);
 	}
 	
@@ -134,6 +137,31 @@ public class InputDialog {
 				"End Date", field4
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Discount", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3, field4};
+		return dialogToArray(fields);
+	}
+	
+
+	public String[] showAddCampainDialog() {
+		Object[] field = {
+				"Start date", field1,
+				"End date", field2,
+				"Reduction", field3,
+				"Discound code", field4
+			};
+		JOptionPane.showConfirmDialog(null, field, "Add Campain", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3, field4};
+		return dialogToArray(fields);
+	}
+
+	public String[] showAddFlightRequestDialog() {
+		Object[] field = {
+				"Customer ID", field1,
+				"Departure city", field2,
+				"Arrival city", field3,
+				"Start time", field4
+			};
+		JOptionPane.showConfirmDialog(null, field, "Add Flight Request", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}

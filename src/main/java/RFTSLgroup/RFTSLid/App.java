@@ -6,8 +6,10 @@ import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Session;
 
 import Repository.AirplaneRepository;
+import Repository.CampaignRepository;
 import Repository.CustomerRepository;
 import Repository.EmployeeRepository;
+import Repository.FlightRequestRepository;
 import Repository.KeySpaceRepository;
 import Repository.PilotRepository;
 import Repository.RoutesRepository;
@@ -21,7 +23,9 @@ public class App
     private KeySpaceRepository keySpaceRepository;
     private AirplaneRepository airplaneRepository;
     private CustomerRepository customerRepository;
+    private CampaignRepository campaignRepository; //
     private EmployeeRepository employeeRepository;
+    private FlightRequestRepository flightRequestRepository; //
     private PilotRepository pilotRepository;
     private RoutesRepository routesRepository;
     private ScheduledFlightRepository scheduledFlightRepository;
@@ -56,10 +60,14 @@ public class App
     	keySpaceRepository.useKeyspace(keyspaceName);
     	airplaneRepository = new AirplaneRepository(session);
     	airplaneRepository.createTable();
+    	campaignRepository = new CampaignRepository(session);
+    	campaignRepository.createTable();
     	customerRepository = new CustomerRepository(session);
     	customerRepository.createTable();
     	employeeRepository = new EmployeeRepository(session);
     	employeeRepository.createTable();
+    	flightRequestRepository = new FlightRequestRepository(session);
+    	flightRequestRepository.createTable();
     	pilotRepository = new PilotRepository(session);
     	pilotRepository.createTable();
     	
@@ -69,7 +77,7 @@ public class App
         scheduledFlightRepository.createTable();
     	
     	
-    	new Controller(airplaneRepository, customerRepository, employeeRepository, pilotRepository, routesRepository, scheduledFlightRepository);
+    	new Controller(airplaneRepository, campaignRepository, customerRepository, employeeRepository, flightRequestRepository, pilotRepository, routesRepository, scheduledFlightRepository);
     }
     
     

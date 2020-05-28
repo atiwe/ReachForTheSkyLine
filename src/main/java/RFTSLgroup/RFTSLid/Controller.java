@@ -7,8 +7,10 @@ import Domain.Employee;
 import Domain.Pilot;
 import Domain.ScheduledFlight;
 import Repository.AirplaneRepository;
+import Repository.CampaignRepository;
 import Repository.CustomerRepository;
 import Repository.EmployeeRepository;
+import Repository.FlightRequestRepository;
 import Repository.PilotRepository;
 import Repository.RoutesRepository;
 import Repository.ScheduledFlightRepository;
@@ -16,18 +18,22 @@ import Repository.ScheduledFlightRepository;
 public class Controller {
 	private GuiEmployees guiEmployee;
     private AirplaneRepository airplaneRepository;
+    private CampaignRepository campaignRepository;
     private CustomerRepository customerRepository;
     private EmployeeRepository employeeRepository;
+    private FlightRequestRepository flightRequestRepository;
     private PilotRepository pilotRepository;
     private RoutesRepository routesRepository;
     private ScheduledFlightRepository scheduledFlightRepository;
 	private GuiAdmin guiAdmin;
 	private HomePage homePage;
 	
-	public Controller(AirplaneRepository airplaneRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, PilotRepository pilotRepository, RoutesRepository routesRepository, ScheduledFlightRepository scheduledFlightRepository) {
+	public Controller(AirplaneRepository airplaneRepository, CampaignRepository campaignRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, FlightRequestRepository flightRequestRepository, PilotRepository pilotRepository, RoutesRepository routesRepository, ScheduledFlightRepository scheduledFlightRepository) {
 		this.airplaneRepository = airplaneRepository;
+		this.campaignRepository = campaignRepository;
 		this.customerRepository = customerRepository;
 		this.employeeRepository = employeeRepository;
+		this.flightRequestRepository = flightRequestRepository;
 		this.pilotRepository = pilotRepository;
 		this.routesRepository = routesRepository;
 		this.scheduledFlightRepository = scheduledFlightRepository;
@@ -64,5 +70,9 @@ public class Controller {
     	String nextFlight = null;
     	Pilot pilot = new Pilot(uuid, name, email, telephone, ssn, empDate, pilotLic, weeklyFlightHours, lastFlight, nextFlight);
     	pilotRepository.insertPilot(pilot);
+    }
+
+    public void editPilot(String id, String name, String weeklyHours, String lastFlight, String nextFlight) {
+    	
     }
 }

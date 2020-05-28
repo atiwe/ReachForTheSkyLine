@@ -191,7 +191,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		}
 		else if (e.getSource() == btnEditPilot) {
 			InputDialog id = new InputDialog();
-			id.showEditPilotDialog();
+			String[] arr = id.showEditPilotDialog();
+			controller.editPilot(arr[0], arr[1], arr[2], arr[3], arr[4]);
 		}
 		else if (rbtnPilot.isSelected()) {
 			infoModel.addElement("looking at pilots");
