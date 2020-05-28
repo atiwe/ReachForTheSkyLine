@@ -53,9 +53,7 @@ public class HomePage implements ActionListener {
 		
 		icon = new ImageIcon("C:/Users/dalvi/ReachForTheSkyLineNew/src/main/java/RFTSLgroup/RFTSLid/airplane.jpg");
 		background = new JLabel(icon);
-		//background.setIcon(icon);
 		
-	
 		
 		//Start page panel
 		startPage = new JPanel();
