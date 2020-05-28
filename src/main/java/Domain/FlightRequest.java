@@ -1,12 +1,10 @@
 package Domain;
 
-import java.util.UUID;
-
 public class FlightRequest {
 
-	private UUID id;
+	private int id;
 	
-	private UUID customerId;
+	private int customerId;
 	
 	private String departureCity;
 	
@@ -17,7 +15,7 @@ public class FlightRequest {
 	FlightRequest(){
 	}
 	
-	public FlightRequest(UUID ID, UUID CustomerID, String DepartureCity, String ArrivalCity, String StartTime) {
+	public FlightRequest(int ID, int CustomerID, String DepartureCity, String ArrivalCity, String StartTime) {
 		this.id = ID;
 		this.customerId = CustomerID;
 		this.departureCity = DepartureCity;
@@ -25,19 +23,19 @@ public class FlightRequest {
 		this.startTime = StartTime;
 	}
 	
-	public UUID getID() {
+	public int getID() {
 		return id;
 	}
 	
-	public void setID(UUID id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	
-	public UUID getCustomerID() {
+	public int getCustomerID() {
 		return customerId;
 	}
 	
-	public void setCustomerID(UUID customerId) {
+	public void setCustomerID(int customerId) {
 		this.customerId = customerId;
 	}
 	

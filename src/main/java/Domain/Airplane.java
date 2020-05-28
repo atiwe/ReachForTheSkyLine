@@ -1,10 +1,8 @@
 package Domain;
 
-import java.util.UUID;
-
 public class Airplane {
 
-	private UUID id;
+	private int id;
 	
 	private String model;
 	
@@ -17,7 +15,7 @@ public class Airplane {
 	Airplane(){
 	}
 	
-	public Airplane(UUID ID, String Model, String Producer, String Capacity, String FlightHours) {
+	public Airplane(int ID, String Model, String Producer, String Capacity, String FlightHours) {
 		this.id = ID;
 		this.model = Model;
 		this.producer = Producer;
@@ -25,11 +23,11 @@ public class Airplane {
 		this.flightHours = FlightHours;
 	}
 	
-	public UUID getID() {
+	public int getID() {
 		return id;
 	}
 	
-	public void setID(UUID id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	

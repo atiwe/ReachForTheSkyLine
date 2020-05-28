@@ -1,10 +1,8 @@
 package Domain;
 
-import java.util.UUID;
-
 public class Employee {
 
-	private UUID id;
+	private int id;
 	
 	private String name;
 	
@@ -19,7 +17,7 @@ public class Employee {
 	Employee(){
 	}
 	
-	public Employee(UUID ID, String Name, String Email, String Telephone, String PersonalNumber, String EmploymentDate) {
+	public Employee(int ID, String Name, String Email, String Telephone, String PersonalNumber, String EmploymentDate) {
 		this.id = ID;
 		this.name = Name;
 		this.email = Email;
@@ -28,11 +26,11 @@ public class Employee {
 		this.employmentDate = EmploymentDate;
 	}
 	
-	public UUID getID() {
+	public int getID() {
 		return id;
 	}
 	
-	public void setID(UUID id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	

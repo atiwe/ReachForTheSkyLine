@@ -13,10 +13,6 @@ public class CampaignRepository {
 
 	private static final String TABLE_NAME = "campaign";
 	
-	private static final String TABLE_NAME_BY_START = TABLE_NAME + "ByStartDate";
-	
-//	private static final String TABLE_NAME_BY_ARRIVAL = TABLE_NAME + "ByArrivalCity";
-	
 	private Session session;
 	
 	public CampaignRepository(Session session) {
@@ -27,14 +23,6 @@ public class CampaignRepository {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
 				.append("id uuid PRIMARY KEY, ").append("start_date text,").append("end_date text,").append("reduction text,")
 				.append("discount_code text);");
-		
-		final String query = sb.toString();
-		session.execute(query);
-	}
-	
-	public void createTableRouteByDeparture() {
-		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME_BY_START).append("(")
-				.append("id uuid, ").append("start_date text,").append("PRIMARY KEY (start_date, id));");
 		
 		final String query = sb.toString();
 		session.execute(query);
@@ -57,26 +45,8 @@ public class CampaignRepository {
 		session.execute(query);
 	}
 	
-	public void insertCampaignByStart(Campaign campaign) {
-		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME_BY_START).append("(id, start_date) ").append("VALUES (")
-				.append(campaign.getID()).append(", '").append(campaign.getStartDate()).append("');");
-		
-		final String query = sb.toString();
-		session.execute(query);
-	}
-	
-	public void insertCampaignBatch(Campaign campaign) {
-		StringBuilder sb = new StringBuilder("BEGIN BATCH ").append("INSERT INTO ").append(TABLE_NAME).append("(id, start_date, end_date, reduction, discount_code) ")
-				.append("VALUES (").append(campaign.getID()).append(", '").append(campaign.getStartDate()).append("', '").append(campaign.getEndDate()).append("', '")
-				.append(campaign.getReduction()).append("', '").append(campaign.getDiscountCode()).append("');").append("INSERT INTO ").append(TABLE_NAME_BY_START).append("(id, start_date) ").append("VALUES (")
-				.append(campaign.getID()).append(", '").append(campaign.getStartDate()).append("');").append("APPLY BATCH;");
-		
-		final String query = sb.toString();
-		session.execute(query);
-	}
-	
 	public Campaign selectByStart(String start) {
-		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME_BY_START).append(" WHERE start_date = '").append(start).append("';");
+		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME).append(" WHERE start_date = '").append(start).append("';");
 		
 		final String query = sb.toString();
 		
@@ -85,7 +55,24 @@ public class CampaignRepository {
 		List<Campaign> campaigns = new ArrayList<Campaign>();
 		
 		for(Row r : rs) {
-			Campaign campaign = new Campaign(r.getUUID("id"), r.getString("start_date"), null, null, null);
+			Campaign campaign = new Campaign(r.getInt("id"), r.getString("start_date"), r.getString("end_date"), r.getString("reduction"), r.getString("discount_code"));
+			
+			campaigns.add(campaign);
+		}
+		return campaigns.get(0);
+	}
+	
+	public Campaign selectByEnd(String end) {
+		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME).append(" WHERE end_date = '").append(end).append("';");
+		
+		final String query = sb.toString();
+		
+		ResultSet rs = session.execute(query);
+		
+		List<Campaign> campaigns = new ArrayList<Campaign>();
+		
+		for(Row r : rs) {
+			Campaign campaign = new Campaign(r.getInt("id"), r.getString("start_date"), r.getString("end_date"), r.getString("reduction"), r.getString("discount_code"));
 			
 			campaigns.add(campaign);
 		}
@@ -101,23 +88,7 @@ public class CampaignRepository {
 		List<Campaign> campaigns = new ArrayList<Campaign>();
 		
 		for(Row r : rs) {
-			Campaign campaign = new Campaign(r.getUUID("id"), r.getString("start_date"), r.getString("end_date"), r.getString("reduction"), r.getString("discount_code"));
-			
-			campaigns.add(campaign);
-		}
-		return campaigns;
-	}
-	
-	public List<Campaign> selectAllCampaingsByStart(){
-		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME_BY_START);
-		
-		final String query = sb.toString();
-		ResultSet rs = session.execute(query);
-		
-		List<Campaign> campaigns = new ArrayList<Campaign>();
-		
-		for(Row r : rs) {
-			Campaign campaign = new Campaign(r.getUUID("id"), r.getString("start_date"), null, null, null);
+			Campaign campaign = new Campaign(r.getInt("id"), r.getString("start_date"), r.getString("end_date"), r.getString("reduction"), r.getString("discount_code"));
 			
 			campaigns.add(campaign);
 		}
@@ -125,7 +96,14 @@ public class CampaignRepository {
 	}
 	
 	public void deleteCampaignByStart(String start) {
-		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME_BY_START).append(" WHERE start_date = '").append(start).append("';");
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE start_date = '").append(start).append("';");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
+	public void deleteCampaignByEnd(String end) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE end_date = '").append(end).append("';");
 		
 		final String query = sb.toString();
 		session.execute(query);

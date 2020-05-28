@@ -1,10 +1,8 @@
 package Domain;
 
-import java.util.UUID;
-
 public class ScheduledFlight {
 
-	private UUID id;
+	private int id;
 	
 	private String estimatedStart;
 	
@@ -14,12 +12,12 @@ public class ScheduledFlight {
 	
 	private String pilot;
 	
-	private UUID routeId;
+	private int routeId;
 	
 	ScheduledFlight(){
 	}
 	
-	public ScheduledFlight(UUID ID, String EstimatedStart, String EstimatedLanding, String FlightTime, String Pilot, UUID RouteID) {
+	public ScheduledFlight(int ID, String EstimatedStart, String EstimatedLanding, String FlightTime, String Pilot, int RouteID) {
 		this.id = ID;
 		this.estimatedStart = EstimatedStart;
 		this.estimatedLanding = EstimatedLanding;
@@ -28,11 +26,11 @@ public class ScheduledFlight {
 		this.routeId = RouteID;
 	}
 	
-	public UUID getID() {
+	public int getID() {
 		return id;
 	}
 	
-	public void setID(UUID id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	
@@ -68,11 +66,11 @@ public class ScheduledFlight {
 		this.pilot = pilot;
 	}
 	
-	public UUID getRouteID() {
+	public int getRouteID() {
 		return routeId;
 	}
 	
-	public void setRouteID(UUID routeId) {
+	public void setRouteID(int routeId) {
 		this.routeId = routeId;
 	}
 }

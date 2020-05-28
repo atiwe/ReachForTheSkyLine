@@ -13,7 +13,19 @@ public class CustomerRepository {
 
 	private static final String TABLE_NAME = "customer";
 	
-	private static final String TABLE_NAME_BY_NAME = TABLE_NAME + "ByName";
+	private static final String NAME = "name";
+	
+	private static final String EMAIL = "email";
+	
+	private static final String TELEPHONE = "telephone";
+	
+	private static final String SOCIAL_SECURITY = "social_security_number";
+	
+	private static final String BANK = "bank";
+	
+	private static final String DISCOUNT_CODE = "discount_code";
+	
+	private static final String SCHEDULED_FLIGHT = "scheduled_flight";
 	
 	private Session session;
 	
@@ -23,16 +35,8 @@ public class CustomerRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append("name text,").append("email text,").append("telephone text,")
-				.append("social_security_number text,").append("bank text,").append("discount_code text,").append("scheduled_flight uuid);");
-		
-		final String query = sb.toString();
-		session.execute(query);
-	}
-	
-	public void createTableCustomersByName() {
-		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME_BY_NAME).append("(")
-				.append("id uuid, ").append("name text,").append("PRIMARY KEY (name, id));");
+				.append("id uuid PRIMARY KEY, ").append(NAME + " text,").append(EMAIL + " text,").append(TELEPHONE + " text,")
+				.append(SOCIAL_SECURITY + " text,").append(BANK + " text,").append(DISCOUNT_CODE + " text,").append(SCHEDULED_FLIGHT + " uuid);");
 		
 		final String query = sb.toString();
 		session.execute(query);
@@ -56,28 +60,8 @@ public class CustomerRepository {
 		session.execute(query);
 	}
 	
-	public void insertEmployeeByName(Customer customer) {
-		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME_BY_NAME).append("(id, name) ").append("VALUES (")
-				.append(customer.getID()).append(", '").append(customer.getName()).append("');");
-		
-		final String query = sb.toString();
-		session.execute(query);
-	}
-	
-	public void insertEmployeeBatch(Customer customer) {
-		StringBuilder sb = new StringBuilder("BEGIN BATCH ").append("INSERT INTO ").append(TABLE_NAME).append("(id, name, email, telephone, social_security_number, bank, discount_code, scheduled_flight) ")
-				.append("VALUES (").append(customer.getID()).append(", '").append(customer.getName()).append("', '").append(customer.getEmail()).append("', '")
-				.append(customer.getTelephone()).append("', '").append(customer.getPersonalNumber()).append("', '").append(customer.getBank()).append("', '")
-				.append(customer.getDiscountCode()).append("', '").append(customer.getScheduledFlightID()).append("');")
-				.append("INSERT INTO ").append(TABLE_NAME_BY_NAME).append("(id, name) ").append("VALUES (")
-				.append(customer.getID()).append(", '").append(customer.getName()).append("');").append("APPLY BATCH;");
-		
-		final String query = sb.toString();
-		session.execute(query);
-	}
-	
 	public Customer selectByName(String name) {
-		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME_BY_NAME).append(" WHERE name = '").append(name).append("';");
+		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME).append(" WHERE name = '").append(name).append("';");
 		
 		final String query = sb.toString();
 		
@@ -86,9 +70,9 @@ public class CustomerRepository {
 		List<Customer> customers = new ArrayList<Customer>();
 		
 		for(Row r : rs) {
-			Customer s = new Customer(r.getUUID("id"), r.getString("name"), null, null, null, null, null, null);
+			Customer customer = new Customer(r.getInt("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("bank"), r.getString("discount_code"), r.getUUID("scheduled_flight"));
 			
-			customers.add(s);
+			customers.add(customer);
 		}
 		return customers.get(0);
 	}
@@ -102,31 +86,15 @@ public class CustomerRepository {
 		List<Customer> employees = new ArrayList<Customer>();
 		
 		for(Row r : rs) {
-			Customer customer = new Customer(r.getUUID("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("bank"), r.getString("discount_code"), r.getUUID("scheduled_flight"));
+			Customer customer = new Customer(r.getInt("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("bank"), r.getString("discount_code"), r.getUUID("scheduled_flight"));
 			
 			employees.add(customer);
 		}
 		return employees;
 	}
 	
-	public List<Customer> selectAllCustomersByName(){
-		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME_BY_NAME);
-		
-		final String query = sb.toString();
-		ResultSet rs = session.execute(query);
-		
-		List<Customer> customers = new ArrayList<Customer>();
-		
-		for(Row r : rs) {
-			Customer customer = new Customer(r.getUUID("id"), r.getString("name"), null, null, null, null, null, null);
-			
-			customers.add(customer);
-		}
-		return customers;
-	}
-	
 	public void deleteCustomerByName(String name) {
-		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME_BY_NAME).append(" WHERE name = '").append(name).append("';");
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE name = '").append(name).append("';");
 		
 		final String query = sb.toString();
 		session.execute(query);

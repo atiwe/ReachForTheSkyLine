@@ -1,10 +1,8 @@
 package Domain;
 
-import java.util.UUID;
-
 public class Campaign {
 
-	private UUID id;
+	private int id;
 	
 	private String startDate;
 	
@@ -17,7 +15,7 @@ public class Campaign {
 	Campaign(){
 	}
 	
-	public Campaign(UUID ID, String StartDate, String EndDate, String Reduction, String DiscountCode) {
+	public Campaign(int ID, String StartDate, String EndDate, String Reduction, String DiscountCode) {
 		this.id = ID;
 		this.startDate = StartDate;
 		this.endDate = EndDate;
@@ -25,11 +23,11 @@ public class Campaign {
 		this.discountCode = DiscountCode;
 	}
 	
-	public UUID getID() {
+	public int getID() {
 		return id;
 	}
 	
-	public void setID(UUID id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	

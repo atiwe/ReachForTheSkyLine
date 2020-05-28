@@ -1,10 +1,8 @@
 package Domain;
 
-import java.util.UUID;
-
 public class Route {
 
-	private UUID id;
+	private int id;
 	
 	private String departureCity;
 	
@@ -17,7 +15,7 @@ public class Route {
 	Route(){
 	}
 	
-	public Route(UUID ID, String DepartureCity, String ArrivalCity, String FlightDuration, String Price) {
+	public Route(int ID, String DepartureCity, String ArrivalCity, String FlightDuration, String Price) {
 		this.id = ID;
 		this.departureCity = DepartureCity;
 		this.arrivalCity = ArrivalCity;
@@ -25,11 +23,11 @@ public class Route {
 		this.price = Price;
 	}
 	
-	public UUID getID() {
+	public int getID() {
 		return id;
 	}
 	
-	public void setID(UUID id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	
