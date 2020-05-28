@@ -20,7 +20,7 @@ public class EmployeeRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append("name text,").append("email text,").append("telephone text,")
+				.append("id int PRIMARY KEY, ").append("name text,").append("email text,").append("telephone text,")
 				.append("social_security_number text,").append("employment_date text);");
 		
 		final String query = sb.toString();

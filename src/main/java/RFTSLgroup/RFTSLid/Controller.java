@@ -1,8 +1,6 @@
 package RFTSLgroup.RFTSLid;
 
 import java.util.List;
-import java.util.UUID;
-
 import Domain.Airplane;
 import Domain.Campaign;
 import Domain.Employee;
@@ -47,27 +45,34 @@ public class Controller {
     	homePage = new HomePage(this);
 	}
     
-    public void addEmployee(String id, String name, String email, String telephone, String ssn, String empDate) {
-    	int id1 = 100;
-    	Employee employee = new Employee(id1, name, email, telephone, ssn, empDate);
+    public void addEmployee(String name, String email, String telephone, String ssn, String empDate) {
+    	List<Employee> employees = getEmployees();
+    	int id;
+    	if((getEmployees().size())<1){
+    		id = 1;
+    	}else {
+    		    	id = (employees.get(employees.size()-1).getID())+1;
+    	}
+
+    	Employee employee = new Employee(id, name, email, telephone, ssn, empDate);
     	employeeRepository.insertEmployee(employee);
     }
     
     
-    void addFlight(String id, String estimatedStart, String estimatedLanding, String flightTime, String pilot, String routeID) {
+    void addFlight(String estimatedStart, String estimatedLanding, String flightTime, String pilot, String routeID) {
     	int id1 = 101;
     	int id2 = 102;
     	ScheduledFlight scheduledFlight = new ScheduledFlight(id1, estimatedStart, estimatedLanding, flightTime, pilot, id2);
     	scheduledFlightRepository.insertFlight(scheduledFlight);
     }
     
-    public void addAircraft(String id, String model, String producer, String capacity, String flightHours) {
+    public void addAircraft(String model, String producer, String capacity, String flightHours) {
     	int id1 = 103;
     	Airplane airplane = new Airplane(id1, model, producer, capacity, flightHours);
     	airplaneRepository.insertAirplane(airplane);
     }
     
-    public void addPilot(String id, String name, String email, String telephone, String ssn, String empDate, String pilotLic) {
+    public void addPilot(String name, String email, String telephone, String ssn, String empDate, String pilotLic) {
     	int id1  = 104;
     	String weeklyFlightHours = null;
     	String lastFlight = null;
@@ -76,44 +81,46 @@ public class Controller {
     	pilotRepository.insertPilot(pilot);
     }
 
-    public void addCampaign(int id, String startDate, String endDate, String reduction, String discountCode) {
+    public void addCampaign(String startDate, String endDate, String reduction, String discountCode) {
     	int id1 = 105;
-    	Campaign campaign = new Campaign(id, startDate, endDate, reduction, discountCode);
+    	Campaign campaign = new Campaign(id1, startDate, endDate, reduction, discountCode);
     	campaignRepository.insertCampaign(campaign);
     }
     
-    public void addRoute(int id, String deptCity, String arrCity, String flightDuration, String price) {
+    public void addRoute(String deptCity, String arrCity, String flightDuration, String price) {
     	int id1 = 106;
-    	Route route = new Route(id, deptCity, arrCity, flightDuration, price);
+    	Route route = new Route(id1, deptCity, arrCity, flightDuration, price);
     	routesRepository.insertRoute(route);
     }
     
-    public void editPilot(int id, String name, String weeklyHours, String lastFlight, String nextFlight) {
+    public void editPilot(String name, String weeklyHours, String lastFlight, String nextFlight) {
     	
     }
     
-    public List<Pilot> showPilots() {
+    public List<Pilot> getPilots() {
     	return pilotRepository.selectAll();
     }
     
-    public List<Airplane> showAircraft() {
+    public List<Airplane> getAircraft() {
     	return airplaneRepository.selectAll();
     }
     
-    public List<Employee> showEmployees() {
+    public List<Employee> getEmployees() {
     	return employeeRepository.selectAll();
     }
     
-    public List<Campaign> showDiscount() {
+    public List<Campaign> getDiscount() {
     	return campaignRepository.selectAll();
     }
     
-    public List<ScheduledFlight> showScheduledFlights(){
+    public List<ScheduledFlight> getScheduledFlights(){
     	return scheduledFlightRepository.selectAll();
     }
     
-    public List<Route> showFlightLines(){
+    public List<Route> getFlightLines(){
     	return routesRepository.selectAll();
     }
+    
+    
     
 }
