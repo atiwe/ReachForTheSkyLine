@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import Domain.Customer;
+import Domain.Employee;
 
 public class GuiCustomers extends JPanel implements ActionListener {
 	JLabel jlemp;
@@ -33,6 +35,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	
 	Object[] dreamFlights;
 	private Controller controller;
+	List<Customer> currentCustomerList;
 	
 	
 	public GuiCustomers(Controller controller) {
@@ -60,7 +63,13 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		jlistfl = new JList(modelfl);
 		
 		
-		modelsf.addElement("Hi");
+		modelsf.addElement("| ID | Name | E-mail | Telephone | Social security number | Bank | Discount code | Scheduled Flight |");
+		currentCustomerList = controller.getCustomers();
+		for(Customer customer : currentCustomerList)
+		{
+			modelsf.addElement(customer.getID() + ", " + customer.getName() + ", " + customer.getEmail() + ", " + customer.getTelephone()
+			+ ", " + customer.getPersonalNumber() + ", " + customer.getBank()  + ", " + customer.getDiscountCode()  + ", " + customer.getScheduledFlightID());
+		}
 	
 		
 		//Buttons with action listeners
