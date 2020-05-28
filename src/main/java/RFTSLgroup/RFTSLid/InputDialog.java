@@ -33,10 +33,11 @@ public class InputDialog {
 				"Estimated Start", field1,
 				"Estimated Landing", field2,
 				"Flight Time", field3,
-				"Pilot", field4
+				"Pilot", field4,
+				"Flightline ID", field5
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Flight", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3, field4};
+		JTextField[] fields = {field1, field2, field3, field4, field5};
 		return dialogToArray(fields);
 	}
 	
@@ -105,15 +106,14 @@ public class InputDialog {
 	
 	public String[] showAddEmployeeDialog() {
 		Object[] field = {
-				"ID", field1,
-				"Name", field2,
-				"Email", field3,
-				"Telephone", field4,
-				"Social", field5,
-				"Employment date", field6
+				"Name", field1,
+				"Email", field2,
+				"Telephone", field3,
+				"Social", field4,
+				"Employment date", field5
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Employee", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
+		JTextField[] fields = {field1, field2, field3, field4, field5};
 		return dialogToArray(fields);
 	}
 	
@@ -173,21 +173,4 @@ public class InputDialog {
 		}
 		return arr;
 	}
-	
-	public static void main(String[] args) {
-		InputDialog input = new InputDialog();
-		String[] arr = input.showEditFlightDialog();
-		for(int i = 0; i<arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-		arr = input.showBookFlightDialog();
-		for(int i = 0; i<arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-		arr = input.showAddPilotDialog();
-		for(int i = 0; i<arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
-
 }

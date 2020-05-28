@@ -170,7 +170,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		else if (e.getSource() == btnAddEmp) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddEmployeeDialog();
-			controller.addEmployee(arr[1], arr[2], arr[3], arr[4], arr[5]);
+			controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4]);
 		} 
 		else if (e.getSource() == btnAddAir) {
 			InputDialog id = new InputDialog();
@@ -180,7 +180,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		else if (e.getSource() == btnAddDis) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddDiscountDialog();
-			//controller.addDiscount(arr[0], arr[1], arr[2], arr[3]);
+			controller.addCampaign(arr[0], arr[1], arr[2], arr[3]);
 		}
 		else if (e.getSource() == btnRemAir) {
 			infoModel.addElement("Removing Aircraft");

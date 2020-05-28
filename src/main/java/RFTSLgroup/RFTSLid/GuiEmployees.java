@@ -92,7 +92,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		if (e.getSource() == btnAddFlight) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddFlightDialog();
-			controller.addFlight(arr[0], arr[1], arr[2], arr[3], "id2");
+			controller.addFlight(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]));
 		} 
 		else if (e.getSource() == btnAddFlightLine) {
 			InputDialog id = new InputDialog();
