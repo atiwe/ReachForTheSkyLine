@@ -21,8 +21,8 @@ public class ScheduledFlightRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append("estimated_start text,").append("estimated_landing text,").append("flightTime text,")
-				.append("pilot text,").append("route_id uuid);");
+				.append("id int PRIMARY KEY, ").append("estimated_start text,").append("estimated_landing text,").append("flightTime text,")
+				.append("pilot text,").append("route_id int);");
 		
 		final String query = sb.toString();
 		session.execute(query);

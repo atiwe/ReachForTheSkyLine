@@ -18,12 +18,12 @@ public class Customer {
 	
 	private String discountCode;
 	
-	private UUID scheduledFlightID;
+	private int scheduledFlightID;
 	
 	Customer(){
 	}
 	
-	public Customer(int ID, String Name, String Email, String Telephone, String PersonalNumber, String Bank, String DiscountCode, UUID ScheduledFlightID) {
+	public Customer(int ID, String Name, String Email, String Telephone, String PersonalNumber, String Bank, String DiscountCode, int ScheduledFlightID) {
 		this.id = ID;
 		this.name = Name;
 		this.email = Email;
@@ -90,11 +90,11 @@ public class Customer {
 		this.discountCode = discountCode;
 	}
 	
-	public UUID getScheduledFlightID() {
+	public int getScheduledFlightID() {
 		return scheduledFlightID;
 	}
 	
-	public void setScheduledFlightID(UUID scheduledFlightID) {
+	public void setScheduledFlightID(int scheduledFlightID) {
 		this.scheduledFlightID = scheduledFlightID;
 	}
 }

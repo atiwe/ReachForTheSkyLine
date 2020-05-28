@@ -35,8 +35,8 @@ public class CustomerRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append(NAME + " text,").append(EMAIL + " text,").append(TELEPHONE + " text,")
-				.append(SOCIAL_SECURITY + " text,").append(BANK + " text,").append(DISCOUNT_CODE + " text,").append(SCHEDULED_FLIGHT + " uuid);");
+				.append("id int PRIMARY KEY, ").append(NAME + " text,").append(EMAIL + " text,").append(TELEPHONE + " text,")
+				.append(SOCIAL_SECURITY + " text,").append(BANK + " text,").append(DISCOUNT_CODE + " text,").append(SCHEDULED_FLIGHT + " int);");
 		
 		final String query = sb.toString();
 		session.execute(query);
@@ -70,7 +70,7 @@ public class CustomerRepository {
 		List<Customer> customers = new ArrayList<Customer>();
 		
 		for(Row r : rs) {
-			Customer customer = new Customer(r.getInt("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("bank"), r.getString("discount_code"), r.getUUID("scheduled_flight"));
+			Customer customer = new Customer(r.getInt("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("bank"), r.getString("discount_code"), r.getInt("scheduled_flight"));
 			
 			customers.add(customer);
 		}
@@ -86,7 +86,7 @@ public class CustomerRepository {
 		List<Customer> employees = new ArrayList<Customer>();
 		
 		for(Row r : rs) {
-			Customer customer = new Customer(r.getInt("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("bank"), r.getString("discount_code"), r.getUUID("scheduled_flight"));
+			Customer customer = new Customer(r.getInt("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("bank"), r.getString("discount_code"), r.getInt("scheduled_flight"));
 			
 			employees.add(customer);
 		}

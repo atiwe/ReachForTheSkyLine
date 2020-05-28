@@ -21,7 +21,7 @@ public class PilotRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append("name text,").append("email text,").append("telephone text,")
+				.append("id int PRIMARY KEY, ").append("name text,").append("email text,").append("telephone text,")
 				.append("social_security_number text,").append("employment_date text,").append("pilot_license text,")
 				.append("weekly_flight_hours text,").append("last_flight text,").append("next_flight text);");
 		

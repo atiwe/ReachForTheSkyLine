@@ -21,7 +21,7 @@ public class FlightRequestRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append("customer_id uuid,").append("departure_city text,").append("arrival_city text,")
+				.append("id int PRIMARY KEY, ").append("customer_id int,").append("departure_city text,").append("arrival_city text,")
 				.append("start_time text);");
 		
 		final String query = sb.toString();

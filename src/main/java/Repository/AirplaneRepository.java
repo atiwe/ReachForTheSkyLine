@@ -21,7 +21,7 @@ public class AirplaneRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append("model text,").append("producer text,").append("capacity text,")
+				.append("id int PRIMARY KEY, ").append("model text,").append("producer text,").append("capacity text,")
 				.append("flight_hours text);");
 		
 		final String query = sb.toString();

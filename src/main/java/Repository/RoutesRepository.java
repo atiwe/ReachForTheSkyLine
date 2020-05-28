@@ -21,7 +21,7 @@ public class RoutesRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append("departure_city text,").append("arrival_city text,").append("estimated_flight_duration text,")
+				.append("id int PRIMARY KEY, ").append("departure_city text,").append("arrival_city text,").append("estimated_flight_duration text,")
 				.append("price text);");
 		
 		final String query = sb.toString();

@@ -21,7 +21,7 @@ public class CampaignRepository {
 	
 	public void createTable() {
 		StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(TABLE_NAME).append("(")
-				.append("id uuid PRIMARY KEY, ").append("start_date text,").append("end_date text,").append("reduction text,")
+				.append("id int PRIMARY KEY, ").append("start_date text,").append("end_date text,").append("reduction text,")
 				.append("discount_code text);");
 		
 		final String query = sb.toString();
