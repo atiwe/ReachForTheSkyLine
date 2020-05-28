@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -17,6 +18,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+
+import Domain.Employee;
 
 public class GuiEmployees extends JPanel implements ActionListener{
 	JLabel jlemp;
@@ -31,6 +34,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
 	private Controller controller;
+	List<Employee> currentEmployeeList;
 	
 	public GuiEmployees(Controller controller) {
 		this.controller = controller;
@@ -54,6 +58,13 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		modelfl = new DefaultListModel<String>();
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
+		
+		modelsf.addElement("Hi");
+		currentEmployeeList = controller.getEmployees();
+		for(Employee employee : currentEmployeeList)
+		{
+			modelsf.addElement(employee.toString());
+		}
 		
 		//Add buttons with action listeners
 		btnAddFlight = new JButton("Add Flight");
