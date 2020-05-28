@@ -63,7 +63,8 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		currentEmployeeList = controller.getEmployees();
 		for(Employee employee : currentEmployeeList)
 		{
-			modelsf.addElement(employee.toString());
+			modelsf.addElement(employee.getID() + ", " + employee.getName() + ", " + employee.getEmail() + ", " + employee.getTelephone()
+			+ ", " + employee.getPersonalNumber()+ ", " + employee.getEmploymentDate());
 		}
 		
 		//Add buttons with action listeners
