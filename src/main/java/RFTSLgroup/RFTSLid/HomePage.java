@@ -47,7 +47,7 @@ public class HomePage implements ActionListener {
 		
 		this.controller = controller;
 		guiAdmin = new GuiAdmin(controller);
-		guiCustomer = new GuiCustomers();
+		guiCustomer = new GuiCustomers(controller);
 		guiEmployees = new GuiEmployees(controller);
 		panelContainer.setLayout(cardLayout);
 		

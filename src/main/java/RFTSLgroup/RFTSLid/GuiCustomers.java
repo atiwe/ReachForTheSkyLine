@@ -30,10 +30,11 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	DefaultListModel<String> modelfl;
 	
 	Object[] dreamFlights;
+	private Controller controller;
 	
 	
-	public GuiCustomers() {
-		
+	public GuiCustomers(Controller controller) {
+		this.controller = controller;
 		//Panels with grid layout
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 700));
@@ -86,10 +87,10 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	//Action performed on button clicks
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnBookFlight) {
-			
+			//controller.bookFlight();
 		} 
 		else if (e.getSource() == btnCancelFlight) {
-			
+			//controller.cancelFlight();
 		}
 		
 	}

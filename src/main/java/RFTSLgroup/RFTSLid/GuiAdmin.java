@@ -174,20 +174,25 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		} 
 		else if (e.getSource() == btnAddAir) {
 			InputDialog id = new InputDialog();
-			id.showAddAircraftDialog();
+			String[] arr = id.showAddAircraftDialog();
+			controller.addAircraft("id", arr[0], arr[1], arr[2], arr[3]);
 		}
 		else if (e.getSource() == btnAddDis) {
 			InputDialog id = new InputDialog();
-			id.showAddDiscountDialog();
+			String[] arr = id.showAddDiscountDialog();
+			//controller.addDiscount(arr[0], arr[1], arr[2], arr[3]);
 		}
 		else if (e.getSource() == btnRemAir) {
 			infoModel.addElement("Removing Aircraft");
+			//controller.removeAircraft(aircraftID);
 		}
 		else if (e.getSource() == btnRemPilot) {
 			infoModel.addElement("Removing Pilot");
+			//controller.removePilot(pilotID);
 		}
 		else if (e.getSource() == btnRemEmp) {
 			infoModel.addElement("Removing Employee");
+			//controller.removeEmployee(employeeID);
 		}
 		else if (e.getSource() == btnEditPilot) {
 			InputDialog id = new InputDialog();
@@ -196,18 +201,20 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		}
 		else if (rbtnPilot.isSelected()) {
 			infoModel.addElement("looking at pilots");
+			//controller.showPilots();
 		}
 		else if (rbtnEmp.isSelected()) {
 			infoModel.addElement("looking at emps");
+			//controller.showEmployees();
 		}
 		else if(rbtnDis.isSelected()) {
 			infoModel.addElement("looking at Discounts");
+			//controller.showDiscounts();
 		}
 		else if (rbtnAir.isSelected()) {
 			infoModel.addElement("looking at aircrafts");
+			//controller.showAircrafts();
 		}
-		
-		
 	}
 
 }

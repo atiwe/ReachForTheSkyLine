@@ -127,14 +127,14 @@ public class InputDialog {
 		JOptionPane.showConfirmDialog(null, field, "Add Aircraft", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
-	}
+	}	
 	
 	public String[] showAddDiscountDialog() {
 		Object[] field = {
-				"Discount code", field1,
-				"Reduction", field2,
-				"Start Date", field3,
-				"End Date", field4
+				"Start Date", field1,
+				"End Date", field2,
+				"Reduction", field3,
+				"Discount code", field4
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Discount", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
