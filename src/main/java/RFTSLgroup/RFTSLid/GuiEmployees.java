@@ -59,7 +59,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
 		
-		modelsf.addElement("Hi");
+		modelsf.addElement("| ID | Name | E-mail | Telephone | Social security number | Employment date |");
 		currentEmployeeList = controller.getEmployees();
 		for(Employee employee : currentEmployeeList)
 		{
