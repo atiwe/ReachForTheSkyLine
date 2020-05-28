@@ -1,5 +1,6 @@
 package RFTSLgroup.RFTSLid;
 
+import java.util.List;
 import java.util.UUID;
 
 import Domain.Airplane;
@@ -89,13 +90,30 @@ public class Controller {
     
     public void editPilot(int id, String name, String weeklyHours, String lastFlight, String nextFlight) {
     	
-    	
     }
     
-    public void getPilots() {
-    	
+    public List<Pilot> showPilots() {
+    	return pilotRepository.selectAll();
     }
     
+    public List<Airplane> showAircraft() {
+    	return airplaneRepository.selectAll();
+    }
     
+    public List<Employee> showEmployees() {
+    	return employeeRepository.selectAll();
+    }
+    
+    public List<Campaign> showDiscount() {
+    	return campaignRepository.selectAll();
+    }
+    
+    public List<ScheduledFlight> showScheduledFlights(){
+    	return scheduledFlightRepository.selectAll();
+    }
+    
+    public List<Route> showFlightLines(){
+    	return routesRepository.selectAll();
+    }
     
 }
