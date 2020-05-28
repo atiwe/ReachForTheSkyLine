@@ -78,6 +78,13 @@ public class EmployeeRepository {
 		return employees;
 	}
 	
+	public void deleteEmployeeByID(int num) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
 	public void deleteEmployeeByName(String name) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE name = '").append(name).append("';");
 		

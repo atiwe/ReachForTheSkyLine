@@ -78,8 +78,15 @@ public class FlightRequestRepository {
 		return requests;
 	}
 	
+	public void deleteRequestByID(int num) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
 	public void deleteRequestByCustomer(int customer) {
-		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE customer_id = '").append(customer).append("';");
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE customer_id = ").append(customer).append(";");
 		
 		final String query = sb.toString();
 		session.execute(query);

@@ -78,6 +78,13 @@ public class AirplaneRepository {
 		return airplanes;
 	}
 	
+	public void deleteAirplaneByID(int num) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
 	public void deleteAirplaneByModel(String model) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE model = '").append(model).append("';");
 		

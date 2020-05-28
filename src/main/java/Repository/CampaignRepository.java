@@ -95,6 +95,13 @@ public class CampaignRepository {
 		return campaigns;
 	}
 	
+	public void deleteCampaignByID(int num) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
 	public void deleteCampaignByStart(String start) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE start_date = '").append(start).append("';");
 		

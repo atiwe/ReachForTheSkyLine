@@ -93,6 +93,13 @@ public class CustomerRepository {
 		return employees;
 	}
 	
+	public void deleteCustomerByID(int num) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
 	public void deleteCustomerByName(String name) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE name = '").append(name).append("';");
 		

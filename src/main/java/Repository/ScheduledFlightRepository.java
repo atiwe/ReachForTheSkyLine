@@ -123,6 +123,13 @@ public class ScheduledFlightRepository {
 		session.execute(query);
 	}
 	
+	public void deleteFlightByID(int num) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
 	public void deleteFlightByRoute(int route) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE route_id = '").append(route).append("';");
 		

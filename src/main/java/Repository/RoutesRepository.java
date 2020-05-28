@@ -102,6 +102,13 @@ public class RoutesRepository {
 		session.execute(query);
 	}
 	
+	public void deleteRouteByID(int num) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
 	public void deleteRouteByArrival(String arrive) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE arrival_city = '").append(arrive).append("';");
 		
