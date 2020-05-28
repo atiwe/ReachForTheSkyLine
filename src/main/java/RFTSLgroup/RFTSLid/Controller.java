@@ -3,8 +3,10 @@ package RFTSLgroup.RFTSLid;
 import java.util.UUID;
 
 import Domain.Airplane;
+import Domain.Campaign;
 import Domain.Employee;
 import Domain.Pilot;
+import Domain.Route;
 import Domain.ScheduledFlight;
 import Repository.AirplaneRepository;
 import Repository.CampaignRepository;
@@ -61,6 +63,7 @@ public class Controller {
     public void addAircraft(String id, String model, String producer, String capacity, String flightHours) {
     	int id1 = 103;
     	Airplane airplane = new Airplane(id1, model, producer, capacity, flightHours);
+    	airplaneRepository.insertAirplane(airplane);
     }
     
     public void addPilot(String id, String name, String email, String telephone, String ssn, String empDate, String pilotLic) {
@@ -72,7 +75,27 @@ public class Controller {
     	pilotRepository.insertPilot(pilot);
     }
 
-    public void editPilot(String id, String name, String weeklyHours, String lastFlight, String nextFlight) {
+    public void addCampaign(int id, String startDate, String endDate, String reduction, String discountCode) {
+    	int id1 = 105;
+    	Campaign campaign = new Campaign(id, startDate, endDate, reduction, discountCode);
+    	campaignRepository.insertCampaign(campaign);
+    }
+    
+    public void addRoute(int id, String deptCity, String arrCity, String flightDuration, String price) {
+    	int id1 = 106;
+    	Route route = new Route(id, deptCity, arrCity, flightDuration, price);
+    	routesRepository.insertRoute(route);
+    }
+    
+    public void editPilot(int id, String name, String weeklyHours, String lastFlight, String nextFlight) {
+    	
     	
     }
+    
+    public void getPilots() {
+    	
+    }
+    
+    
+    
 }
