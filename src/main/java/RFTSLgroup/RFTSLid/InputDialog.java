@@ -64,22 +64,6 @@ public class InputDialog {
 		return dialogToArray(fields);
 	}
 	
-//	private int id;
-//	
-//	private String name;
-//	
-//	private String email;
-//	
-//	private String telephone;
-//	
-//	private String personalNumber;
-//	
-//	private String bank;
-//	
-//	private String discountCode;
-//	
-//	private int scheduledFlightID;
-	
 	public String[] showBookFlightDialog() {
 		Object[] field = {
 				"Name", field1,
@@ -182,6 +166,19 @@ public class InputDialog {
 		JOptionPane.showConfirmDialog(null, field, "Add Flight Request", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
+	}
+	
+	public boolean confirmationDialog(String[] textFields) {
+		for (String var : textFields) 
+		{ 
+		    if(var.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Nothing saved becuase not all fields were answered");
+		    	return false;
+		    }
+		}
+		JOptionPane.showMessageDialog(null, "Changes saved!");
+		return true;
+
 	}
 	
 	private String[] dialogToArray(JTextField[] fields) {
