@@ -109,22 +109,6 @@ public class ScheduledFlightRepository {
 		return flights;
 	}
 	
-	public ScheduledFlight selectByHighestID() {
-		StringBuilder sb = new StringBuilder("SELECT MAX('id') AS highest FROM ").append(TABLE_NAME).append(";");
-		
-		final String query = sb.toString();
-		
-		ResultSet rs = session.execute(query);
-		
-		List<ScheduledFlight> flights = new ArrayList<ScheduledFlight>();
-		
-		for(Row r : rs) {
-			ScheduledFlight flight = new ScheduledFlight(r.getInt("id"), r.getString("estimated_start"), r.getString("estimated_landing"), r.getString("flightTime"), r.getString("pilot"), r.getInt("route_id"));			
-			flights.add(flight);
-		}
-		return flights.get(0);
-	}
-	
 	public void deleteFlightByStart(String start) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE estimated_start = '").append(start).append("';");
 		
