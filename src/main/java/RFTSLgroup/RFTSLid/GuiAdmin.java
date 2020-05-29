@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -169,65 +170,96 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			if(id.confirmationDialog(arr)) {
 				controller.addPilot( arr[0], arr[3], arr[2], arr[4], arr[5], arr[1]);
 			}
+			updatePilots();
 		} 
+		
 		else if (e.getSource() == btnAddEmp) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddEmployeeDialog();	
 			if(id.confirmationDialog(arr)) {
 				controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4]);
 			}
+			updateEmployees();
 		} 
+		
 		else if (e.getSource() == btnAddAir) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddAircraftDialog();
 			if(id.confirmationDialog(arr)) {
 				controller.addAircraft( arr[0], arr[1], arr[2], arr[3]);
 			}
+			updateAircrafts();
 		}
+		
 		else if (e.getSource() == btnAddDis) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddDiscountDialog();
 			if(id.confirmationDialog(arr)) {
 				controller.addCampaign(arr[0], arr[1], arr[2], arr[3]);
 			}
+			updateDiscounts();
 		}
+		
 		else if (e.getSource() == btnRemAir) {
-			infoModel.addElement("Removing Aircraft");
-			//controller.removeAircraft(aircraftID);
+			currentAirplaneList = controller.getAircrafts();
+			int airID = currentAirplaneList.get(jlistInfo.getSelectedIndex()).getID();
+			JOptionPane.showMessageDialog(this, "Removing Flight with ID " + airID );
+			controller.removeAircraft(airID);
+			updateAircrafts();
+
 		}
+		
 		else if (e.getSource() == btnRemPilot) {
-			infoModel.addElement("Removing Pilot");
-			//controller.removePilot(pilotID);
+			currentPilotList = controller.getPilots();
+			int pilotID = currentPilotList.get(jlistInfo.getSelectedIndex()).getID();
+			JOptionPane.showMessageDialog(this, "Removing Pilot with ID " + pilotID );
+			controller.removePilot(pilotID);
+			updatePilots();
 		}
+		
 		else if (e.getSource() == btnRemEmp) {
-			infoModel.addElement("Removing Employee");
-			//controller.removeEmployee(employeeID);
+			  currentEmployeeList = controller.getEmployees(); 
+			  int empID = currentEmployeeList.get(jlistInfo.getSelectedIndex()).getID();
+			  JOptionPane.showMessageDialog(this, "Removing Employee with ID " + empID );
+			  controller.removeEmployee(empID);
+			  updateEmployees();
 		}
 		else if (e.getSource() == btnEditPilot) {
+			currentPilotList = controller.getPilots();
+			Pilot currentPilot = currentPilotList.get(jlistInfo.getSelectedIndex());
+			
+			int pilotID = currentPilot.getID();
+			String pilotName = currentPilot.getName();
+			String email = currentPilot.getEmail();
+			String telephone = currentPilot.getTelephone();
+			String pilotLicense = currentPilot.getPilotLicense();
+			String pilotSSN = currentPilot.getPersonalNumber();
+			String empDate = currentPilot.getEmploymentDate();
+			
+		    JOptionPane.showMessageDialog(this, "Editing Pilot with ID " + pilotID  + " and license: " + pilotLicense);
+		    
 			InputDialog id = new InputDialog();
 			String[] arr = id.showEditPilotDialog();
-		//controller.editPilot(arr[0], arr[1], arr[2], arr[3], arr[4]);
+			
+			controller.editPilot(pilotID, pilotName, email, telephone, pilotSSN, pilotLicense, empDate, arr[0], arr[1], arr[2]);
+			updatePilots();
 		}
 		else if (rbtnPilot.isSelected()) {
-			infoModel.clear();
-			showPilots();
+			updatePilots();
 		}
 		else if (rbtnEmp.isSelected()) {
-			infoModel.clear();
-			showEmployees();
+			updateEmployees();
 		}
 		else if(rbtnDis.isSelected()) {
-			infoModel.clear();
-			showDiscounts();
+			updateDiscounts();
 		}
 		else if (rbtnAir.isSelected()) {
-			infoModel.clear();
-			showAircrafts();
+			updateAircrafts();
 		}
 	}
 	
-	public void showPilots() {
-		
+	public void updatePilots() {
+		infoModel.clear();
 		currentPilotList = controller.getPilots();
 		for (Pilot pilots: currentPilotList) {
 			infoModel.addElement( " ID: " + pilots.getID() + " | Name: " + pilots.getName() + " | E-mail: " + pilots.getEmail() + " | Tel: " +
@@ -237,7 +269,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		}
 	}
 	
-	public void showEmployees() {
+	public void updateEmployees() {
+		infoModel.clear();
 		  currentEmployeeList = controller.getEmployees(); 
 		  for(Employee employees : currentEmployeeList) {
 			  infoModel.addElement(" ID: " + employees.getID() + "| Name: " +
@@ -248,7 +281,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		 
 	}
 	
-	public void showDiscounts() {
+	public void updateDiscounts() {
+		infoModel.clear();
 		currentCampaignList = controller.getDiscounts();
 		for (Campaign campaigns : currentCampaignList) {
 			infoModel.addElement(" ID: " + campaigns.getID() + " | Start Date: " + campaigns.getStartDate() + " | End Date: " +  campaigns.getEndDate() +
@@ -257,8 +291,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		
 	}
 	
-	public void showAircrafts() {
-		infoModel.addElement("| ID | Model | Producer | Capacity | Flight Hours | ");
+	public void updateAircrafts() {
+		infoModel.clear();
 		currentAirplaneList = controller.getAircrafts();
 		for (Airplane airplanes : currentAirplaneList) {
 			infoModel.addElement(" ID: " + airplanes.getID() + " | Model: " + airplanes.getModel() + " | Producer: " + airplanes.getProducer() + " | Capacity: " +
