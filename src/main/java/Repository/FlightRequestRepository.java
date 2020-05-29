@@ -78,6 +78,23 @@ public class FlightRequestRepository {
 		return requests;
 	}
 	
+	public FlightRequest selectByHighestID() {
+		StringBuilder sb = new StringBuilder("SELECT MAX('id') AS highest FROM ").append(TABLE_NAME).append(";");
+		
+		final String query = sb.toString();
+		
+		ResultSet rs = session.execute(query);
+		
+		List<FlightRequest> requests = new ArrayList<FlightRequest>();
+		
+		for(Row r : rs) {
+			FlightRequest request = new FlightRequest(r.getInt("id"), r.getInt("customer_id"), r.getString("departure_city"), r.getString("arrival_city"), r.getString("start_time"));
+			
+			requests.add(request);
+		}
+		return requests.get(0);
+	}
+	
 	public void deleteRequestByID(int num) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
 		

@@ -49,9 +49,13 @@ public class Controller {
     //TODO Fixa så metoderna alltid får det högsta ID:t, förtillfället tar den sista ID:t + 1, men den sista
     // är inte alltid högst
     public void addEmployee(String name, String email, String telephone, String ssn, String empDate) {
-    	//List<Employee> employees = getEmployees();
-    	Employee employeeHigh = highestIDEmployee();
-    	int id = employeeHigh.getID();
+    	List<Employee> employees = getEmployees();
+    	int id = 0;
+    	for(Employee employee : employees)
+    	{
+    		if(employee.getID() > id)
+    			id = employee.getID();
+    	}
     	if(id < 1){
     		id = 1;
     	}else {
@@ -64,11 +68,16 @@ public class Controller {
     
     void addFlight(String estimatedStart, String estimatedLanding, String flightTime, String pilot, int routeID) {
     	List<ScheduledFlight> flights = getScheduledFlights();
-    	int id;
-    	if((flights.size())<1){
+    	int id = 0;
+    	for(ScheduledFlight flight : flights)
+    	{
+    		if(flight.getID() > id)
+    			id = flight.getID();
+    	}
+    	if(id<1){
     		id = 1;
     	}else {
-    		id = (flights.get(flights.size()-1).getID())+1;
+    		id = id + 1;
     	}
     	ScheduledFlight scheduledFlight = new ScheduledFlight(id, estimatedStart, estimatedLanding, flightTime, pilot, routeID);
     	scheduledFlightRepository.insertFlight(scheduledFlight);
@@ -143,10 +152,8 @@ public class Controller {
     	customerRepository.deleteCustomerBySecurityNumberAndFlightID(personalNumber, flightID);
     }
     
-    public void editPilot(int id,String name, String email, String telephone, String ssn, String empDate, String pilotLic, String weeklyHours, String lastFlight, String nextFlight) {
+    public void editPilot(int id, String name, String weeklyHours, String lastFlight, String nextFlight) {
     	
-    	Pilot pilot = new Pilot(id, name, email, telephone, ssn, empDate, pilotLic, weeklyHours, lastFlight, nextFlight );
-    	pilotRepository.insertPilot(pilot);
     }
     
     public void editScheduledFlight(int id, String ETD, String ETA, String flightTime, String pilot, int routeID) {

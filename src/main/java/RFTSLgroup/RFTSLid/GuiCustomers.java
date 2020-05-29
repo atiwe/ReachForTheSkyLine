@@ -13,32 +13,35 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-
-import org.apache.cassandra.utils.OutputHandler.SystemOutput;
-
 import Domain.ScheduledFlight;
+import Domain.Customer;
 import Domain.Route;
 
 public class GuiCustomers extends JPanel implements ActionListener {
 	JLabel jlemp;
 	JLabel jlsf;
 	JLabel jlfl;
-	JLabel emp = new JLabel("");
+	JLabel jlbf;
 	JLabel emp2 = new JLabel("");
+	JLabel emp3 = new JLabel("");
 	JList jlistsf;
 	JList jlistfl;
+	JList jlistbf;
 	JButton btnBookFlight, btnCancelFlight;
 	
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
+	DefaultListModel<String> modelbf;
 	
 	Object[] dreamFlights;
 	private Controller controller;
 	List<ScheduledFlight> currentflightList;
 	List<Route> currentRouteList;
+	List<Customer> currentCustomers;
 	
 	public GuiCustomers(Controller controller) {
 		this.controller = controller;
@@ -46,7 +49,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 700));
 		JPanel centrePanel = new JPanel();
-		centrePanel.setLayout(new GridLayout(10,0));
+		centrePanel.setLayout(new GridLayout(12,0));
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new GridLayout(1,1));
 		JPanel bottomPanel2 = new JPanel();
@@ -57,12 +60,15 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		jlemp.setFont(new Font("Serif", Font.BOLD, 24));
 		jlsf = new JLabel("Scheduled flights", SwingConstants.CENTER);
 		jlfl = new JLabel("Routes", SwingConstants.CENTER);
+		jlbf = new JLabel("Booked flights");
 		
 		//Lists
 		modelsf = new DefaultListModel<String>();
 		modelfl = new DefaultListModel<String>();
+		modelbf = new DefaultListModel<String>();
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
+		jlistbf = new JList(modelbf);
 		
 
 		currentflightList = controller.getScheduledFlights();
@@ -77,6 +83,11 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		{
 			modelfl.addElement("ID: " + route.getID() + ", Departure city: " + route.getDepartureCity() + ", Arrival city: " + route.getArrivalCity() + ", Flight time: "
 					+ route.getFlightDuration() + ", Price: " + route.getPrice());
+		}
+		
+		currentCustomers = controller.getCustomers();
+		for(Customer c : currentCustomers) {
+			modelbf.addElement("ID: " + c.getID() + ", Name" + c.getName() + ", Email: " + c.getEmail() + ", Phone: " + c.getTelephone() + ", Social security number: " + c.getPersonalNumber() + ", Bank: " + c.getBank() + ", Discount code:" + c.getDiscountCode() + ", Flight ID: " + c.getScheduledFlightID());
 		}
 		
 		//Buttons with action listeners
@@ -94,9 +105,11 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		centrePanel.add(new JScrollPane(jlistsf));
 		centrePanel.add(jlfl);
 		centrePanel.add(new JScrollPane(jlistfl));
-		centrePanel.add(emp);
-		centrePanel.add(bottomPanel);
+		centrePanel.add(jlbf);
+		centrePanel.add(new JScrollPane(jlistbf));
 		centrePanel.add(emp2);
+		centrePanel.add(bottomPanel);
+		centrePanel.add(emp3);
 		centrePanel.add(bottomPanel2);
 		add(centrePanel);
 
@@ -113,9 +126,14 @@ public class GuiCustomers extends JPanel implements ActionListener {
 			}
 		} 
 		else if (e.getSource() == btnCancelFlight) {
-			InputDialog cancel = new InputDialog();
-			String[] arr = cancel.showCancelFlightDialog();
-			controller.cancelFlight(arr[0], Integer.parseInt(arr[1]));
+			if(jlistbf.getSelectedIndex()>=0) {
+				int customerID = currentCustomers.get(jlistbf.getSelectedIndex()).getID();
+				controller.cancelFlight(customerID);
+				JOptionPane.showMessageDialog(null, "Flight canceled!");
+			}else {
+				JOptionPane.showMessageDialog(null, "You need to select a flight from the list to cancel it!");
+			}
+
 		}
 		
 	}
