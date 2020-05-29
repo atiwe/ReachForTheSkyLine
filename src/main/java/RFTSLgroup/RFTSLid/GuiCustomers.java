@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 
 import Domain.Customer;
 import Domain.Employee;
+import Domain.ScheduledFlight;
+import Domain.Route;
 
 public class GuiCustomers extends JPanel implements ActionListener {
 	JLabel jlemp;
@@ -35,8 +37,8 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	
 	Object[] dreamFlights;
 	private Controller controller;
-	List<Customer> currentCustomerList;
-	
+	List<ScheduledFlight> currentflightList;
+	List<Route> currentRouteList;
 	
 	public GuiCustomers(Controller controller) {
 		this.controller = controller;
@@ -54,7 +56,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		jlemp = new JLabel("Customers", SwingConstants.CENTER);
 		jlemp.setFont(new Font("Serif", Font.BOLD, 24));
 		jlsf = new JLabel("Scheduled flights", SwingConstants.CENTER);
-		jlfl = new JLabel("Flight lines", SwingConstants.CENTER);
+		jlfl = new JLabel("Routes", SwingConstants.CENTER);
 		
 		//Lists
 		modelsf = new DefaultListModel<String>();
@@ -63,12 +65,20 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		jlistfl = new JList(modelfl);
 		
 		
-		modelsf.addElement("| ID | Name | E-mail | Telephone | Social security number | Bank | Discount code | Scheduled Flight |");
-		currentCustomerList = controller.getCustomers();
-		for(Customer customer : currentCustomerList)
+		modelsf.addElement("| ID | Estimated start | Estimated landing | Flight time | Pilot | RouteID |");
+		currentflightList = controller.getScheduledFlights();
+		for(ScheduledFlight scheduledFlight : currentflightList)
 		{
-			modelsf.addElement(customer.getID() + ", " + customer.getName() + ", " + customer.getEmail() + ", " + customer.getTelephone()
-			+ ", " + customer.getPersonalNumber() + ", " + customer.getBank()  + ", " + customer.getDiscountCode()  + ", " + customer.getScheduledFlightID());
+			modelsf.addElement(scheduledFlight.getID() + ", " + scheduledFlight.getEstimatedStart() + ", " + scheduledFlight.getEstimatedLanding() + ", " + scheduledFlight.getFlightTime()
+			+ ", " + scheduledFlight.getPilot() + ", " + scheduledFlight.getRouteID());
+		}
+		
+		modelfl.addElement("| ID | Departure city | Arrival city | Flight time | Price |");
+		currentRouteList = controller.getFlightLines();
+		for(Route route : currentRouteList)
+		{
+			modelfl.addElement(route.getID() + ", " + route.getDepartureCity() + ", " + route.getArrivalCity() + ", "
+					+ route.getFlightDuration() + ", " + route.getPrice());
 		}
 	
 		
