@@ -152,13 +152,20 @@ public class Controller {
     	customerRepository.deleteCustomerBySecurityNumberAndFlightID(personalNumber, flightID);
     }
     
-    public void editPilot(int id, String name, String weeklyHours, String lastFlight, String nextFlight) {
-    	
-    }
     
-    public void editScheduledFlight(int id, String ETD, String ETA, String flightTime, String pilot, int routeID) {
+   public void editPilot(int id,String name, String email, String telephone, String ssn, String empDate, String pilotLic, String weeklyHours, String lastFlight, String nextFlight) {
     	
+    	Pilot pilot = new Pilot(id, name, email, telephone, ssn, empDate, pilotLic, weeklyHours, lastFlight, nextFlight );
+    	pilotRepository.insertPilot(pilot);
     }
+
+    
+   public void editScheduledFlight(int id, String ETD, String ETA, String flightTime, String pilot, int routeID) {
+   	
+   	ScheduledFlight scheduledFlight = new ScheduledFlight(id, ETD, ETA, flightTime, pilot, routeID);
+   	scheduledFlightRepository.insertFlight(scheduledFlight);
+   }
+
     
     public void removeAircraft(int planeID) {
     	airplaneRepository.deleteAirplaneByID(planeID);
