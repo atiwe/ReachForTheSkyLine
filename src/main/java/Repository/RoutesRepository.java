@@ -95,6 +95,23 @@ public class RoutesRepository {
 		return routes;
 	}
 	
+	public Route selectByHighestID() {
+		StringBuilder sb = new StringBuilder("SELECT MAX('id') AS highest FROM ").append(TABLE_NAME).append(";");
+		
+		final String query = sb.toString();
+		
+		ResultSet rs = session.execute(query);
+		
+		List<Route> routes = new ArrayList<Route>();
+		
+		for(Row r : rs) {
+			Route route = new Route(r.getInt("id"), r.getString("departure_city"), r.getString("arrival_city"), r.getString("estimated_flight_duration"), r.getString("price"));
+			
+			routes.add(route);
+		}
+		return routes.get(0);
+	}
+	
 	public void deleteRouteByDeparture(String depart) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE departure_city = '").append(depart).append("';");
 		

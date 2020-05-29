@@ -63,12 +63,13 @@ public class Controller {
     
     
     void addFlight(String estimatedStart, String estimatedLanding, String flightTime, String pilot, int routeID) {
-    	List<ScheduledFlight> flights = getScheduledFlights();
-    	int id;
-    	if((flights.size())<1){
+    	//List<ScheduledFlight> flights = getScheduledFlights();
+    	ScheduledFlight flightHigh = highestIDFlight();
+    	int id = flightHigh.getID();
+    	if(id < 1){
     		id = 1;
     	}else {
-    		id = (flights.get(flights.size()-1).getID())+1;
+    		id = id + 1;
     	}
     	ScheduledFlight scheduledFlight = new ScheduledFlight(id, estimatedStart, estimatedLanding, flightTime, pilot, routeID);
     	scheduledFlightRepository.insertFlight(scheduledFlight);
@@ -176,6 +177,10 @@ public class Controller {
     
     public Employee highestIDEmployee() {
     	return employeeRepository.selectByHighestID();
+    }
+    
+    public ScheduledFlight highestIDFlight() {
+    	return scheduledFlightRepository.selectByHighestID();
     }
     
     public List<Campaign> getDiscounts() {

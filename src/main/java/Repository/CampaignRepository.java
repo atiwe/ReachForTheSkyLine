@@ -95,6 +95,23 @@ public class CampaignRepository {
 		return campaigns;
 	}
 	
+	public Campaign selectByHighestID() {
+		StringBuilder sb = new StringBuilder("SELECT MAX('id') AS highest FROM ").append(TABLE_NAME).append(";");
+		
+		final String query = sb.toString();
+		
+		ResultSet rs = session.execute(query);
+		
+		List<Campaign> campaigns = new ArrayList<Campaign>();
+		
+		for(Row r : rs) {
+			Campaign campaign = new Campaign(r.getInt("id"), r.getString("start_date"), r.getString("end_date"), r.getString("reduction"), r.getString("discount_code"));
+			
+			campaigns.add(campaign);
+		}
+		return campaigns.get(0);
+	}
+	
 	public void deleteCampaignByID(int num) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
 		
