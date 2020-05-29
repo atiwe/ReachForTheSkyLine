@@ -1,7 +1,5 @@
 package Domain;
 
-import java.util.UUID;
-
 public class Customer {
 
 	private int id;
