@@ -102,12 +102,22 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		}
 		return false;
 	}
+	
+	public static boolean isNumeric(String str) { 
+		  try {  
+		    Double.parseDouble(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAddFlight) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddFlightDialog();
-			if(checkFlightLineID(Integer.parseInt(arr[4]))) {
+			if(isNumeric(arr[4])) {
+							if(checkFlightLineID(Integer.parseInt(arr[4]))) {
 				if(id.confirmationDialog(arr)) {
 					controller.addFlight(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]));
 			
@@ -115,6 +125,10 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			}else {
 				JOptionPane.showMessageDialog(null, "Not a valid flight line code!");
 			}
+			}else {
+				JOptionPane.showMessageDialog(null, "Flightline ID must be numbers only!");
+			}
+
 			
 			updateScheduledFlights();
 		} 
