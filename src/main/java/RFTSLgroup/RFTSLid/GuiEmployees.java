@@ -152,9 +152,15 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			
 		}
 		else if (e.getSource() == btnPlaceBooking) {
+			currentScheduledFlightList = controller.getScheduledFlights();
+			ScheduledFlight schFlight = currentScheduledFlightList.get(jlistsf.getSelectedIndex());
+			
+			int flightID = schFlight.getID();
+			
 			InputDialog id = new InputDialog();
 			String[] arr = id.showBookFlightDialog();
-			controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4],arr[5], Integer.parseInt(arr[6]));
+			
+			controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4],arr[5], flightID);
 		}
 	}
 	

@@ -174,7 +174,10 @@ public class Controller {
     public void cancelFlight(int customerID) {
     	//TODO Fixa en metod i customerRepository som gör att man kan ta bort customer med hjälp av
     	//personnummer och flightID, ifall en kund har bokat flera flights
+<<<<<<< HEAD
     	//customerRepository.deleteCustomerBySecurityNumberAndFlightID(personalNumber, flightID);
+=======
+>>>>>>> 5621e80d76e0c6cba9179a853d07afca4f148b70
     	customerRepository.deleteCustomerByID(customerID);
     }
     
