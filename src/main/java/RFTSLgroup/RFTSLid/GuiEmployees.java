@@ -118,10 +118,13 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddFlightDialog();
 			controller.addFlight(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]));
+			updateScheduledFlights();
 		} 
 		else if (e.getSource() == btnAddFlightLine) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddFlightLineDialog();
+			controller.addRoute(arr[0], arr[1], arr[2], arr[3]);
+			updateFlightRoutes();
 		}
 		else if (e.getSource() == btnRemoveFlight) {
 			
@@ -134,5 +137,29 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			InputDialog id = new InputDialog();
 			id.showBookFlightDialog();
 		}
+	}
+	
+	
+	public void updateScheduledFlights() {
+		modelsf.clear();
+		modelsf.addElement("| Take Off | Arrival | Flight Time | Pilot | RouteID | ");
+		currentScheduledFlightList = controller.getScheduledFlights();
+		for (ScheduledFlight scheduledFlight : currentScheduledFlightList) {
+			modelsf.addElement(scheduledFlight.getEstimatedStart() + "| " + scheduledFlight.getEstimatedLanding() + 
+					"| " + scheduledFlight.getFlightTime() + "| " + scheduledFlight.getPilot() + "| " +
+					scheduledFlight.getRouteID());
+		}
+	}
+	
+	public void updateFlightRoutes() {
+		modelfl.clear();
+		modelfl.addElement("| ID | Departure City | Arrival City | Flight Duration | Price |");
+		currentRouteList = controller.getFlightLines();
+		for (Route routes : currentRouteList) {
+			modelfl.addElement(routes.getID() + "| " + routes.getDepartureCity() + "| " + 
+					routes.getArrivalCity() + "| " + routes.getFlightDuration() + "| " + 
+					routes.getPrice());
+		}
+		
 	}
 }

@@ -45,10 +45,11 @@ public class InputDialog {
 		Object[] field = {
 				"Dept City", field1,
 				"Arrival City", field2,
-				"Price", field3
+				"Flight Duration", field3,
+				"Price", field4
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Flight Line", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3};
+		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
 	
