@@ -139,6 +139,7 @@ public class Controller {
     public void cancelFlight(String personalNumber, int flightID) {
     	//TODO Fixa en metod i customerRepository som gör att man kan ta bort customer med hjälp av
     	//personnummer och flightID, ifall en kund har bokat flera flights
+    	customerRepository.deleteCustomerBySecurityNumberAndFlightID(personalNumber, flightID);
     }
     
     public void editPilot(int id, String name, String weeklyHours, String lastFlight, String nextFlight) {
