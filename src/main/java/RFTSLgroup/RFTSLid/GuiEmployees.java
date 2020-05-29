@@ -27,7 +27,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 	JLabel emp2 = new JLabel("");
 	JList jlistsf;
 	JList jlistfl;
-	JButton btnAddFlight, btnAddFlightLine, btnRemoveFlight, btnEditFlight, btnPlaceBooking;
+	JButton btnAddFlight, btnAddFlightLine, btnRemoveFlight, btnEditFlight, btnPlaceBooking, btnRemoveFlightLine;
 
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
@@ -67,18 +67,24 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		btnRemoveFlight = new JButton("Remove Flight");
 		btnEditFlight = new JButton("Edit Flight");
 		btnPlaceBooking = new JButton("Place Booking");
+		btnRemoveFlightLine = new JButton("Remove Flight Route");
 		btnAddFlight.addActionListener(this);
 		btnAddFlightLine.addActionListener(this);
 		btnRemoveFlight.addActionListener(this);
 		btnEditFlight.addActionListener(this);
 		btnPlaceBooking.addActionListener(this);
+		btnRemoveFlightLine.addActionListener(this);
+		
 
 		//Add components to panel
 		bottomPanel.add(btnAddFlight);
 		bottomPanel.add(btnAddFlightLine);
+		bottomPanel.add(btnRemoveFlightLine);
 		bottomPanel2.add(btnRemoveFlight);
 		bottomPanel2.add(btnEditFlight);
 		bottomPanel2.add(btnPlaceBooking);
+		
+		
 
 		centrePanel.add(jlemp);
 		centrePanel.add(jlsf);
@@ -153,7 +159,6 @@ public class GuiEmployees extends JPanel implements ActionListener{
 				controller.removeFlight(flightID);
 				updateScheduledFlights();
 
-				controller.removePilot(flightID);
 
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select a flight from the list to remove it!");
@@ -161,6 +166,23 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			
 			updateScheduledFlights();
 
+		}
+		
+		else if (e.getSource() == btnRemoveFlightLine) {
+			if(jlistfl.getSelectedIndex() >= 0) {
+				currentRouteList = controller.getFlightLines();
+				int flightLineID = currentRouteList.get(jlistfl.getSelectedIndex()).getID();
+				
+				JOptionPane.showMessageDialog(this, "Removing Flight Route with ID " + flightLineID );
+				
+				controller.removeRoute(flightLineID);
+				updateFlightRoutes();
+				
+			}
+			
+			else {
+				JOptionPane.showMessageDialog(null, "You need to select a flight route from the list to remove it!");
+			}
 		}
 
 		else if (e.getSource() == btnEditFlight) {

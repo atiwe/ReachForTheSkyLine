@@ -212,6 +212,10 @@ public class Controller {
     	employeeRepository.deleteEmployeeByID(employeeID);
     }
     
+    public void removeRoute(int flightID) {
+    	routesRepository.deleteRouteByID(flightID);
+    }
+    
     public List<Pilot> getPilots() {
     	return pilotRepository.selectAll();
     }
