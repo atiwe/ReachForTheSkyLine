@@ -132,6 +132,8 @@ public class Controller {
     	}else {
     		id = (customers.get(customers.size()-1).getID())+1;
     	}
+    	Customer customer = new Customer(id, name, email, phone, personalNumber, bank, discountCode, scheduledFlightID);
+    	customerRepository.insertCustomer(customer);
     }
     
     public void cancelFlight(String personalNumber, int flightID) {
