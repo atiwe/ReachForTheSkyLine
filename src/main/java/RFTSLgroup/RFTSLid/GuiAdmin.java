@@ -101,10 +101,13 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		btnGroup.add(rbtnAir);
 		btnGroup.add(rbtnEmp);
 		btnGroup.add(rbtnDis);
+		rbtnPilot.setSelected(true);
 		
 		//List view for information - depends on which radio button is chosen
 		infoModel = new DefaultListModel<String>();
 		jlistInfo = new JList(infoModel);
+		
+		updatePilots();
 
 		//Buttons with action listeners
 		btnAddPilot = new JButton("Add Pilot");
