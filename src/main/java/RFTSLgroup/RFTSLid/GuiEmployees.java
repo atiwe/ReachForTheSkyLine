@@ -121,6 +121,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			if(id.confirmationDialog(arr)) {
 				controller.addRoute(arr[0], arr[1], arr[2], arr[3]);
 			}
+			updateFlightRoutes();
 		}
 		else if (e.getSource() == btnRemoveFlight) {
 			currentScheduledFlightList = controller.getScheduledFlights();
