@@ -27,74 +27,74 @@ import Domain.Employee;
 import Domain.Pilot;
 
 public class GuiAdmin extends JPanel implements ActionListener {
-	
+
 	JLabel jlHeading, jlInfo, jlChoose; 
 	JList jlistInfo; 
 	JButton btnAddPilot, btnAddAir, btnAddEmp, btnAddDis, btnRemPilot, btnRemAir, btnRemEmp, btnEditPilot;
 	JRadioButton rbtnPilot, rbtnAir, rbtnEmp, rbtnDis;
 	ButtonGroup btnGroup;
-	
+
 	DefaultListModel<String> infoModel; 
 	private Controller controller;
-	
+
 	List<Employee> currentEmployeeList;
 	List<Pilot> currentPilotList;
 	List<Campaign> currentCampaignList;
 	List<Airplane> currentAirplaneList;
-	
-	
+
+
 	public GuiAdmin(Controller controller) {
 		this.controller = controller;
 		// Panels with grid layout
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 600));
-		
+
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(3, 2));
-		
+
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new GridLayout(2,1));
-		
+
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new GridLayout(1,2));
-		
+
 		JPanel leftCenterPanel = new JPanel();
 		leftCenterPanel.setLayout(new GridLayout(5,1));
-		
+
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new GridLayout(2, 4));
-		
+
 		// Labels
 		jlHeading = new JLabel("Admin", SwingConstants.CENTER);
 		jlHeading.setFont(new Font("Serif", Font.BOLD, 24));
 		jlInfo = new JLabel("Info", SwingConstants.CENTER);
 		jlChoose = new JLabel("Choose what information you want to see");
-		
+
 		//Radio Buttons
 		String pilot = "Pilots";
 		rbtnPilot = new JRadioButton(pilot);
 		rbtnPilot.setMnemonic(KeyEvent.VK_B);
 		rbtnPilot.setActionCommand(pilot);
 		rbtnPilot.addActionListener(this);
-		
+
 		String aircraft = "Aircrafts";
 		rbtnAir = new JRadioButton(aircraft);
 		rbtnAir.setMnemonic(KeyEvent.VK_B);
 		rbtnAir.setActionCommand(aircraft);
 		rbtnAir.addActionListener(this);
-		
+
 		String employee = "Employees";
 		rbtnEmp = new JRadioButton(employee);
 		rbtnEmp.setMnemonic(KeyEvent.VK_B);
 		rbtnEmp.setActionCommand(employee);
 		rbtnEmp.addActionListener(this);
-		
+
 		String discount = "Discounts";
 		rbtnDis = new JRadioButton(discount);
 		rbtnDis.setMnemonic(KeyEvent.VK_B);
 		rbtnDis.setActionCommand(discount);
 		rbtnDis.addActionListener(this);
-		
+
 		//Radio button group
 		btnGroup = new ButtonGroup();
 		btnGroup.add(rbtnPilot);
@@ -102,11 +102,11 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		btnGroup.add(rbtnEmp);
 		btnGroup.add(rbtnDis);
 		rbtnPilot.setSelected(true);
-		
+
 		//List view for information - depends on which radio button is chosen
 		infoModel = new DefaultListModel<String>();
 		jlistInfo = new JList(infoModel);
-		
+
 		updatePilots();
 
 		//Buttons with action listeners
@@ -127,12 +127,12 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		btnEditPilot = new JButton("Edit Pilot Info");
 		btnEditPilot.addActionListener(this);
 		;
-		
+
 		//Adding components to panels
 		mainPanel.add(topPanel);
 		topPanel.add(jlHeading);
 		topPanel.add(jlInfo);
-		
+
 		mainPanel.add(centerPanel);
 		centerPanel.add(leftCenterPanel);
 		leftCenterPanel.add(jlChoose);
@@ -140,9 +140,9 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		leftCenterPanel.add(rbtnAir);
 		leftCenterPanel.add(rbtnEmp);
 		leftCenterPanel.add(rbtnDis);
-		
+
 		centerPanel.add(new JScrollPane(jlistInfo));
-		
+
 		mainPanel.add(bottomPanel);
 		bottomPanel.add(btnAddAir);
 		bottomPanel.add(btnAddEmp);
@@ -152,10 +152,10 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		bottomPanel.add(btnRemEmp);
 		bottomPanel.add(btnRemPilot);
 		bottomPanel.add(btnEditPilot);
-			
+
 		add(mainPanel);	
 	}
-	
+
 	public void createUI() {
 		JFrame frame = new JFrame("Databas");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -163,10 +163,10 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 	// Actions perfomed when buttons clicked
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == btnAddPilot) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddPilotDialog();
@@ -175,7 +175,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			}
 			updatePilots();
 		} 
-		
+
 		else if (e.getSource() == btnAddEmp) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddEmployeeDialog();	
@@ -184,7 +184,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			}
 			updateEmployees();
 		} 
-		
+
 		else if (e.getSource() == btnAddAir) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddAircraftDialog();
@@ -193,7 +193,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			}
 			updateAircrafts();
 		}
-		
+
 		else if (e.getSource() == btnAddDis) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddDiscountDialog();
@@ -202,50 +202,69 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			}
 			updateDiscounts();
 		}
-		
+
 		else if (e.getSource() == btnRemAir) {
-			currentAirplaneList = controller.getAircrafts();
-			int airID = currentAirplaneList.get(jlistInfo.getSelectedIndex()).getID();
-			JOptionPane.showMessageDialog(this, "Removing Flight with ID " + airID );
-			controller.removeAircraft(airID);
-			updateAircrafts();
+			if(jlistInfo.getSelectedIndex()>=0) {
+				currentAirplaneList = controller.getAircrafts();
+				int airID = currentAirplaneList.get(jlistInfo.getSelectedIndex()).getID();
+				JOptionPane.showMessageDialog(this, "Removing Flight with ID " + airID );
+				controller.removeAircraft(airID);
+				updateAircrafts();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "You need to select a aircraft from the list to remove it!");
+			}
 
 		}
-		
+
 		else if (e.getSource() == btnRemPilot) {
-			currentPilotList = controller.getPilots();
-			int pilotID = currentPilotList.get(jlistInfo.getSelectedIndex()).getID();
-			JOptionPane.showMessageDialog(this, "Removing Pilot with ID " + pilotID );
-			controller.removePilot(pilotID);
-			updatePilots();
+			if(jlistInfo.getSelectedIndex()>=0) {
+				currentPilotList = controller.getPilots();
+				int pilotID = currentPilotList.get(jlistInfo.getSelectedIndex()).getID();
+				JOptionPane.showMessageDialog(this, "Removing Pilot with ID " + pilotID );
+				controller.removePilot(pilotID);
+				updatePilots();
+			} else {
+
+				JOptionPane.showMessageDialog(null, "You need to select a pilot from the list to remove it!");
+			}
 		}
-		
+
 		else if (e.getSource() == btnRemEmp) {
-			  currentEmployeeList = controller.getEmployees(); 
-			  int empID = currentEmployeeList.get(jlistInfo.getSelectedIndex()).getID();
-			  JOptionPane.showMessageDialog(this, "Removing Employee with ID " + empID );
-			  controller.removeEmployee(empID);
-			  updateEmployees();
+			if(jlistInfo.getSelectedIndex()>=0) {
+				currentEmployeeList = controller.getEmployees(); 
+				int empID = currentEmployeeList.get(jlistInfo.getSelectedIndex()).getID();
+				JOptionPane.showMessageDialog(this, "Removing Employee with ID " + empID );
+				controller.removeEmployee(empID);
+				updateEmployees();
+			} else {
+				JOptionPane.showMessageDialog(null, "You need to select an employee from the list to remove it!");
+			}
 		}
 		else if (e.getSource() == btnEditPilot) {
-			currentPilotList = controller.getPilots();
-			Pilot currentPilot = currentPilotList.get(jlistInfo.getSelectedIndex());
-			
-			int pilotID = currentPilot.getID();
-			String pilotName = currentPilot.getName();
-			String email = currentPilot.getEmail();
-			String telephone = currentPilot.getTelephone();
-			String pilotLicense = currentPilot.getPilotLicense();
-			String pilotSSN = currentPilot.getPersonalNumber();
-			String empDate = currentPilot.getEmploymentDate();
-			
-		    JOptionPane.showMessageDialog(this, "Editing Pilot with ID " + pilotID  + " and license: " + pilotLicense);
-		    
-			InputDialog id = new InputDialog();
-			String[] arr = id.showEditPilotDialog();
-			
-			controller.editPilot(pilotID, pilotName, email, telephone, pilotSSN, pilotLicense, empDate, arr[0], arr[1], arr[2]);
-			updatePilots();
+
+			if (jlistInfo.getSelectedIndex()>=0) {
+				currentPilotList = controller.getPilots();
+				Pilot currentPilot = currentPilotList.get(jlistInfo.getSelectedIndex());
+
+				int pilotID = currentPilot.getID();
+				String pilotName = currentPilot.getName();
+				String email = currentPilot.getEmail();
+				String telephone = currentPilot.getTelephone();
+				String pilotLicense = currentPilot.getPilotLicense();
+				String pilotSSN = currentPilot.getPersonalNumber();
+				String empDate = currentPilot.getEmploymentDate();
+
+				JOptionPane.showMessageDialog(this, "Editing Pilot with ID " + pilotID  + " and license: " + pilotLicense);
+
+				InputDialog id = new InputDialog();
+				String[] arr = id.showEditPilotDialog();
+
+				controller.editPilot(pilotID, pilotName, email, telephone, pilotSSN, pilotLicense, empDate, arr[0], arr[1], arr[2]);
+				updatePilots();
+			}
+			JOptionPane.showMessageDialog(null, "You need to select a pilot from the list to edit it!");
+
 		}
 		else if (rbtnPilot.isSelected()) {
 			updatePilots();
@@ -260,7 +279,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			updateAircrafts();
 		}
 	}
-	
+
 	public void updatePilots() {
 		infoModel.clear();
 		currentPilotList = controller.getPilots();
@@ -271,19 +290,19 @@ public class GuiAdmin extends JPanel implements ActionListener {
 					pilots.getLastFlight() + " | Next Flight: " + pilots.getNextFlight());
 		}
 	}
-	
+
 	public void updateEmployees() {
 		infoModel.clear();
-		  currentEmployeeList = controller.getEmployees(); 
-		  for(Employee employees : currentEmployeeList) {
-			  infoModel.addElement(" ID: " + employees.getID() + "| Name: " +
-				  employees.getName() + " | Email: " + employees.getEmail() + " | Tel: " +
-				  employees.getTelephone() + " | SSN: " + employees.getPersonalNumber()+ " | Emp. Date: " +
-				  employees.getEmploymentDate()); 
-			  }
-		 
+		currentEmployeeList = controller.getEmployees(); 
+		for(Employee employees : currentEmployeeList) {
+			infoModel.addElement(" ID: " + employees.getID() + "| Name: " +
+					employees.getName() + " | Email: " + employees.getEmail() + " | Tel: " +
+					employees.getTelephone() + " | SSN: " + employees.getPersonalNumber()+ " | Emp. Date: " +
+					employees.getEmploymentDate()); 
+		}
+
 	}
-	
+
 	public void updateDiscounts() {
 		infoModel.clear();
 		currentCampaignList = controller.getDiscounts();
@@ -291,9 +310,9 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			infoModel.addElement(" ID: " + campaigns.getID() + " | Start Date: " + campaigns.getStartDate() + " | End Date: " +  campaigns.getEndDate() +
 					" | Reduction: " + campaigns.getReduction() + " | Code: " + campaigns.getDiscountCode());
 		}
-		
+
 	}
-	
+
 	public void updateAircrafts() {
 		infoModel.clear();
 		currentAirplaneList = controller.getAircrafts();
