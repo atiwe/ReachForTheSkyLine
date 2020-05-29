@@ -145,8 +145,8 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		modelsf.addElement("| Take Off | Arrival | Flight Time | Pilot | RouteID | ");
 		currentScheduledFlightList = controller.getScheduledFlights();
 		for (ScheduledFlight scheduledFlight : currentScheduledFlightList) {
-			modelsf.addElement(scheduledFlight.getEstimatedStart() + "| " + scheduledFlight.getEstimatedLanding() + 
-					"| " + scheduledFlight.getFlightTime() + "| " + scheduledFlight.getPilot() + "| " +
+			modelsf.addElement(scheduledFlight.getEstimatedStart() + " | " + scheduledFlight.getEstimatedLanding() + 
+					" | " + scheduledFlight.getFlightTime() + " | " + scheduledFlight.getPilot() + " | " +
 					scheduledFlight.getRouteID());
 		}
 	}
@@ -156,8 +156,8 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		modelfl.addElement("| ID | Departure City | Arrival City | Flight Duration | Price |");
 		currentRouteList = controller.getFlightLines();
 		for (Route routes : currentRouteList) {
-			modelfl.addElement(routes.getID() + "| " + routes.getDepartureCity() + "| " + 
-					routes.getArrivalCity() + "| " + routes.getFlightDuration() + "| " + 
+			modelfl.addElement(routes.getID() + " | " + routes.getDepartureCity() + " | " + 
+					routes.getArrivalCity() + " | " + routes.getFlightDuration() + " | " + 
 					routes.getPrice());
 		}
 		
