@@ -30,7 +30,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 
 	JLabel jlHeading, jlInfo, jlChoose; 
 	JList jlistInfo; 
-	JButton btnAddPilot, btnAddAir, btnAddEmp, btnAddDis, btnRemPilot, btnRemAir, btnRemEmp, btnEditPilot;
+	JButton btnAddPilot, btnAddAir, btnAddEmp, btnAddDis, btnRemPilot, btnRemAir, btnRemEmp, btnRemDis, btnEditPilot, btnEditAir, btnEditEmp, btnEditDis;
 	JRadioButton rbtnPilot, rbtnAir, rbtnEmp, rbtnDis;
 	ButtonGroup btnGroup;
 
@@ -62,7 +62,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		leftCenterPanel.setLayout(new GridLayout(5,1));
 
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new GridLayout(2, 4));
+		bottomPanel.setLayout(new GridLayout(3, 4));
 
 		// Labels
 		jlHeading = new JLabel("Admin", SwingConstants.CENTER);
@@ -124,9 +124,16 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		btnRemAir.addActionListener(this);
 		btnRemEmp = new JButton("Remove Employee");
 		btnRemEmp.addActionListener(this);
+		btnRemDis = new JButton("Remove Discount");
+		btnRemDis.addActionListener(this);
 		btnEditPilot = new JButton("Edit Pilot Info");
 		btnEditPilot.addActionListener(this);
-		;
+		btnEditAir = new JButton("Edit Aircraft Info");
+		btnEditAir.addActionListener(this);
+		btnEditEmp = new JButton("Edit Employee Info");
+		btnEditEmp.addActionListener(this);
+		btnEditDis = new JButton("Edit Discount Info");
+		btnEditEmp.addActionListener(this);
 
 		//Adding components to panels
 		mainPanel.add(topPanel);
@@ -148,10 +155,14 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		bottomPanel.add(btnAddEmp);
 		bottomPanel.add(btnAddPilot);
 		bottomPanel.add(btnAddDis);
+		bottomPanel.add(btnEditAir);
+		bottomPanel.add(btnEditEmp);
+		bottomPanel.add(btnEditPilot);
+		bottomPanel.add(btnEditDis);
 		bottomPanel.add(btnRemAir);
 		bottomPanel.add(btnRemEmp);
 		bottomPanel.add(btnRemPilot);
-		bottomPanel.add(btnEditPilot);
+		bottomPanel.add(btnRemDis);
 
 		add(mainPanel);	
 	}
@@ -240,6 +251,37 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select an employee from the list to remove it!");
 			}
+		}
+		else if (e.getSource() == btnRemDis) {
+			if(jlistInfo.getSelectedIndex()>=0) {
+				currentCampaignList = controller.getDiscounts();
+				int empID = currentCampaignList.get(jlistInfo.getSelectedIndex()).getID();
+				JOptionPane.showMessageDialog(this, "Removing Campaign with ID " + empID );
+				controller.removeCampaign(empID);
+				updateDiscounts();
+			} else {
+				JOptionPane.showMessageDialog(null, "You need to select a Campaign from the list to remove it!");
+			}
+		}
+		else if (e.getSource() == btnEditDis) {
+
+			if (jlistInfo.getSelectedIndex()>=0) {
+				currentCampaignList = controller.getDiscounts();
+				Campaign currentCampaign = currentCampaignList.get(jlistInfo.getSelectedIndex());
+
+				int campaignID = currentCampaign.getID();
+				String code = currentCampaign.getDiscountCode();
+
+				JOptionPane.showMessageDialog(this, "Editing Campaign with ID " + campaignID  + " and Discount code: " + code);
+
+				InputDialog id = new InputDialog();
+				String[] arr = id.showEditCampaignDialog();
+
+				controller.editCampaign(campaignID, arr[0], arr[1], arr[2], arr[3]);
+				updateDiscounts();
+			}
+			JOptionPane.showMessageDialog(null, "You need to select a campaign from the list to edit it!");
+
 		}
 		else if (e.getSource() == btnEditPilot) {
 

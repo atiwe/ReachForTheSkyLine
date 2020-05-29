@@ -111,6 +111,18 @@ public class InputDialog {
 		return dialogToArray(fields);
 	}
 	
+	public String[] showEditCampaignDialog() {
+		Object[] field = {
+				"Start Date", field1,
+				"End Date", field2,
+				"Reduction", field3,
+				"Discount code", field4
+			};
+		JOptionPane.showConfirmDialog(null, field, "Edit Discount", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3, field4};
+		return dialogToArray(fields);
+	}
+	
 	public String[] showAddEmployeeDialog() {
 		Object[] field = {
 				"Name", field1,

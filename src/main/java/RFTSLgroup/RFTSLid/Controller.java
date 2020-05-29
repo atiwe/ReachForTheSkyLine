@@ -194,6 +194,11 @@ public class Controller {
    	ScheduledFlight scheduledFlight = new ScheduledFlight(id, ETD, ETA, flightTime, pilot, routeID);
    	scheduledFlightRepository.insertFlight(scheduledFlight);
    }
+   
+   public void editCampaign(int id, String start, String end, String reduction, String code) {
+	   Campaign campaign = new Campaign(id, start, end, reduction, code);
+	   campaignRepository.insertCampaign(campaign);
+   }
 
     
     public void removeAircraft(int planeID) {
@@ -206,6 +211,10 @@ public class Controller {
     
     public void removeEmployee(int employeeID) {
     	employeeRepository.deleteEmployeeByID(employeeID);
+    }
+    
+    public void removeCampaign(int campaignID) {
+    	campaignRepository.deleteCampaignByID(campaignID);
     }
     
     public List<Pilot> getPilots() {
