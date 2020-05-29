@@ -165,6 +165,7 @@ public class Controller {
     
     public List<Employee> getEmployees() {
     	return employeeRepository.selectAll();
+    	
     }
     
     public List<Campaign> getDiscounts() {

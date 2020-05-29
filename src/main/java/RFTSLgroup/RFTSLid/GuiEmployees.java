@@ -20,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import Domain.Employee;
+import Domain.Route;
+import Domain.ScheduledFlight;
 
 public class GuiEmployees extends JPanel implements ActionListener{
 	JLabel jlemp;
@@ -34,7 +36,9 @@ public class GuiEmployees extends JPanel implements ActionListener{
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
 	private Controller controller;
-	List<Employee> currentEmployeeList;
+
+	List<ScheduledFlight> currentScheduledFlightList;
+	List<Route> currentRouteList;
 	
 	public GuiEmployees(Controller controller) {
 		this.controller = controller;
@@ -59,17 +63,26 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
 		
-		modelsf.addElement("| ID | Name | E-mail | Telephone | Social security number | Employment date |");
-		currentEmployeeList = controller.getEmployees();
-		for(Employee employee : currentEmployeeList)
-		{
-			modelsf.addElement(employee.getID() + ", " + employee.getName() + ", " + employee.getEmail() + ", " + employee.getTelephone()
-			+ ", " + employee.getPersonalNumber()+ ", " + employee.getEmploymentDate());
+		
+		modelsf.addElement("| Take Off | Arrival | Flight Time | Pilot | RouteID | ");
+		currentScheduledFlightList = controller.getScheduledFlights();
+		for (ScheduledFlight scheduledFlight : currentScheduledFlightList) {
+			modelsf.addElement(scheduledFlight.getEstimatedStart() + ", " + scheduledFlight.getEstimatedLanding() + 
+					", " + scheduledFlight.getFlightTime() + ", " + scheduledFlight.getPilot() + ", " +
+					scheduledFlight.getRouteID());
+		}
+		
+		modelfl.addElement("| ID | Departure City | Arrival City | Flight Duration | Price |");
+		currentRouteList = controller.getFlightLines();
+		for (Route routes : currentRouteList) {
+			modelfl.addElement(routes.getID() + ", " + routes.getDepartureCity() + ", " + 
+					routes.getArrivalCity() + ", " + routes.getFlightDuration() + ", " + 
+					routes.getPrice());
 		}
 		
 		//Add buttons with action listeners
 		btnAddFlight = new JButton("Add Flight");
-		btnAddFlightLine = new JButton("Add Flight Line");
+		btnAddFlightLine = new JButton("Add Flight Route");
 		btnRemoveFlight = new JButton("Remove Flight");
 		btnEditFlight = new JButton("Edit Flight");
 		btnPlaceBooking = new JButton("Place Booking");
