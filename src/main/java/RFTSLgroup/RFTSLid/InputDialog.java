@@ -1,11 +1,8 @@
 package RFTSLgroup.RFTSLid;
 
-import java.util.UUID;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import org.apache.cassandra.thrift.Cassandra.AsyncProcessor.system_add_column_family;
 
 public class InputDialog {
 	JTextField field1;
