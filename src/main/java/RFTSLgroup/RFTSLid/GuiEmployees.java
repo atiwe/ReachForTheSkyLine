@@ -115,7 +115,6 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			String[] arr = id.showAddFlightDialog();
 			if(id.confirmationDialog(arr)) {
 				controller.addFlight(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]));
-							updateScheduledFlights();
 			}
 		} 
 		else if (e.getSource() == btnAddFlightLine) {
@@ -123,7 +122,6 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			String[] arr = id.showAddFlightLineDialog();
 			if(id.confirmationDialog(arr)) {
 				controller.addRoute(arr[0], arr[1], arr[2], arr[3]);
-				updateFlightRoutes();
 			}
 		}
 		else if (e.getSource() == btnRemoveFlight) {

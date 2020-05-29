@@ -29,6 +29,7 @@ public class Controller {
     private ScheduledFlightRepository scheduledFlightRepository;
 	private GuiAdmin guiAdmin;
 	private HomePage homePage;
+	private GuiCustomers guiCustomers;
 	
 	public Controller(AirplaneRepository airplaneRepository, CampaignRepository campaignRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, FlightRequestRepository flightRequestRepository, PilotRepository pilotRepository, RoutesRepository routesRepository, ScheduledFlightRepository scheduledFlightRepository) {
 		this.airplaneRepository = airplaneRepository;
@@ -45,6 +46,10 @@ public class Controller {
     void createUI() {
     	homePage = new HomePage(this);
 	}
+    
+    void setGuiCustomer(GuiCustomers guiCustomers) {
+    	this.guiCustomers = guiCustomers;
+    }
     
     //TODO Fixa så metoderna alltid får det högsta ID:t, förtillfället tar den sista ID:t + 1, men den sista
     // är inte alltid högst
@@ -145,10 +150,11 @@ public class Controller {
     		if(route.getID() > id)
     			id = route.getID();
     	}
+    	System.out.println("ID :" + id);
     	if(id < 1){
     		id = 1;
     	}else {
-    		id = (routes.get(routes.size()-1).getID())+1;
+    		id++;
     	}
     	Route route = new Route(id, deptCity, arrCity, flightDuration, price);
     	routesRepository.insertRoute(route);

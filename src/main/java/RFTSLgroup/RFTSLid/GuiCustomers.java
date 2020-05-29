@@ -46,6 +46,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	
 	public GuiCustomers(Controller controller) {
 		this.controller = controller;
+		controller.setGuiCustomer(this);
 		//Panels with grid layout
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1000, 700));
@@ -71,25 +72,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		jlistfl = new JList(modelfl);
 		jlistbf = new JList(modelbf);
 		
-
-		currentflightList = controller.getScheduledFlights();
-		for(ScheduledFlight scheduledFlight : currentflightList)
-		{
-			modelsf.addElement("ID: " + scheduledFlight.getID() + ", Estimated start: " + scheduledFlight.getEstimatedStart() + ", Estimated landing: " + scheduledFlight.getEstimatedLanding() + ", Flight time: " + scheduledFlight.getFlightTime()
-			+ ", Pilot: " + scheduledFlight.getPilot() + ", RouteID: " + scheduledFlight.getRouteID());
-		}
-
-		currentRouteList = controller.getFlightLines();
-		for(Route route : currentRouteList)
-		{
-			modelfl.addElement("ID: " + route.getID() + ", Departure city: " + route.getDepartureCity() + ", Arrival city: " + route.getArrivalCity() + ", Flight time: "
-					+ route.getFlightDuration() + ", Price: " + route.getPrice());
-		}
-		
-		currentCustomers = controller.getCustomers();
-		for(Customer c : currentCustomers) {
-			modelbf.addElement("ID: " + c.getID() + ", Name" + c.getName() + ", Email: " + c.getEmail() + ", Phone: " + c.getTelephone() + ", Social security number: " + c.getPersonalNumber() + ", Bank: " + c.getBank() + ", Discount code:" + c.getDiscountCode() + ", Flight ID: " + c.getScheduledFlightID());
-		}
+		updateTexts();
 		
 		//Buttons with action listeners
 		btnBookFlight = new JButton("Book Flight");
@@ -116,13 +99,38 @@ public class GuiCustomers extends JPanel implements ActionListener {
 
 	}
 	
-	public void updateBookedFlights() {
+	public void updateTexts() {
+		updateBookedFlights();
+		updateFlightLines();
+		updateScheduledFlights();
+	}
+	
+	private void updateBookedFlights() {
 		modelbf.clear();
 		  currentCustomers = controller.getCustomers(); 
 			for(Customer c : currentCustomers) {
 				modelbf.addElement("ID: " + c.getID() + ", Name" + c.getName() + ", Email: " + c.getEmail() + ", Phone: " + c.getTelephone() + ", Social security number: " + c.getPersonalNumber() + ", Bank: " + c.getBank() + ", Discount code:" + c.getDiscountCode() + ", Flight ID: " + c.getScheduledFlightID());
 			}
 		 
+	}
+	
+	private void updateFlightLines() {
+		modelfl.clear();
+		currentRouteList = controller.getFlightLines();
+		for(Route route : currentRouteList){
+			modelfl.addElement("ID: " + route.getID() + ", Departure city: " + route.getDepartureCity() + ", Arrival city: " + route.getArrivalCity() + ", Flight time: "
+					+ route.getFlightDuration() + ", Price: " + route.getPrice());
+		}
+	}
+	
+	private void updateScheduledFlights() {
+		modelsf.clear();
+		currentflightList = controller.getScheduledFlights();
+		for(ScheduledFlight scheduledFlight : currentflightList)
+		{
+			modelsf.addElement("ID: " + scheduledFlight.getID() + ", Estimated start: " + scheduledFlight.getEstimatedStart() + ", Estimated landing: " + scheduledFlight.getEstimatedLanding() + ", Flight time: " + scheduledFlight.getFlightTime()
+			+ ", Pilot: " + scheduledFlight.getPilot() + ", RouteID: " + scheduledFlight.getRouteID());
+		}
 	}
 
 	//Action performed on button clicks

@@ -125,6 +125,7 @@ public class HomePage implements ActionListener {
 		} 
 		else if (e.getSource() == menuItemCust) {
 			cardLayout.show(panelContainer, "GuiCustomer");
+			guiCustomer.updateTexts();
 		} 
 		else if (e.getSource() == menuItemEmp) {
 			cardLayout.show(panelContainer, "GuiEmployee");
