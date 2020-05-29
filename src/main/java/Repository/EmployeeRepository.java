@@ -79,7 +79,7 @@ public class EmployeeRepository {
 	}
 	
 	public Employee selectByHighestID() {
-		StringBuilder sb = new StringBuilder("SELECT MAX('id') FROM ").append(TABLE_NAME).append(";");
+		StringBuilder sb = new StringBuilder("SELECT MAX('id') AS highest FROM ").append(TABLE_NAME).append(";");
 		
 		final String query = sb.toString();
 		
