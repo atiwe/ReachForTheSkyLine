@@ -139,7 +139,8 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		}
 		else if (e.getSource() == btnPlaceBooking) {
 			InputDialog id = new InputDialog();
-			id.showBookFlightDialog();
+			String[] arr = id.showBookFlightDialog();
+			controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4],arr[5], Integer.parseInt(arr[6]));
 		}
 	}
 	

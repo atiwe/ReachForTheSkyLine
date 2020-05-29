@@ -72,7 +72,7 @@ public class InputDialog {
 				"Discount code", field6
 			};
 		JOptionPane.showConfirmDialog(null, field, "Book Flight", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3, field4};
+		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
 		return dialogToArray(fields);
 	}
 	

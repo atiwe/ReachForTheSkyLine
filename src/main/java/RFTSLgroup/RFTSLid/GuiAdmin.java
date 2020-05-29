@@ -74,7 +74,6 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		rbtnPilot = new JRadioButton(pilot);
 		rbtnPilot.setMnemonic(KeyEvent.VK_B);
 		rbtnPilot.setActionCommand(pilot);
-		rbtnPilot.setSelected(true);
 		rbtnPilot.addActionListener(this);
 		
 		String aircraft = "Aircrafts";
@@ -173,7 +172,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		} 
 		else if (e.getSource() == btnAddEmp) {
 			InputDialog id = new InputDialog();
-			String[] arr = id.showAddEmployeeDialog();
+			String[] arr = id.showAddEmployeeDialog();	
 			if(id.confirmationDialog(arr)) {
 				controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4]);
 			}
@@ -229,34 +228,31 @@ public class GuiAdmin extends JPanel implements ActionListener {
 	
 	public void showPilots() {
 		
-		infoModel.addElement("| ID | Name |  E-mail | Telephone | Social security number | Employment date | Pilot License | Weekly Flight Hours | Last Flight | Next Flight | ");
 		currentPilotList = controller.getPilots();
 		for (Pilot pilots: currentPilotList) {
-			infoModel.addElement(pilots.getID() + " | " + pilots.getName() + " | " + pilots.getEmail() + " | " +
-					pilots.getTelephone() + " | " + pilots.getPersonalNumber() + " | " + pilots.getEmploymentDate() + " | " +
-					pilots.getPilotLicense() + " | " + pilots.getWeeklyFlightHours() + " | " + 
-					pilots.getLastFlight() + " | " + pilots.getNextFlight());
+			infoModel.addElement( " ID: " + pilots.getID() + " | Name: " + pilots.getName() + " | E-mail: " + pilots.getEmail() + " | Tel: " +
+					pilots.getTelephone() + " | SSN: " + pilots.getPersonalNumber() + " | Emp. Date: " + pilots.getEmploymentDate() + " | Pilot License: " +
+					pilots.getPilotLicense() + " | Weekly Flight Hours: " + pilots.getWeeklyFlightHours() + " | Last Flight: " + 
+					pilots.getLastFlight() + " | Next Flight: " + pilots.getNextFlight());
 		}
 	}
 	
 	public void showEmployees() {
-		  infoModel.addElement("| ID | Name | E-mail | Telephone | Social security number | Employment date |"); 
 		  currentEmployeeList = controller.getEmployees(); 
 		  for(Employee employees : currentEmployeeList) {
-			  infoModel.addElement(employees.getID() + "| " +
-				  employees.getName() + " | " + employees.getEmail() + " | " +
-				  employees.getTelephone() + " | " + employees.getPersonalNumber()+ " | " +
+			  infoModel.addElement(" ID: " + employees.getID() + "| Name: " +
+				  employees.getName() + " | Email: " + employees.getEmail() + " | Tel: " +
+				  employees.getTelephone() + " | SSN: " + employees.getPersonalNumber()+ " | Emp. Date: " +
 				  employees.getEmploymentDate()); 
 			  }
 		 
 	}
 	
 	public void showDiscounts() {
-		infoModel.addElement(" | ID | Start Date | End Date | Reduction | Discount Code |");
 		currentCampaignList = controller.getDiscounts();
 		for (Campaign campaigns : currentCampaignList) {
-			infoModel.addElement(campaigns.getID() + " | " + campaigns.getStartDate() + " | " +  campaigns.getEndDate() +
-					" | " + campaigns.getReduction() + " | " + campaigns.getDiscountCode());
+			infoModel.addElement(" ID: " + campaigns.getID() + " | Start Date: " + campaigns.getStartDate() + " | End Date: " +  campaigns.getEndDate() +
+					" | Reduction: " + campaigns.getReduction() + " | Code: " + campaigns.getDiscountCode());
 		}
 		
 	}
@@ -265,8 +261,8 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		infoModel.addElement("| ID | Model | Producer | Capacity | Flight Hours | ");
 		currentAirplaneList = controller.getAircrafts();
 		for (Airplane airplanes : currentAirplaneList) {
-			infoModel.addElement(airplanes.getID() + " | " + airplanes.getModel() + " | " + airplanes.getProducer() + " | " +
-					airplanes.getCapacity() + " | " + airplanes.getFlightHours());
+			infoModel.addElement(" ID: " + airplanes.getID() + " | Model: " + airplanes.getModel() + " | Producer: " + airplanes.getProducer() + " | Capacity: " +
+					airplanes.getCapacity() + " | Flight Hours: " + airplanes.getFlightHours());
 		}
 	}
 
