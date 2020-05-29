@@ -154,7 +154,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 				int customerID = currentCustomers.get(jlistbf.getSelectedIndex()).getID();
 				controller.cancelFlight(customerID);
 				JOptionPane.showMessageDialog(null, "Flight canceled!");
-				updateScheduledFlights();
+				updateBookedFlights();
 			}else {
 				JOptionPane.showMessageDialog(null, "You need to select a flight from the list to cancel it!");
 			}
