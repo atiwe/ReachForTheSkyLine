@@ -174,6 +174,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 
 				controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4],arr[5], flightID);
 				updateScheduledFlights();
+				
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "You need to select a flight from the list to book it!");

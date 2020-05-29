@@ -136,12 +136,17 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	//Action performed on button clicks
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnBookFlight) {
+			if(jlistsf.getSelectedIndex()>=0) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showBookFlightDialog();
 			int flightID = currentflightList.get(jlistsf.getSelectedIndex()).getID();
 			if(id.confirmationDialog(arr)) {
 				controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], flightID);
 				updateBookedFlights();
+			}
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "You need to select a flight from the scheduled list to book it!");
 			}
 		} 
 		else if (e.getSource() == btnCancelFlight) {
