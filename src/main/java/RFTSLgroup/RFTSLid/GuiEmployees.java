@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -131,11 +132,29 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			}
 		}
 		else if (e.getSource() == btnRemoveFlight) {
+			currentScheduledFlightList = controller.getScheduledFlights();
+			int flightID = currentScheduledFlightList.get(jlistsf.getSelectedIndex()).getID();
+			
+			JOptionPane.showMessageDialog(this, "Removing Scheduled Flight with ID " + flightID );
+			controller.removePilot(flightID);
+			updateScheduledFlights();
 			
 		}
 		else if (e.getSource() == btnEditFlight) {
+			currentScheduledFlightList = controller.getScheduledFlights();
+			ScheduledFlight schFlight = currentScheduledFlightList.get(jlistsf.getSelectedIndex());
+			
+			int flightID = schFlight.getID();
+			String flightTime = schFlight.getFlightTime();
+			int flightRouteID = schFlight.getRouteID(); 
+			
+			JOptionPane.showMessageDialog(this, "Editing Scheduled Flight with ID " + flightID );
 			InputDialog id = new InputDialog();
-			id.showEditFlightDialog();
+			String[] arr = id.showEditScheduledFlightDialog();
+			
+			controller.editScheduledFlight(flightID, arr[0], arr[1], flightTime, arr[2], flightRouteID);
+			updateScheduledFlights();
+			
 		}
 		else if (e.getSource() == btnPlaceBooking) {
 			InputDialog id = new InputDialog();
@@ -147,22 +166,20 @@ public class GuiEmployees extends JPanel implements ActionListener{
 	
 	public void updateScheduledFlights() {
 		modelsf.clear();
-		modelsf.addElement("| Take Off | Arrival | Flight Time | Pilot | RouteID | ");
 		currentScheduledFlightList = controller.getScheduledFlights();
 		for (ScheduledFlight scheduledFlight : currentScheduledFlightList) {
-			modelsf.addElement(scheduledFlight.getEstimatedStart() + " | " + scheduledFlight.getEstimatedLanding() + 
-					" | " + scheduledFlight.getFlightTime() + " | " + scheduledFlight.getPilot() + " | " +
+			modelsf.addElement(" Take Off: " + scheduledFlight.getEstimatedStart() + " | Arrival: " + scheduledFlight.getEstimatedLanding() + 
+					" | Flight Time: " + scheduledFlight.getFlightTime() + " | Pilot: " + scheduledFlight.getPilot() + " | Route ID: " +
 					scheduledFlight.getRouteID());
 		}
 	}
 	
 	public void updateFlightRoutes() {
 		modelfl.clear();
-		modelfl.addElement("| ID | Departure City | Arrival City | Flight Duration | Price |");
 		currentRouteList = controller.getFlightLines();
 		for (Route routes : currentRouteList) {
-			modelfl.addElement(routes.getID() + " | " + routes.getDepartureCity() + " | " + 
-					routes.getArrivalCity() + " | " + routes.getFlightDuration() + " | " + 
+			modelfl.addElement(" ID: " + routes.getID() + " | Dep. City: " + routes.getDepartureCity() + " | Arr. City: " + 
+					routes.getArrivalCity() + " | Duration: " + routes.getFlightDuration() + " | Price:" + 
 					routes.getPrice());
 		}
 		

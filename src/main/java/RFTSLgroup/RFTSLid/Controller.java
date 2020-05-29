@@ -49,9 +49,13 @@ public class Controller {
     //TODO Fixa så metoderna alltid får det högsta ID:t, förtillfället tar den sista ID:t + 1, men den sista
     // är inte alltid högst
     public void addEmployee(String name, String email, String telephone, String ssn, String empDate) {
-    	//List<Employee> employees = getEmployees();
-    	Employee employeeHigh = highestIDEmployee();
-    	int id = employeeHigh.getID();
+    	List<Employee> employees = getEmployees();
+    	int id = 0;
+    	for(Employee employee : employees)
+    	{
+    		if(employee.getID() > id)
+    			id = employee.getID();
+    	}
     	if(id < 1){
     		id = 1;
     	}else {
@@ -63,10 +67,14 @@ public class Controller {
     
     
     void addFlight(String estimatedStart, String estimatedLanding, String flightTime, String pilot, int routeID) {
-    	//List<ScheduledFlight> flights = getScheduledFlights();
-    	ScheduledFlight flightHigh = highestIDFlight();
-    	int id = flightHigh.getID();
-    	if(id < 1){
+    	List<ScheduledFlight> flights = getScheduledFlights();
+    	int id = 0;
+    	for(ScheduledFlight flight : flights)
+    	{
+    		if(flight.getID() > id)
+    			id = flight.getID();
+    	}
+    	if(id<1){
     		id = 1;
     	}else {
     		id = id + 1;
@@ -138,18 +146,26 @@ public class Controller {
     	customerRepository.insertCustomer(customer);
     }
     
-    public void cancelFlight(int customerID) {
+    public void cancelFlight(String personalNumber, int flightID) {
     	//TODO Fixa en metod i customerRepository som gör att man kan ta bort customer med hjälp av
     	//personnummer och flightID, ifall en kund har bokat flera flights
-    	//customerRepository.deleteCustomerBySecurityNumberAndFlightID(personalNumber, flightID);
-    	customerRepository.deleteCustomerByID(customerID);
+    	customerRepository.deleteCustomerBySecurityNumberAndFlightID(personalNumber, flightID);
     }
     
-    public void editPilot(int id,String name, String email, String telephone, String ssn, String empDate, String pilotLic, String weeklyHours, String lastFlight, String nextFlight) {
+    
+   public void editPilot(int id,String name, String email, String telephone, String ssn, String empDate, String pilotLic, String weeklyHours, String lastFlight, String nextFlight) {
     	
     	Pilot pilot = new Pilot(id, name, email, telephone, ssn, empDate, pilotLic, weeklyHours, lastFlight, nextFlight );
     	pilotRepository.insertPilot(pilot);
     }
+
+    
+   public void editScheduledFlight(int id, String ETD, String ETA, String flightTime, String pilot, int routeID) {
+   	
+   	ScheduledFlight scheduledFlight = new ScheduledFlight(id, ETD, ETA, flightTime, pilot, routeID);
+   	scheduledFlightRepository.insertFlight(scheduledFlight);
+   }
+
     
     public void removeAircraft(int planeID) {
     	airplaneRepository.deleteAirplaneByID(planeID);
@@ -178,10 +194,6 @@ public class Controller {
     
     public Employee highestIDEmployee() {
     	return employeeRepository.selectByHighestID();
-    }
-    
-    public ScheduledFlight highestIDFlight() {
-    	return scheduledFlightRepository.selectByHighestID();
     }
     
     public List<Campaign> getDiscounts() {
