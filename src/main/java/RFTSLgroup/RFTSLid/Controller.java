@@ -149,6 +149,10 @@ public class Controller {
     	pilotRepository.insertPilot(pilot);
     }
     
+    public void editScheduledFlight(int id, String ETD, String ETA, String flightTime, String pilot, int routeID) {
+    	
+    }
+    
     public void removeAircraft(int planeID) {
     	airplaneRepository.deleteAirplaneByID(planeID);
     }

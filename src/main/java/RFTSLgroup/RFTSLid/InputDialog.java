@@ -50,15 +50,14 @@ public class InputDialog {
 		return dialogToArray(fields);
 	}
 	
-	public String[] showEditFlightDialog() {
+	public String[] showEditScheduledFlightDialog() {
 		Object[] field = {
-				"Dept City", field1,
-				"Arrival City", field2,
-				"Price", field3,
-				"Pilot", field4
+				"ETD", field1,
+				"ETA", field2,
+				"Pilot", field3
 			};
-		JOptionPane.showConfirmDialog(null, field, "Edit Flight", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3, field4};
+		JOptionPane.showConfirmDialog(null, field, "Edit Scheduled Flight", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3};
 		return dialogToArray(fields);
 	}
 	
