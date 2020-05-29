@@ -110,11 +110,13 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			if(checkFlightLineID(Integer.parseInt(arr[4]))) {
 				if(id.confirmationDialog(arr)) {
 					controller.addFlight(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]));
-					updateScheduledFlights();
+			
 				}
 			}else {
 				JOptionPane.showMessageDialog(null, "Not a valid flight line code!");
 			}
+			
+			updateScheduledFlights();
 		} 
 
 		else if (e.getSource() == btnAddFlightLine) {
@@ -134,10 +136,12 @@ public class GuiEmployees extends JPanel implements ActionListener{
 
 				JOptionPane.showMessageDialog(this, "Removing Scheduled Flight with ID " + flightID );
 				controller.removePilot(flightID);
-				updateScheduledFlights();
+				
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select a flight from the list to remove it!");
 			}
+			
+			updateScheduledFlights();
 
 		}
 
