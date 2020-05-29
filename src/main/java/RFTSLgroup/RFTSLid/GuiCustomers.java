@@ -113,7 +113,9 @@ public class GuiCustomers extends JPanel implements ActionListener {
 			//controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], Ta från listan);
 		} 
 		else if (e.getSource() == btnCancelFlight) {
-			//controller.cancelFlight();
+			InputDialog cancel = new InputDialog();
+			String[] arr = cancel.showCancelFlightDialog();
+			controller.cancelFlight(arr[0], Integer.parseInt(arr[1]));
 		}
 		
 	}

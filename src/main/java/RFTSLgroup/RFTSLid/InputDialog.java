@@ -76,6 +76,16 @@ public class InputDialog {
 		return dialogToArray(fields);
 	}
 	
+	public String[] showCancelFlightDialog() {
+		Object[] field = {
+				"Social Security Number", field1,
+				"Flight ID", field2
+		};
+		JOptionPane.showConfirmDialog(null, field, "Cancel Flight", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2};
+		return dialogToArray(fields);
+	}
+	
 	public String[] showAddPilotDialog() {
 		Object[] field = {
 				"Name", field1,
