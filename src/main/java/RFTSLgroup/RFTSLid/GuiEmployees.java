@@ -108,13 +108,26 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		add(centrePanel);
 
 	}
+	
+	private boolean checkFlightLineID(int id) {
+		for(Route r : currentRouteList) {
+			if(r.getID()==id) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAddFlight) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddFlightDialog();
-			if(id.confirmationDialog(arr)) {
-				controller.addFlight(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]));
+			if(checkFlightLineID(Integer.parseInt(arr[4]))) {
+				if(id.confirmationDialog(arr)) {
+					controller.addFlight(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]));
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Not a valid flight line code!");
 			}
 		} 
 		else if (e.getSource() == btnAddFlightLine) {
