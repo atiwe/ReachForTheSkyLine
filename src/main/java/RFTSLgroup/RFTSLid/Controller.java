@@ -144,8 +144,10 @@ public class Controller {
     	customerRepository.deleteCustomerByID(customerID);
     }
     
-    public void editPilot(int id, String name, String weeklyHours, String lastFlight, String nextFlight) {
+    public void editPilot(int id,String name, String email, String telephone, String ssn, String empDate, String pilotLic, String weeklyHours, String lastFlight, String nextFlight) {
     	
+    	Pilot pilot = new Pilot(id, name, email, telephone, ssn, empDate, pilotLic, weeklyHours, lastFlight, nextFlight );
+    	pilotRepository.insertPilot(pilot);
     }
     
     public void removeAircraft(int planeID) {
