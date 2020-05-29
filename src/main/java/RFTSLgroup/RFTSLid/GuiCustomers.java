@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import Domain.Customer;
-import Domain.Employee;
+import org.apache.cassandra.utils.OutputHandler.SystemOutput;
+
 import Domain.ScheduledFlight;
 import Domain.Route;
 
@@ -64,23 +64,20 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
 		
-		
-		modelsf.addElement("| ID | Estimated start | Estimated landing | Flight time | Pilot | RouteID |");
+
 		currentflightList = controller.getScheduledFlights();
 		for(ScheduledFlight scheduledFlight : currentflightList)
 		{
-			modelsf.addElement(scheduledFlight.getID() + ", " + scheduledFlight.getEstimatedStart() + ", " + scheduledFlight.getEstimatedLanding() + ", " + scheduledFlight.getFlightTime()
-			+ ", " + scheduledFlight.getPilot() + ", " + scheduledFlight.getRouteID());
+			modelsf.addElement("ID: " + scheduledFlight.getID() + ", Estimated start: " + scheduledFlight.getEstimatedStart() + ", Estimated landing: " + scheduledFlight.getEstimatedLanding() + ", Flight time: " + scheduledFlight.getFlightTime()
+			+ ", Pilot: " + scheduledFlight.getPilot() + ", RouteID: " + scheduledFlight.getRouteID());
 		}
-		
-		modelfl.addElement("| ID | Departure city | Arrival city | Flight time | Price |");
+
 		currentRouteList = controller.getFlightLines();
 		for(Route route : currentRouteList)
 		{
-			modelfl.addElement(route.getID() + ", " + route.getDepartureCity() + ", " + route.getArrivalCity() + ", "
-					+ route.getFlightDuration() + ", " + route.getPrice());
+			modelfl.addElement("ID: " + route.getID() + ", Departure city: " + route.getDepartureCity() + ", Arrival city: " + route.getArrivalCity() + ", Flight time: "
+					+ route.getFlightDuration() + ", Price: " + route.getPrice());
 		}
-	
 		
 		//Buttons with action listeners
 		btnBookFlight = new JButton("Book Flight");
@@ -110,7 +107,10 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		if (e.getSource() == btnBookFlight) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showBookFlightDialog();
-			//controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], Ta från listan);
+			int flightID = currentflightList.get(jlistsf.getSelectedIndex()).getID();
+			if(id.confirmationDialog(arr)) {
+				controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], flightID);
+			}
 		} 
 		else if (e.getSource() == btnCancelFlight) {
 			InputDialog cancel = new InputDialog();
