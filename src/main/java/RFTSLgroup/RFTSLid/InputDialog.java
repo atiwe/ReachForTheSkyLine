@@ -1,11 +1,8 @@
 package RFTSLgroup.RFTSLid;
 
-import java.util.UUID;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import org.apache.cassandra.thrift.Cassandra.AsyncProcessor.system_add_column_family;
 
 public class InputDialog {
 	JTextField field1;
@@ -64,22 +61,6 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
-	
-//	private int id;
-//	
-//	private String name;
-//	
-//	private String email;
-//	
-//	private String telephone;
-//	
-//	private String personalNumber;
-//	
-//	private String bank;
-//	
-//	private String discountCode;
-//	
-//	private int scheduledFlightID;
 	
 	public String[] showBookFlightDialog() {
 		Object[] field = {
@@ -193,6 +174,19 @@ public class InputDialog {
 		JOptionPane.showConfirmDialog(null, field, "Add Flight Request", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
+	}
+	
+	public boolean confirmationDialog(String[] textFields) {
+		for (String var : textFields) 
+		{ 
+		    if(var.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Nothing saved becuase not all fields were answered");
+		    	return false;
+		    }
+		}
+		JOptionPane.showMessageDialog(null, "Changes saved!");
+		return true;
+
 	}
 	
 	private String[] dialogToArray(JTextField[] fields) {

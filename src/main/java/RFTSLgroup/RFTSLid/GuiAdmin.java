@@ -1,7 +1,6 @@
 package RFTSLgroup.RFTSLid;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -15,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -26,7 +24,6 @@ import Domain.Airplane;
 import Domain.Campaign;
 import Domain.Employee;
 import Domain.Pilot;
-import Domain.ScheduledFlight;
 
 public class GuiAdmin extends JPanel implements ActionListener {
 	
@@ -163,13 +160,6 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 	}
-
-//	"Name", field1,
-//	"Pilot License", field2,
-//	"Telephone", field3,
-//	"Email", field4,
-//	"Social Security #", field5,
-//	"Employment Date", field6,
 	
 	// Actions perfomed when buttons clicked
 	public void actionPerformed(ActionEvent e) {
@@ -177,22 +167,30 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		if (e.getSource() == btnAddPilot) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddPilotDialog();
-			controller.addPilot( arr[0], arr[3], arr[2], arr[4], arr[5], arr[1]);
+			if(id.confirmationDialog(arr)) {
+				controller.addPilot( arr[0], arr[3], arr[2], arr[4], arr[5], arr[1]);
+			}
 		} 
 		else if (e.getSource() == btnAddEmp) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddEmployeeDialog();
-			controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4]);
+			if(id.confirmationDialog(arr)) {
+				controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4]);
+			}
 		} 
 		else if (e.getSource() == btnAddAir) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddAircraftDialog();
-			controller.addAircraft( arr[0], arr[1], arr[2], arr[3]);
+			if(id.confirmationDialog(arr)) {
+				controller.addAircraft( arr[0], arr[1], arr[2], arr[3]);
+			}
 		}
 		else if (e.getSource() == btnAddDis) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddDiscountDialog();
-			controller.addCampaign(arr[0], arr[1], arr[2], arr[3]);
+			if(id.confirmationDialog(arr)) {
+				controller.addCampaign(arr[0], arr[1], arr[2], arr[3]);
+			}
 		}
 		else if (e.getSource() == btnRemAir) {
 			infoModel.addElement("Removing Aircraft");
