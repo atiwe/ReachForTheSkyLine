@@ -78,23 +78,6 @@ public class EmployeeRepository {
 		return employees;
 	}
 	
-	public Employee selectByHighestID() {
-		StringBuilder sb = new StringBuilder("SELECT MAX('id') AS highest FROM ").append(TABLE_NAME).append(";");
-		
-		final String query = sb.toString();
-		
-		ResultSet rs = session.execute(query);
-		
-		List<Employee> employees = new ArrayList<Employee>();
-		
-		for(Row r : rs) {
-			Employee employee = new Employee(r.getInt("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"), r.getString("employment_date"));
-			
-			employees.add(employee);
-		}
-		return employees.get(0);
-	}
-	
 	public void deleteEmployeeByID(int num) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
 		

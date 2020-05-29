@@ -78,23 +78,6 @@ public class AirplaneRepository {
 		return airplanes;
 	}
 	
-	public Airplane selectByHighestID() {
-		StringBuilder sb = new StringBuilder("SELECT MAX('id') AS highest FROM ").append(TABLE_NAME).append(";");
-		
-		final String query = sb.toString();
-		
-		ResultSet rs = session.execute(query);
-		
-		List<Airplane> airplanes = new ArrayList<Airplane>();
-		
-		for(Row r : rs) {
-			Airplane airplane = new Airplane(r.getInt("id"), r.getString("model"), r.getString("producer"), r.getString("capacity"), r.getString("flight_hours"));
-			
-			airplanes.add(airplane);
-		}
-		return airplanes.get(0);
-	}
-	
 	public void deleteAirplaneByID(int num) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
 		

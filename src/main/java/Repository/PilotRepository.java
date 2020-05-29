@@ -83,24 +83,6 @@ public class PilotRepository {
 		return pilots;
 	}
 	
-	public Pilot selectByHighestID() {
-		StringBuilder sb = new StringBuilder("SELECT MAX('id') AS highest FROM ").append(TABLE_NAME).append(";");
-		
-		final String query = sb.toString();
-		
-		ResultSet rs = session.execute(query);
-		
-		List<Pilot> pilots = new ArrayList<Pilot>();
-		
-		for(Row r : rs) {
-			Pilot pilot = new Pilot(r.getInt("id"), r.getString("name"), r.getString("email"), r.getString("telephone"), r.getString("social_security_number"),
-					r.getString("employment_date"), r.getString("pilot_license"), r.getString("weekly_flight_hours"), r.getString("last_flight"), r.getString("next_flight"));
-			
-			pilots.add(pilot);
-		}
-		return pilots.get(0);
-	}
-	
 	public void deletePilotByID(int num) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE id = ").append(num).append(";");
 		

@@ -85,11 +85,16 @@ public class Controller {
     
     public void addAircraft(String model, String producer, String capacity, String flightHours) {
     	List<Airplane> planes = getAircrafts();
-    	int id;
-    	if((planes.size())<1){
+    	int id = 0;
+    	for(Airplane plane : planes)
+    	{
+    		if(plane.getID() > id)
+    			id = plane.getID();
+    	}
+    	if(id < 1){
     		id = 1;
     	}else {
-    		    	id = (planes.get(planes.size()-1).getID())+1;
+    	id = id + 1;
     	}
     	Airplane airplane = new Airplane(id, model, producer, capacity, flightHours);
     	airplaneRepository.insertAirplane(airplane);
@@ -97,11 +102,16 @@ public class Controller {
     
     public void addPilot(String name, String email, String telephone, String ssn, String empDate, String pilotLic) {
     	List<Pilot> pilots = getPilots();
-    	int id;
-    	if((pilots.size())<1){
+    	int id = 0;
+    	for(Pilot pilot : pilots)
+    	{
+    		if(pilot.getID() > id)
+    			id = pilot.getID();
+    	}
+    	if(id < 1){
     		id = 1;
     	}else {
-    		    	id = (pilots.get(pilots.size()-1).getID())+1;
+    	id = id + 1;
     	}
     	String weeklyFlightHours = null;
     	String lastFlight = null;
@@ -112,11 +122,16 @@ public class Controller {
 
     public void addCampaign(String startDate, String endDate, String reduction, String discountCode) {
     	List<Campaign> campaigns = getDiscounts();
-    	int id;
-    	if((campaigns.size())<1){
+    	int id = 0;
+    	for(Campaign campaign : campaigns)
+    	{
+    		if(campaign.getID() > id)
+    			id = campaign.getID();
+    	}
+    	if(id < 1){
     		id = 1;
     	}else {
-    		id = (campaigns.get(campaigns.size()-1).getID())+1;
+    		id = id + 1;
     	}
     	Campaign campaign = new Campaign(id, startDate, endDate, reduction, discountCode);
     	campaignRepository.insertCampaign(campaign);
@@ -124,8 +139,13 @@ public class Controller {
     
     public void addRoute(String deptCity, String arrCity, String flightDuration, String price) {
     	List<Route> routes = getFlightLines();
-    	int id;
-    	if((routes.size())<1){
+    	int id = 0;
+    	for(Route route : routes)
+    	{
+    		if(route.getID() > id)
+    			id = route.getID();
+    	}
+    	if(id < 1){
     		id = 1;
     	}else {
     		id = (routes.get(routes.size()-1).getID())+1;
@@ -136,11 +156,16 @@ public class Controller {
     
     public void bookFlight(String name, String email, String phone, String personalNumber, String bank, String discountCode, int scheduledFlightID) {
     	List<Customer> customers = getCustomers();
-    	int id;
-    	if((customers.size())<1){
+    	int id = 0;
+    	for(Customer customer : customers)
+    	{
+    		if(customer.getID() > id)
+    			id = customer.getID();
+    	}
+    	if(id < 1){
     		id = 1;
     	}else {
-    		id = (customers.get(customers.size()-1).getID())+1;
+    		id = id + 1;
     	}
     	Customer customer = new Customer(id, name, email, phone, personalNumber, bank, discountCode, scheduledFlightID);
     	customerRepository.insertCustomer(customer);
@@ -191,10 +216,6 @@ public class Controller {
     public List<Employee> getEmployees() {
     	return employeeRepository.selectAll();
     	
-    }
-    
-    public Employee highestIDEmployee() {
-    	return employeeRepository.selectByHighestID();
     }
     
     public List<Campaign> getDiscounts() {
