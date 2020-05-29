@@ -54,7 +54,7 @@ public class CustomerRepository {
 		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME).append("(id, name, email, telephone, social_security_number, bank, discount_code, scheduled_flight) ")
 				.append("VALUES (").append(customer.getID()).append(", '").append(customer.getName()).append("', '").append(customer.getEmail()).append("', '")
 				.append(customer.getTelephone()).append("', '").append(customer.getPersonalNumber()).append("', '").append(customer.getBank()).append("', '")
-				.append(customer.getDiscountCode()).append("', '").append(customer.getScheduledFlightID()).append("');");
+				.append(customer.getDiscountCode()).append("', ").append(customer.getScheduledFlightID()).append(");");
 		
 		final String query = sb.toString();
 		session.execute(query);
