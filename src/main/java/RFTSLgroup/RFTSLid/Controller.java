@@ -49,12 +49,13 @@ public class Controller {
     //TODO Fixa så metoderna alltid får det högsta ID:t, förtillfället tar den sista ID:t + 1, men den sista
     // är inte alltid högst
     public void addEmployee(String name, String email, String telephone, String ssn, String empDate) {
-    	List<Employee> employees = getEmployees();
-    	int id;
-    	if((employees.size())<1){
+    	//List<Employee> employees = getEmployees();
+    	Employee employeeHigh = highestIDEmployee();
+    	int id = employeeHigh.getID();
+    	if(id < 1){
     		id = 1;
     	}else {
-    		id = (employees.get(employees.size()-1).getID())+1;
+    		id = id + 1;
     	}
     	Employee employee = new Employee(id, name, email, telephone, ssn, empDate);
     	employeeRepository.insertEmployee(employee);
@@ -169,6 +170,10 @@ public class Controller {
     public List<Employee> getEmployees() {
     	return employeeRepository.selectAll();
     	
+    }
+    
+    public Employee highestIDEmployee() {
+    	return employeeRepository.selectByHighestID();
     }
     
     public List<Campaign> getDiscounts() {
