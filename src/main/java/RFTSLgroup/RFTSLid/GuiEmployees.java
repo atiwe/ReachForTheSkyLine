@@ -59,22 +59,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		jlistsf = new JList(modelsf);
 		jlistfl = new JList(modelfl);
 		
-		
-		modelsf.addElement("| Take Off | Arrival | Flight Time | Pilot | RouteID | ");
-		currentScheduledFlightList = controller.getScheduledFlights();
-		for (ScheduledFlight scheduledFlight : currentScheduledFlightList) {
-			modelsf.addElement(scheduledFlight.getEstimatedStart() + ", " + scheduledFlight.getEstimatedLanding() + 
-					", " + scheduledFlight.getFlightTime() + ", " + scheduledFlight.getPilot() + ", " +
-					scheduledFlight.getRouteID());
-		}
-		
-		modelfl.addElement("| ID | Departure City | Arrival City | Flight Duration | Price |");
-		currentRouteList = controller.getFlightLines();
-		for (Route routes : currentRouteList) {
-			modelfl.addElement(routes.getID() + ", " + routes.getDepartureCity() + ", " + 
-					routes.getArrivalCity() + ", " + routes.getFlightDuration() + ", " + 
-					routes.getPrice());
-		}
+		updateTexts();
 		
 		//Add buttons with action listeners
 		btnAddFlight = new JButton("Add Flight");
@@ -176,8 +161,12 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		}
 	}
 	
+	public void updateTexts() {
+		updateScheduledFlights();
+		updateFlightRoutes();
+	}
 	
-	public void updateScheduledFlights() {
+	private void updateScheduledFlights() {
 		modelsf.clear();
 		currentScheduledFlightList = controller.getScheduledFlights();
 		for (ScheduledFlight scheduledFlight : currentScheduledFlightList) {
@@ -187,7 +176,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		}
 	}
 	
-	public void updateFlightRoutes() {
+	private void updateFlightRoutes() {
 		modelfl.clear();
 		currentRouteList = controller.getFlightLines();
 		for (Route routes : currentRouteList) {
