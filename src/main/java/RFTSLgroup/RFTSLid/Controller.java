@@ -216,14 +216,12 @@ public class Controller {
     public void removeEmployee(int employeeID) {
     	employeeRepository.deleteEmployeeByID(employeeID);
     }
-    
-<<<<<<< HEAD
+
     public void removeCampaign(int campaignID) {
     	campaignRepository.deleteCampaignByID(campaignID);
-=======
+    }
     public void removeRoute(int flightID) {
     	routesRepository.deleteRouteByID(flightID);
->>>>>>> dd581580d2221c4763ea851300cc58e0de0db7e3
     }
     
     public List<Pilot> getPilots() {
