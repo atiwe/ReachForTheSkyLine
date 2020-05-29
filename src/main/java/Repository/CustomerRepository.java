@@ -114,6 +114,13 @@ public class CustomerRepository {
 		session.execute(query);
 	}
 	
+	public void deleteCustomerBySecurityNumberAndFlightID(String number, int num) {
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE social_security_number = '").append(number).append("' AND scheduled_flight = ").append(num).append(";");
+		
+		final String query = sb.toString();
+		session.execute(query);
+	}
+	
 	public void deleteTable(String tableName) {
 		StringBuilder sb = new StringBuilder("DROP TABLE IF EXISTS ").append(tableName);
 		
