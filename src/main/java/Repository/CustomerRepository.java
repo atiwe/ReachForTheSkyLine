@@ -115,7 +115,7 @@ public class CustomerRepository {
 	}
 	
 	public void deleteCustomerBySecurityNumberAndFlightID(String number, int num) {
-		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE social_security_number = '").append(number).append("' AND id = ").append(num).append(";");
+		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE social_security_number = '").append(number).append("' AND scheduled_flight = ").append(num).append(";");
 		
 		final String query = sb.toString();
 		session.execute(query);
