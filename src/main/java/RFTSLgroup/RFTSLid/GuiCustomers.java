@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import Domain.ScheduledFlight;
 import Domain.Customer;
+import Domain.Employee;
 import Domain.Route;
 
 public class GuiCustomers extends JPanel implements ActionListener {
@@ -60,7 +61,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		jlemp.setFont(new Font("Serif", Font.BOLD, 24));
 		jlsf = new JLabel("Scheduled flights", SwingConstants.CENTER);
 		jlfl = new JLabel("Routes", SwingConstants.CENTER);
-		jlbf = new JLabel("Booked flights");
+		jlbf = new JLabel("Booked flights", SwingConstants.CENTER);
 		
 		//Lists
 		modelsf = new DefaultListModel<String>();
@@ -114,6 +115,15 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		add(centrePanel);
 
 	}
+	
+	public void updateBookedFlights() {
+		modelbf.clear();
+		  currentCustomers = controller.getCustomers(); 
+			for(Customer c : currentCustomers) {
+				modelbf.addElement("ID: " + c.getID() + ", Name" + c.getName() + ", Email: " + c.getEmail() + ", Phone: " + c.getTelephone() + ", Social security number: " + c.getPersonalNumber() + ", Bank: " + c.getBank() + ", Discount code:" + c.getDiscountCode() + ", Flight ID: " + c.getScheduledFlightID());
+			}
+		 
+	}
 
 	//Action performed on button clicks
 	public void actionPerformed(ActionEvent e) {
@@ -123,6 +133,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 			int flightID = currentflightList.get(jlistsf.getSelectedIndex()).getID();
 			if(id.confirmationDialog(arr)) {
 				controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], flightID);
+				updateBookedFlights();
 			}
 		} 
 		else if (e.getSource() == btnCancelFlight) {
@@ -133,7 +144,6 @@ public class GuiCustomers extends JPanel implements ActionListener {
 			}else {
 				JOptionPane.showMessageDialog(null, "You need to select a flight from the list to cancel it!");
 			}
-
 		}
 		
 	}
