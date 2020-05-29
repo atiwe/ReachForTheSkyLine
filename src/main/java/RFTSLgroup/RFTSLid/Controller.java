@@ -150,7 +150,6 @@ public class Controller {
     		if(route.getID() > id)
     			id = route.getID();
     	}
-    	System.out.println("ID :" + id);
     	if(id < 1){
     		id = 1;
     	}else {
@@ -201,7 +200,12 @@ public class Controller {
     }
     
     public void removePilot(int pilotID) {
+    	
     	pilotRepository.deletePilotByID(pilotID);
+    }
+    
+    public void removeFlight(int flightID) {
+    	scheduledFlightRepository.deleteFlightByID(flightID);
     }
     
     public void removeEmployee(int employeeID) {

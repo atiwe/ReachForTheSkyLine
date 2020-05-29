@@ -133,7 +133,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 				int flightID = currentScheduledFlightList.get(jlistsf.getSelectedIndex()).getID();
 
 				JOptionPane.showMessageDialog(this, "Removing Scheduled Flight with ID " + flightID );
-				controller.removePilot(flightID);
+				controller.removeFlight(flightID);
 				updateScheduledFlights();
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select a flight from the list to remove it!");
