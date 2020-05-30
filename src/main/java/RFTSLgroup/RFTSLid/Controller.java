@@ -181,7 +181,17 @@ public class Controller {
     }
     
     
-   public void editPilot(int id,String name, String email, String telephone, String ssn, String empDate, String pilotLic, String weeklyHours, String lastFlight, String nextFlight) {
+    public void editEmployee(int id, String name, String email, String telephone, String ssn, String empDate) {
+    	Employee employee = new Employee(id, name, email, telephone, ssn, empDate);
+    	employeeRepository.insertEmployee(employee);
+    }
+    
+    public void editAircraft(int id, String model, String producer, String capacity, String flightHours) {
+    	Airplane airplane = new Airplane(id, model, producer, capacity, flightHours);
+    	airplaneRepository.insertAirplane(airplane);
+    }
+    
+   public void editPilot(int id, String name, String email, String telephone, String ssn, String empDate, String pilotLic, String weeklyHours, String lastFlight, String nextFlight) {
     	
     	Pilot pilot = new Pilot(id, name, email, telephone, ssn, empDate, pilotLic, weeklyHours, lastFlight, nextFlight );
     	pilotRepository.insertPilot(pilot);

@@ -133,7 +133,7 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		btnEditEmp = new JButton("Edit Employee Info");
 		btnEditEmp.addActionListener(this);
 		btnEditDis = new JButton("Edit Discount Info");
-		btnEditEmp.addActionListener(this);
+		btnEditDis.addActionListener(this);
 
 		//Adding components to panels
 		mainPanel.add(topPanel);
@@ -263,24 +263,44 @@ public class GuiAdmin extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, "You need to select a Campaign from the list to remove it!");
 			}
 		}
-		else if (e.getSource() == btnEditDis) {
+		else if (e.getSource() == btnEditAir) {
 
 			if (jlistInfo.getSelectedIndex()>=0) {
-				currentCampaignList = controller.getDiscounts();
-				Campaign currentCampaign = currentCampaignList.get(jlistInfo.getSelectedIndex());
+				currentAirplaneList = controller.getAircrafts();
+				Airplane currentAirplane = currentAirplaneList.get(jlistInfo.getSelectedIndex());
 
-				int campaignID = currentCampaign.getID();
-				String code = currentCampaign.getDiscountCode();
+				int airplaneID = currentAirplane.getID();
+				String model = currentAirplane.getModel();
 
-				JOptionPane.showMessageDialog(this, "Editing Campaign with ID " + campaignID  + " and Discount code: " + code);
+				JOptionPane.showMessageDialog(this, "Editing Airplane with ID " + airplaneID  + " and Model: " + model);
 
 				InputDialog id = new InputDialog();
-				String[] arr = id.showEditCampaignDialog();
+				String[] arr = id.showEditAircraftDialog();
 
-				controller.editCampaign(campaignID, arr[0], arr[1], arr[2], arr[3]);
-				updateDiscounts();
+				controller.editAircraft(airplaneID, arr[0], arr[1], arr[2], arr[3]);
+				updateAircrafts();
 			}
-			JOptionPane.showMessageDialog(null, "You need to select a campaign from the list to edit it!");
+			JOptionPane.showMessageDialog(null, "You need to select a airplane from the list to edit it!");
+
+		}
+		else if (e.getSource() == btnEditEmp) {
+
+			if (jlistInfo.getSelectedIndex()>=0) {
+				currentEmployeeList = controller.getEmployees();
+				Employee currentEmployee = currentEmployeeList.get(jlistInfo.getSelectedIndex());
+
+				int employeeID = currentEmployee.getID();
+				String name = currentEmployee.getName();
+
+				JOptionPane.showMessageDialog(this, "Editing Employee with ID " + employeeID  + " and Name: " + name);
+
+				InputDialog id = new InputDialog();
+				String[] arr = id.showEditEmployeeDialog();
+
+				controller.editEmployee(employeeID, arr[0], arr[1], arr[2], arr[3], arr[4]);
+				updateEmployees();
+			}
+			JOptionPane.showMessageDialog(null, "You need to select a employee from the list to edit it!");
 
 		}
 		else if (e.getSource() == btnEditPilot) {
@@ -306,6 +326,26 @@ public class GuiAdmin extends JPanel implements ActionListener {
 				updatePilots();
 			}
 			JOptionPane.showMessageDialog(null, "You need to select a pilot from the list to edit it!");
+
+		}
+		else if (e.getSource() == btnEditDis) {
+
+			if (jlistInfo.getSelectedIndex()>=0) {
+				currentCampaignList = controller.getDiscounts();
+				Campaign currentCampaign = currentCampaignList.get(jlistInfo.getSelectedIndex());
+
+				int campaignID = currentCampaign.getID();
+				String code = currentCampaign.getDiscountCode();
+
+				JOptionPane.showMessageDialog(this, "Editing Campaign with ID " + campaignID  + " and Discount code: " + code);
+
+				InputDialog id = new InputDialog();
+				String[] arr = id.showEditCampaignDialog();
+
+				controller.editCampaign(campaignID, arr[0], arr[1], arr[2], arr[3]);
+				updateDiscounts();
+			}
+			JOptionPane.showMessageDialog(null, "You need to select a campaign from the list to edit it!");
 
 		}
 		else if (rbtnPilot.isSelected()) {

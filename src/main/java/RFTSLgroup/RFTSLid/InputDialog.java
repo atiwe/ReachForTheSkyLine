@@ -136,6 +136,19 @@ public class InputDialog {
 		return dialogToArray(fields);
 	}
 	
+	public String[] showEditEmployeeDialog() {
+		Object[] field = {
+				"Name", field1,
+				"Email", field2,
+				"Telephone", field3,
+				"Social", field4,
+				"Employment date", field5
+			};
+		JOptionPane.showConfirmDialog(null, field, "Edit Employee", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3, field4, field5};
+		return dialogToArray(fields);
+	}
+	
 	public String[] showAddAircraftDialog() {
 		Object[] field = {
 				"Model", field1,
@@ -146,7 +159,19 @@ public class InputDialog {
 		JOptionPane.showConfirmDialog(null, field, "Add Aircraft", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
-	}	
+	}
+	
+	public String[] showEditAircraftDialog() {
+		Object[] field = {
+				"Model", field1,
+				"Producer", field2,
+				"Capacity", field3,
+				"Flight Hours", field4
+			};
+		JOptionPane.showConfirmDialog(null, field, "Edit Aircraft", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3, field4};
+		return dialogToArray(fields);
+	}
 	
 	public String[] showAddDiscountDialog() {
 		Object[] field = {
