@@ -214,7 +214,7 @@ public class InputDialog {
 		for (String var : textFields) 
 		{ 
 		    if(var.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Nothing saved becuase not all fields were answered");
+				JOptionPane.showMessageDialog(null, "Nothing saved because not all fields were answered");
 		    	return false;
 		    }
 		}
