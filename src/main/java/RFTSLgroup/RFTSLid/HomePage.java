@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -22,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+
+import com.kenai.jffi.Main;
 
 import Domain.Customer;
 
@@ -58,8 +61,10 @@ public class HomePage implements ActionListener {
 		guiEmployees = new GuiEmployees(controller);
 		panelContainer.setLayout(cardLayout);
 		
-		icon = new ImageIcon("C:/Users/dalvi/ReachForTheSkyLineNew/src/main/java/RFTSLgroup/RFTSLid/airplane.jpg");
-		background = new JLabel(icon);
+		icon = new ImageIcon("airplane.jpg");
+		//URL url = Main.class.getResource("airplane.jpg");
+		//icon = new ImageIcon(url);
+		 background = new JLabel(icon);
 		
 		
 		//Start page panel
