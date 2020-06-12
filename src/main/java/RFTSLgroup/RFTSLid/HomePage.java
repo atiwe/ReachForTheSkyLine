@@ -165,7 +165,7 @@ public class HomePage implements ActionListener {
 		String[] arr = id.showCustomerLoginDialog();
 		String username = arr[0];
 		String password = arr[1];
-		checkLogin(username, password);
+		//checkLogin(username, password);
 
 	}
 
@@ -180,17 +180,22 @@ public class HomePage implements ActionListener {
 		String username = arr[0];
 		String password = arr[1];
 		
-		return checkLogin(username, password);
+		return checkLoginEmployee(username, password);
 	}
 
-	public boolean checkLogin(String username, String password) {
+	public boolean checkLoginEmployee(String username, String password) {
 		InputDialog id = new InputDialog();
 			existingCustomers = controller.getCustomers();
 			User loginUser = controller.getUser(username);
 			if(loginUser!=null) {
 				if(loginUser.getPassword().equals(password)) {
-					currentUser = loginUser;
-					return true;
+					if(loginUser.getType().equals("Employee")) {
+						currentUser = loginUser;
+						return true;
+					}else {
+						JOptionPane.showMessageDialog(null, "Not a employee account!");
+						return false;
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Wrong password!");
 					return false;
