@@ -179,7 +179,8 @@ public class HomePage implements ActionListener {
 		
 		if (id.confirmationDialog(arr)){
 			controller.addCustomer(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
-			JOptionPane.showMessageDialog(background, this, "Customer Account Added", 0);
+			
+			JOptionPane.showMessageDialog(null, "Customer account added");
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Something went wrong! no account added");
