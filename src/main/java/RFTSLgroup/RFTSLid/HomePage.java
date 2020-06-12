@@ -129,7 +129,9 @@ public class HomePage implements ActionListener {
 		} 
 		else if (e.getSource() == menuItemCust) {
 			newOrExistingCustomer();
+			if(customerLoginWindow()) {
 			cardLayout.show(panelContainer, "GuiCustomer");
+			}
 			guiCustomer.updateTexts();
 		} 
 		else if (e.getSource() == menuItemEmp) {
@@ -141,7 +143,9 @@ public class HomePage implements ActionListener {
 		}
 		else if (e.getSource() == btnCust) {
 			newOrExistingCustomer();
+			if(customerLoginWindow()) {
 			cardLayout.show(panelContainer, "GuiCustomer");
+			}
 		}
 		else if (e.getSource() == btnEmp) {
 			if(employeeLoginWindow())
@@ -160,18 +164,26 @@ public class HomePage implements ActionListener {
 		}
 	}
 
-	public void customerLoginWindow() {
+	public boolean customerLoginWindow() {
 		InputDialog id = new InputDialog();
 		String[] arr = id.showCustomerLoginDialog();
 		String username = arr[0];
 		String password = arr[1];
-		//checkLogin(username, password);
+		return checkLoginCustomer(username, password);
 
 	}
 
 	public void createNewUser() {
 		InputDialog id = new InputDialog();
 		String[] arr = id.showCreateCustomerDialog();
+		
+		if (id.confirmationDialog(arr)){
+			controller.addCustomer(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+			JOptionPane.showMessageDialog(background, this, "Customer Account Added", 0);
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Something went wrong! no account added");
+		}
 	}
 
 	public boolean employeeLoginWindow() {
@@ -184,8 +196,7 @@ public class HomePage implements ActionListener {
 	}
 
 	public boolean checkLoginEmployee(String username, String password) {
-		InputDialog id = new InputDialog();
-			existingCustomers = controller.getCustomers();
+
 			User loginUser = controller.getUser(username);
 			if(loginUser!=null) {
 				if(loginUser.getPassword().equals(password)) {
@@ -194,6 +205,28 @@ public class HomePage implements ActionListener {
 						return true;
 					}else {
 						JOptionPane.showMessageDialog(null, "Not a employee account!");
+						return false;
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Wrong password!");
+					return false;
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Wrong username!");
+				return false;
+			}
+	}
+	
+	public boolean checkLoginCustomer(String username, String password) {
+		
+			User loginUser = controller.getUser(username);
+			if(loginUser!=null) {
+				if(loginUser.getPassword().equals(password)) {
+					if(loginUser.getType().equals("Customer")) {
+						currentUser = loginUser;
+						return true;
+					}else {
+						JOptionPane.showMessageDialog(null, "Not a customer account!");
 						return false;
 					}
 				}else {

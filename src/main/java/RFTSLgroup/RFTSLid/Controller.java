@@ -166,6 +166,27 @@ public class Controller {
     	Route route = new Route(id, deptCity, arrCity, flightDuration, price);
     	routesRepository.insertRoute(route);
     }
+  
+    public void addCustomer(String name, String email, String telephone, String ssn, String bank, String username, String password) {
+    	List<Customer> customers = getCustomers();
+    	int id = 0;
+    	for(Customer customer : customers)
+    	{
+    		if(customer.getID() > id)
+    			id = customer.getID();
+    	}
+    	if(id < 1){
+    		id = 1;
+    	}else {
+    		id = id + 1;
+    	}
+    	Customer customer = new Customer(id, name, email, telephone, ssn, bank);
+    	customerRepository.insertCustomer(customer);
+    	
+    	String type = "Customer";
+    	User user = new User(username, password, id, type);
+    	userRepository.insertUser(user);
+    }
     
     public void bookFlight(String name, String email, String phone, String personalNumber, String bank, String discountCode, int scheduledFlightID) {
     	List<Customer> customers = getCustomers();

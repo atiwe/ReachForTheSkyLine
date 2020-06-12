@@ -32,6 +32,15 @@ public class Customer {
 		this.scheduledFlightID = ScheduledFlightID;
 	}
 	
+	public Customer(int ID, String Name, String Email, String Telephone, String PersonalNumber, String Bank) {
+		this.id = ID;
+		this.name = Name;
+		this.email = Email;
+		this.telephone = Telephone;
+		this.personalNumber = PersonalNumber;
+		this.bank = Bank;
+	}
+	
 	public int getID() {
 		return id;
 	}

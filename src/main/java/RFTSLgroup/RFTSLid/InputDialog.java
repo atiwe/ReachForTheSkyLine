@@ -231,11 +231,12 @@ public class InputDialog {
 				"Telephone", field3,
 				"SSN", field4,
 				"Bank", field5,
-				"Password", field6
+				"Username", field6,
+				"Password", field7
 		};
 
 		JOptionPane.showConfirmDialog(null, field, "Create new customer", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
+		JTextField[] fields = {field1, field2, field3, field4, field5, field6, field7};
 		return dialogToArray(fields);
 	}
 
