@@ -216,6 +216,11 @@ public class Controller {
 	   Campaign campaign = new Campaign(id, start, end, reduction, code);
 	   campaignRepository.insertCampaign(campaign);
    }
+   
+   public User checkUser(String username) {
+	   return  userRepository.selectByUser(username);
+	   
+   }
 
     
     public void removeAircraft(int planeID) {
