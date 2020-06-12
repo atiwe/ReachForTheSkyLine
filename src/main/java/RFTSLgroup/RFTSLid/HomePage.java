@@ -7,11 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
-import java.net.URL;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,14 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-
-import com.kenai.jffi.Main;
-
 import Domain.Customer;
+import Domain.User;
 
 
 public class HomePage implements ActionListener {
@@ -50,6 +43,7 @@ public class HomePage implements ActionListener {
 	GuiCustomers guiCustomer;
 	GuiEmployees guiEmployees;
 	private Controller controller;
+	private User currentUser;
 	
 	List<Customer> existingCustomers;
 	
@@ -150,8 +144,8 @@ public class HomePage implements ActionListener {
 			cardLayout.show(panelContainer, "GuiCustomer");
 		}
 		else if (e.getSource() == btnEmp) {
-			employeeLoginWindow();
-			cardLayout.show(panelContainer, "GuiEmployee");
+			if(employeeLoginWindow())
+				cardLayout.show(panelContainer, "GuiEmployee");
 		}
 	}
 	
@@ -180,25 +174,31 @@ public class HomePage implements ActionListener {
 		String[] arr = id.showCreateCustomerDialog();
 	}
 
-	public void employeeLoginWindow() {
+	public boolean employeeLoginWindow() {
 		InputDialog id = new InputDialog();
 		String[] arr = id.showEmployeeLoginDialog();
 		String username = arr[0];
 		String password = arr[1];
-
+		
+		return checkLogin(username, password);
 	}
 
 	public boolean checkLogin(String username, String password) {
+		InputDialog id = new InputDialog();
 			existingCustomers = controller.getCustomers();
-
-			// controller.findCustomer(username);
-		if (1 == 1) {
-				System.out.println("checking " + username + " " + password);
-		}
-		return true;
+			User loginUser = controller.getUser(username);
+			if(loginUser!=null) {
+				if(loginUser.getPassword().equals(password)) {
+					currentUser = loginUser;
+					return true;
+				}else {
+					JOptionPane.showMessageDialog(null, "Wrong password!");
+					return false;
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Wrong username!");
+				return false;
+			}
 	}
-
-	
-
 }
 

@@ -57,6 +57,9 @@ public class UserRepository {
 			
 			users.add(user);
 		}
+		if(users.size()<1) {
+			return null;
+		}
 		return users.get(0);
 	}
 	

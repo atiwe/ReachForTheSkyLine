@@ -280,4 +280,8 @@ public class Controller {
     	return customerRepository.selectAll();
     }
     
+    public User getUser(String username) {
+    	return userRepository.selectByUser(username);
+    }
+    
 }
