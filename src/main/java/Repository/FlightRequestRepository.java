@@ -38,7 +38,7 @@ public class FlightRequestRepository {
 	
 	public void insertRequest(FlightRequest request) {
 		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME).append("(id, customer_id, departure_city, arrival_city, start_time) ")
-				.append("VALUES (").append(request.getID()).append(", '").append(request.getCustomerID()).append("', '").append(request.getDepartureCity()).append("', '")
+				.append("VALUES (").append(request.getID()).append(", ").append(request.getCustomerID()).append(", '").append(request.getDepartureCity()).append("', '")
 				.append(request.getArrivalCity()).append("', '").append(request.getStartTime()).append("');");
 		
 		final String query = sb.toString();

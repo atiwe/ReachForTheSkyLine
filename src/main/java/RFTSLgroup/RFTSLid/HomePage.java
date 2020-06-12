@@ -225,6 +225,7 @@ public class HomePage implements ActionListener {
 				if(loginUser.getPassword().equals(password)) {
 					if(loginUser.getType().equals("Customer")) {
 						currentUser = loginUser;
+						guiCustomer.setCurrentUser(loginUser);
 						return true;
 					}else {
 						JOptionPane.showMessageDialog(null, "Not a customer account!");

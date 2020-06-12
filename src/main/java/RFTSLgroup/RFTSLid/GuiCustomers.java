@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -18,8 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import Domain.ScheduledFlight;
+import Domain.User;
 import Domain.Customer;
 import Domain.Employee;
+import Domain.FlightRequest;
 import Domain.Route;
 
 public class GuiCustomers extends JPanel implements ActionListener {
@@ -43,6 +46,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	List<ScheduledFlight> currentflightList;
 	List<Route> currentRouteList;
 	List<Customer> currentCustomers;
+	private User currentUser;
 	
 	public GuiCustomers(Controller controller) {
 		this.controller = controller;
@@ -99,6 +103,11 @@ public class GuiCustomers extends JPanel implements ActionListener {
 
 	}
 	
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+		updateBookedFlights();
+	}
+	
 	public void updateTexts() {
 		updateBookedFlights();
 		updateFlightLines();
@@ -107,11 +116,15 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	
 	private void updateBookedFlights() {
 		modelbf.clear();
-		  currentCustomers = controller.getCustomers(); 
-			for(Customer c : currentCustomers) {
-				modelbf.addElement("ID: " + c.getID() + ", Name" + c.getName() + ", Email: " + c.getEmail() + ", Phone: " + c.getTelephone() + ", Social security number: " + c.getPersonalNumber() + ", Bank: " + c.getBank() + ", Discount code:" + c.getDiscountCode() + ", Flight ID: " + c.getScheduledFlightID());
-			}
-		 
+		if(currentUser!=null) {
+			List<FlightRequest> bookedFlights = controller.getFlightRequests();
+			for(FlightRequest f : bookedFlights) {
+				if(f.getCustomerID()==currentUser.getRelatedID()) {
+					modelbf.addElement("Booked flight from " + f.getDepartureCity() + " to " + f.getArrivalCity() + " | Time: " +
+				f.getStartTime());
+				}
+			}	
+		}		 
 	}
 	
 	private void updateFlightLines() {
@@ -140,6 +153,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 			scheduledFlight.getEstimatedLanding() + " | Flight time: " + scheduledFlight.getFlightTime());
 		}
 	}
+	
 
 	//Action performed on button clicks
 	public void actionPerformed(ActionEvent e) {
@@ -147,9 +161,11 @@ public class GuiCustomers extends JPanel implements ActionListener {
 			if(jlistsf.getSelectedIndex()>=0) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showBookFlightDialog();
-			int flightID = currentflightList.get(jlistsf.getSelectedIndex()).getID();
+			ScheduledFlight selectedFlight = currentflightList.get(jlistsf.getSelectedIndex());
+			int flightID = selectedFlight.getID();
+			Route route = controller.getRouteById(flightID);
 			if(id.confirmationDialog(arr)) {
-				controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], flightID);
+				controller.bookFlight(currentUser.getRelatedID(), route.getDepartureCity(), route.getArrivalCity(), selectedFlight.getEstimatedStart());
 				updateBookedFlights();
 				}
 			}else {

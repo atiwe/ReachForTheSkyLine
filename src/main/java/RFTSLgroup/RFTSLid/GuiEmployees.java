@@ -205,7 +205,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			}
 
 		}
-
+		//TODO Fixa denna metoden så den skapar flightRequest och hämtar info från användare och flight-listorna
 		else if (e.getSource() == btnPlaceBooking) {
 			if(jlistsf.getSelectedIndex()>=0) {
 				currentScheduledFlightList = controller.getScheduledFlights();
@@ -215,8 +215,8 @@ public class GuiEmployees extends JPanel implements ActionListener{
 
 				InputDialog id = new InputDialog();
 				String[] arr = id.showBookFlightDialog();
-
-				controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4],arr[5], flightID);
+				
+				//controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4],arr[5], flightID);
 				updateScheduledFlights();
 				
 			}

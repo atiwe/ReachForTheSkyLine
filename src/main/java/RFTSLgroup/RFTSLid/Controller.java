@@ -5,6 +5,7 @@ import Domain.Airplane;
 import Domain.Campaign;
 import Domain.Customer;
 import Domain.Employee;
+import Domain.FlightRequest;
 import Domain.Pilot;
 import Domain.Route;
 import Domain.ScheduledFlight;
@@ -188,21 +189,23 @@ public class Controller {
     	userRepository.insertUser(user);
     }
     
-    public void bookFlight(String name, String email, String phone, String personalNumber, String bank, String discountCode, int scheduledFlightID) {
-    	List<Customer> customers = getCustomers();
+    public void bookFlight(int CustomerID, String DepartureCity, String ArrivalCity, String StartTime) {
+    	List<FlightRequest> flights = getFlightRequests();
+    	
+    	
     	int id = 0;
-    	for(Customer customer : customers)
+    	for(FlightRequest flight : flights)
     	{
-    		if(customer.getID() > id)
-    			id = customer.getID();
+    		if(flight.getID() > id)
+    			id = flight.getID();
     	}
     	if(id < 1){
     		id = 1;
     	}else {
     		id = id + 1;
     	}
-    	Customer customer = new Customer(id, name, email, phone, personalNumber, bank, discountCode, scheduledFlightID);
-    	customerRepository.insertCustomer(customer);
+    	FlightRequest fr = new FlightRequest(id, CustomerID, DepartureCity, ArrivalCity, StartTime);
+    	flightRequestRepository.insertRequest(fr);
     }
     
     public void cancelFlight(int customerID) {
@@ -303,6 +306,10 @@ public class Controller {
     
     public User getUser(String username) {
     	return userRepository.selectByUser(username);
+    }
+    
+    public List<FlightRequest> getFlightRequests(){
+    	return flightRequestRepository.selectAll();
     }
     
 }
