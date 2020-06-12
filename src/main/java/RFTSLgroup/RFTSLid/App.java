@@ -77,6 +77,8 @@ public class App
         routesRepository.createTable();
         scheduledFlightRepository = new ScheduledFlightRepository(session);
         scheduledFlightRepository.createTable();
+        userRepository = new UserRepository(session);
+        userRepository.createTable();
     	
     	
     	new Controller(airplaneRepository, campaignRepository, customerRepository, employeeRepository, flightRequestRepository, pilotRepository, routesRepository, scheduledFlightRepository, userRepository);

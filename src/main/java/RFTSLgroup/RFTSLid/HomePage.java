@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
 import java.net.URL;
 import java.util.List;
 
@@ -18,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
@@ -51,8 +51,6 @@ public class HomePage implements ActionListener {
 	GuiEmployees guiEmployees;
 	private Controller controller;
 	
-	List<Customer> existingCustomers; 
-	
 	public HomePage(Controller controller) {
 		
 		this.controller = controller;
@@ -62,6 +60,8 @@ public class HomePage implements ActionListener {
 		panelContainer.setLayout(cardLayout);
 		
 		icon = new ImageIcon("airplane.jpg");
+		//URL url = Main.class.getResource("airplane.jpg");
+		//icon = new ImageIcon(url);
 		background = new JLabel(icon);
 		
 		
@@ -134,68 +134,21 @@ public class HomePage implements ActionListener {
 			cardLayout.show(panelContainer, "GuiAdmin");
 		} 
 		else if (e.getSource() == menuItemCust) {
-			newOrExistingCustomer();
 			cardLayout.show(panelContainer, "GuiCustomer");
 			guiCustomer.updateTexts();
 		} 
 		else if (e.getSource() == menuItemEmp) {
-			employeeLoginWindow();
 			cardLayout.show(panelContainer, "GuiEmployee");
 		}
 		else if (e.getSource() == btnAdmin) {
 			cardLayout.show(panelContainer, "GuiAdmin");
 		}
 		else if (e.getSource() == btnCust) {
-			newOrExistingCustomer();
 			cardLayout.show(panelContainer, "GuiCustomer");
 		}
 		else if (e.getSource() == btnEmp) {
-			employeeLoginWindow();
 			cardLayout.show(panelContainer, "GuiEmployee");
 		}
-	}
-	
-	public void newOrExistingCustomer() {
-		InputDialog id = new InputDialog();
-		
-		boolean result = id.showLoginOptions();
-		if(result == true ) {
-			customerLoginWindow();
-		} else {
-			createNewUser();
-		}
-	}
-	
-	public void customerLoginWindow() {
-		InputDialog id = new InputDialog();
-		String[] arr = id.showCustomerLoginDialog();
-		String username = arr[0];
-		String password = arr[1];
-		checkLogin(username, password);
-		
-	}
-	
-	public void createNewUser() {
-		InputDialog id = new InputDialog();
-		String[] arr = id.showCreateCustomerDialog();
-	}
-	
-	public void employeeLoginWindow() {
-		InputDialog id = new InputDialog();
-		String[] arr = id.showEmployeeLoginDialog();
-		String username = arr[0];
-		String password = arr[1];
-		
-	}
-	
-	public boolean checkLogin(String username, String password) {
-			existingCustomers = controller.getCustomers();
-			
-			// controller.findCustomer(username);
-		if (1 == 1) {
-				System.out.println("checking " + username + " " + password);
-		}
-		return true;
 	}
 	
 
