@@ -35,7 +35,7 @@ public class UserRepository {
 	}
 	
 	public void insertUser(User user) {
-		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME).append("(username, password, relatedID, type")
+		StringBuilder sb = new StringBuilder("INSERT INTO ").append(TABLE_NAME).append("(username, password, relatedID, type) ")
 				.append("VALUES ('").append(user.getUsername()).append("', '").append(user.getPassword()).append("', ").append(user.getRelatedID()).append(", '")
 				.append(user.getType()).append("');");
 		
