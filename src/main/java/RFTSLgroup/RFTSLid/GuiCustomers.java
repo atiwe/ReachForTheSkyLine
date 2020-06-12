@@ -118,8 +118,8 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		modelfl.clear();
 		currentRouteList = controller.getFlightLines();
 		for(Route route : currentRouteList){
-			modelfl.addElement("ID: " + route.getID() + ", Departure city: " + route.getDepartureCity() + ", Arrival city: " + route.getArrivalCity() + ", Flight time: "
-					+ route.getFlightDuration() + ", Price: " + route.getPrice());
+			modelfl.addElement("ID: " + route.getID() + " | Departure city: " + route.getDepartureCity() + " | Arrival city: " + route.getArrivalCity() + " | Flight time: "
+					+ route.getFlightDuration() + " | Price: " + route.getPrice());
 		}
 	}
 	
@@ -128,8 +128,16 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		currentflightList = controller.getScheduledFlights();
 		for(ScheduledFlight scheduledFlight : currentflightList)
 		{
-			modelsf.addElement("ID: " + scheduledFlight.getID() + ", Estimated start: " + scheduledFlight.getEstimatedStart() + ", Estimated landing: " + scheduledFlight.getEstimatedLanding() + ", Flight time: " + scheduledFlight.getFlightTime()
-			+ ", Pilot: " + scheduledFlight.getPilot() + ", RouteID: " + scheduledFlight.getRouteID());
+			Route route = controller.getRouteById(scheduledFlight.getID());
+			String departureCity = "No destination";
+			String arrivalCity = "No destination";
+			if(route!=null) {
+				departureCity = route.getDepartureCity();
+				arrivalCity = route.getArrivalCity();
+			}
+			modelsf.addElement("Flight from " + departureCity + " to " + arrivalCity + 
+			" | Estimated start: " + scheduledFlight.getEstimatedStart() + " | Estimated landing: " + 
+			scheduledFlight.getEstimatedLanding() + " | Flight time: " + scheduledFlight.getFlightTime());
 		}
 	}
 
@@ -143,9 +151,8 @@ public class GuiCustomers extends JPanel implements ActionListener {
 			if(id.confirmationDialog(arr)) {
 				controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], flightID);
 				updateBookedFlights();
-			}
-			}
-			else {
+				}
+			}else {
 				JOptionPane.showMessageDialog(null, "You need to select a flight from the scheduled list to book it!");
 			}
 		} 

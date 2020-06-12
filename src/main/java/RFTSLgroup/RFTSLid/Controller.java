@@ -259,6 +259,10 @@ public class Controller {
     	return routesRepository.selectAll();
     }
     
+    public Route getRouteById(int id) {
+    	return routesRepository.selectByID(id);
+    }
+    
     public List<Customer> getCustomers(){
     	return customerRepository.selectAll();
     }

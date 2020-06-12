@@ -120,24 +120,23 @@ public class GuiEmployees extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAddFlight) {
-			InputDialog id = new InputDialog();
-			String[] arr = id.showAddFlightDialog();
-			if(isNumeric(arr[4])) {
-							if(checkFlightLineID(Integer.parseInt(arr[4]))) {
-				if(id.confirmationDialog(arr)) {
-					controller.addFlight(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]));
-			
+			if(jlistfl.getSelectedIndex()>=0) {
+				currentRouteList = controller.getFlightLines();
+				int flightID = currentRouteList.get(jlistfl.getSelectedIndex()).getID();
+				InputDialog id = new InputDialog();
+				String[] arr = id.showAddFlightDialog();
+				if(checkFlightLineID(flightID)) {
+					if(id.confirmationDialog(arr)) {
+						controller.addFlight(arr[0], arr[1], arr[2], arr[3], flightID);
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Not a valid flight line ID!");
 				}
+				updateScheduledFlights();
 			}else {
-				JOptionPane.showMessageDialog(null, "Not a valid flight line code!");
+				JOptionPane.showMessageDialog(null, "You need to select a flight line from the list to add a flight!");
 			}
-			}else {
-				JOptionPane.showMessageDialog(null, "Flightline ID must be numbers only!");
-			}
-
-			
-			updateScheduledFlights();
-		} 
+		}
 
 		else if (e.getSource() == btnAddFlightLine) {
 			InputDialog id = new InputDialog();
@@ -237,9 +236,16 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		modelsf.clear();
 		currentScheduledFlightList = controller.getScheduledFlights();
 		for (ScheduledFlight scheduledFlight : currentScheduledFlightList) {
-			modelsf.addElement(" Take Off: " + scheduledFlight.getEstimatedStart() + " | Arrival: " + scheduledFlight.getEstimatedLanding() + 
-					" | Flight Time: " + scheduledFlight.getFlightTime() + " | Pilot: " + scheduledFlight.getPilot() + " | Route ID: " +
-					scheduledFlight.getRouteID());
+			Route route = controller.getRouteById(scheduledFlight.getID());
+			String departureCity = "No destination";
+			String arrivalCity = "No destination";
+			if(route!=null) {
+				departureCity = route.getDepartureCity();
+				arrivalCity = route.getArrivalCity();
+			}
+			modelsf.addElement("Flight from " + departureCity + " to " + arrivalCity + 
+			" | Take Off: " + scheduledFlight.getEstimatedStart() + " | Arrival: " + scheduledFlight.getEstimatedLanding() + 
+			" | Flight Time: " + scheduledFlight.getFlightTime() + " | Pilot: " + scheduledFlight.getPilot());
 		}
 	}
 
@@ -251,6 +257,5 @@ public class GuiEmployees extends JPanel implements ActionListener{
 					routes.getArrivalCity() + " | Duration: " + routes.getFlightDuration() + " | Price:" + 
 					routes.getPrice());
 		}
-
 	}
 }

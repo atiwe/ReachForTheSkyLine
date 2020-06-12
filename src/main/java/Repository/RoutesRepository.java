@@ -45,6 +45,25 @@ public class RoutesRepository {
 		session.execute(query);
 	}
 	
+	public Route selectByID(int id) {
+		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME).append(" WHERE id = ").append(id).append(";");
+		
+		final String query = sb.toString();
+		
+		ResultSet rs = session.execute(query);
+		List<Route> routes = new ArrayList<Route>();
+		
+		for(Row r : rs) {
+			Route route = new Route(r.getInt("id"), r.getString("departure_city"), r.getString("arrival_city"), r.getString("estimated_flight_duration"), r.getString("price"));
+			
+			routes.add(route);
+		}
+		if(routes.size()<1) {
+			return null;
+		}
+		return routes.get(0);
+	}
+	
 	public Route selectByDeparture(String depart) {
 		StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME).append(" WHERE departure_city = '").append(depart).append("';");
 		
