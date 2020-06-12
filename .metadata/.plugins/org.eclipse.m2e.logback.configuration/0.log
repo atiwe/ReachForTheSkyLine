@@ -1,2 +1,18 @@
 2020-05-25 12:14:00,253 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2020-05-28 10:42:11,954 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-06-12 12:05:59,416 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-06-12 12:08:31,309 [Worker-3: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: RFTSLgroup:RFTSLid:0.0.1-SNAPSHOT @ C:\Users\dalvi\Desktop\ReachForTheSkyLine\pom.xml.
+2020-06-12 12:08:31,309 [Worker-11: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: RFTSLgroup:RFTSLid:0.0.1-SNAPSHOT @ C:\Users\dalvi\Desktop\ReachForTheSkyLine\pom.xml.
+2020-06-12 12:08:32,762 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-06-12 12:08:32,763 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\dalvi\Desktop\ReachForTheSkyLine\src\main\resources
+2020-06-12 12:08:32,766 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-06-12 12:08:32,766 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\dalvi\Desktop\ReachForTheSkyLine\src\test\resources
+2020-06-12 12:08:34,627 [Worker-1: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: RFTSLgroup:RFTSLid:0.0.1-SNAPSHOT @ C:\Users\dalvi\Desktop\ReachForTheSkyLine\pom.xml.
+2020-06-12 12:08:35,348 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-06-12 12:08:35,348 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\dalvi\Desktop\ReachForTheSkyLine\src\main\resources
+2020-06-12 12:08:35,353 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-06-12 12:08:35,353 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\dalvi\Desktop\ReachForTheSkyLine\src\test\resources
+2020-06-12 12:08:36,804 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-06-12 12:08:36,805 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\dalvi\Desktop\ReachForTheSkyLine\src\main\resources
+2020-06-12 12:08:36,807 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-06-12 12:08:36,807 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\dalvi\Desktop\ReachForTheSkyLine\src\test\resources

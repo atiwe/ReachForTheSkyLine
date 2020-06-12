@@ -13,7 +13,7 @@ public class InputDialog {
 	JTextField field6;
 	JTextField field7;
 	JTextField field8;
-	
+
 	public InputDialog() {
 		field1 = new JTextField();
 		field2 = new JTextField();
@@ -24,7 +24,7 @@ public class InputDialog {
 		field7 = new JTextField();
 		field8 = new JTextField();
 	}
-	
+
 	public String[] showAddFlightDialog() {
 		Object[] field = {
 				"Estimated Start", field1,
@@ -37,7 +37,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4, field5};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showAddFlightLineDialog() {
 		Object[] field = {
 				"Dept City", field1,
@@ -49,7 +49,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showEditScheduledFlightDialog() {
 		Object[] field = {
 				"ETD", field1,
@@ -60,7 +60,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showBookFlightDialog() {
 		Object[] field = {
 				"Name", field1,
@@ -74,7 +74,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showCancelFlightDialog() {
 		Object[] field = {
 				"Social Security Number", field1,
@@ -84,7 +84,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showAddPilotDialog() {
 		Object[] field = {
 				"Name", field1,
@@ -98,19 +98,19 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showEditPilotDialog() {
 		Object[] field = {
 				"Weekly Flight Hours", field1,
 				"Last Flight", field2,
 				"Next Flight", field3,
-				
+
 			};
 		JOptionPane.showConfirmDialog(null, field, "Edit Pilot", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showEditCampaignDialog() {
 		Object[] field = {
 				"Start Date", field1,
@@ -122,7 +122,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showAddEmployeeDialog() {
 		Object[] field = {
 				"Name", field1,
@@ -135,7 +135,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4, field5};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showEditEmployeeDialog() {
 		Object[] field = {
 				"Name", field1,
@@ -148,7 +148,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4, field5};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showAddAircraftDialog() {
 		Object[] field = {
 				"Model", field1,
@@ -160,7 +160,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showEditAircraftDialog() {
 		Object[] field = {
 				"Model", field1,
@@ -172,7 +172,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
-	
+
 	public String[] showAddDiscountDialog() {
 		Object[] field = {
 				"Start Date", field1,
@@ -184,7 +184,7 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
-	
+
 
 	public String[] showAddCampainDialog() {
 		Object[] field = {
@@ -209,10 +209,58 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
-	
+
+	public boolean showLoginOptions() {
+		Object[] options = {"Login", "Create new"};
+		int choice = JOptionPane.showOptionDialog(null, "Please choose: ", "New or Existing Customer?", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, null, options, null);
+
+		if (choice == JOptionPane.NO_OPTION) {
+			return false;
+		}
+
+		return true;
+
+	}
+
+	public String[] showCreateCustomerDialog() {
+		Object[] field = {
+				"Name", field1,
+				"Email", field2,
+				"Telephone", field3,
+				"SSN", field4,
+				"Bank", field5,
+				"Password", field6
+		};
+
+		JOptionPane.showConfirmDialog(null, field, "Create new customer", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
+		return dialogToArray(fields);
+	}
+
+	public String[] showCustomerLoginDialog() {
+		Object[] field = {
+				"Username", field1,
+				"Password", field2,
+		};
+		JOptionPane.showConfirmDialog(null, field, "Login as Customer", JOptionPane.OK_CANCEL_OPTION);
+
+		JTextField[] fields = {field1, field2};
+		return dialogToArray(fields);
+	}
+
+	public String[] showEmployeeLoginDialog() {
+		Object[] field = {
+				"Username", field1,
+				"Password", field2
+		};
+		JOptionPane.showConfirmDialog(null, field, "Login as Employee", JOptionPane.OK_CANCEL_OPTION);
+		JTextField[] fields = {field1, field2};
+		return dialogToArray(fields);
+	}
+
 	public boolean confirmationDialog(String[] textFields) {
-		for (String var : textFields) 
-		{ 
+		for (String var : textFields)
+		{
 		    if(var.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Nothing saved because not all fields were answered");
 		    	return false;
@@ -222,7 +270,8 @@ public class InputDialog {
 		return true;
 
 	}
-	
+
+
 	private String[] dialogToArray(JTextField[] fields) {
 		String[] arr = new String[fields.length];
 		for(int i = 0; i<fields.length; i++) {
