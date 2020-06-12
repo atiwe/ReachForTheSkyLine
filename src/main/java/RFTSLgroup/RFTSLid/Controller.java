@@ -8,6 +8,7 @@ import Domain.Employee;
 import Domain.Pilot;
 import Domain.Route;
 import Domain.ScheduledFlight;
+import Domain.User;
 import Repository.AirplaneRepository;
 import Repository.CampaignRepository;
 import Repository.CustomerRepository;
@@ -16,6 +17,7 @@ import Repository.FlightRequestRepository;
 import Repository.PilotRepository;
 import Repository.RoutesRepository;
 import Repository.ScheduledFlightRepository;
+import Repository.UserRepository;
 
 public class Controller {
 	private GuiEmployees guiEmployee;
@@ -27,11 +29,12 @@ public class Controller {
     private PilotRepository pilotRepository;
     private RoutesRepository routesRepository;
     private ScheduledFlightRepository scheduledFlightRepository;
+    private UserRepository userRepository;
 	private GuiAdmin guiAdmin;
 	private HomePage homePage;
 	private GuiCustomers guiCustomers;
 	
-	public Controller(AirplaneRepository airplaneRepository, CampaignRepository campaignRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, FlightRequestRepository flightRequestRepository, PilotRepository pilotRepository, RoutesRepository routesRepository, ScheduledFlightRepository scheduledFlightRepository) {
+	public Controller(AirplaneRepository airplaneRepository, CampaignRepository campaignRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, FlightRequestRepository flightRequestRepository, PilotRepository pilotRepository, RoutesRepository routesRepository, ScheduledFlightRepository scheduledFlightRepository, UserRepository userRepository) {
 		this.airplaneRepository = airplaneRepository;
 		this.campaignRepository = campaignRepository;
 		this.customerRepository = customerRepository;
@@ -40,6 +43,7 @@ public class Controller {
 		this.pilotRepository = pilotRepository;
 		this.routesRepository = routesRepository;
 		this.scheduledFlightRepository = scheduledFlightRepository;
+		this.userRepository = userRepository;
 		createUI();
 	}
 	
@@ -53,7 +57,7 @@ public class Controller {
     
     //TODO Fixa så metoderna alltid får det högsta ID:t, förtillfället tar den sista ID:t + 1, men den sista
     // är inte alltid högst
-    public void addEmployee(String name, String email, String telephone, String ssn, String empDate) {
+    public void addEmployee(String name, String email, String telephone, String ssn, String empDate, String username, String password) {
     	List<Employee> employees = getEmployees();
     	int id = 0;
     	for(Employee employee : employees)
@@ -68,6 +72,10 @@ public class Controller {
     	}
     	Employee employee = new Employee(id, name, email, telephone, ssn, empDate);
     	employeeRepository.insertEmployee(employee);
+    	
+    	String type = "Employee";
+    	User user = new User(username, password, id, type);
+    	userRepository.insertUser(user);
     }
     
     

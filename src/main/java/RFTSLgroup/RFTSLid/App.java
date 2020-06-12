@@ -14,6 +14,7 @@ import Repository.KeySpaceRepository;
 import Repository.PilotRepository;
 import Repository.RoutesRepository;
 import Repository.ScheduledFlightRepository;
+import Repository.UserRepository;
 
 public class App 
 {
@@ -29,6 +30,7 @@ public class App
     private PilotRepository pilotRepository;
     private RoutesRepository routesRepository;
     private ScheduledFlightRepository scheduledFlightRepository;
+    private UserRepository userRepository;
     
     private static Session session;
     
@@ -77,7 +79,7 @@ public class App
         scheduledFlightRepository.createTable();
     	
     	
-    	new Controller(airplaneRepository, campaignRepository, customerRepository, employeeRepository, flightRequestRepository, pilotRepository, routesRepository, scheduledFlightRepository);
+    	new Controller(airplaneRepository, campaignRepository, customerRepository, employeeRepository, flightRequestRepository, pilotRepository, routesRepository, scheduledFlightRepository, userRepository);
     }
     
     

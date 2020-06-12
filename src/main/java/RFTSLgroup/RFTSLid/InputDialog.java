@@ -129,10 +129,12 @@ public class InputDialog {
 				"Email", field2,
 				"Telephone", field3,
 				"Social", field4,
-				"Employment date", field5
+				"Employment date", field5,
+				"Username", field6,
+				"Password", field7
 			};
 		JOptionPane.showConfirmDialog(null, field, "Add Employee", JOptionPane.OK_CANCEL_OPTION);
-		JTextField[] fields = {field1, field2, field3, field4, field5};
+		JTextField[] fields = {field1, field2, field3, field4, field5, field6, field7};
 		return dialogToArray(fields);
 	}
 
