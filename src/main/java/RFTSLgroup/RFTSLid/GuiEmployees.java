@@ -27,7 +27,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 	JLabel emp2 = new JLabel("");
 	JList jlistsf;
 	JList jlistfl;
-	JButton btnAddFlight, btnAddFlightLine, btnRemoveFlight, btnEditFlight, btnPlaceBooking, btnRemoveFlightLine;
+	JButton btnAddFlight, btnAddFlightLine, btnRemoveFlight, btnEditFlight, btnRemoveFlightLine;
 
 	DefaultListModel<String> modelsf;
 	DefaultListModel<String> modelfl;
@@ -66,13 +66,11 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		btnAddFlightLine = new JButton("Add Flight Route");
 		btnRemoveFlight = new JButton("Remove Flight");
 		btnEditFlight = new JButton("Edit Flight");
-		btnPlaceBooking = new JButton("Place Booking");
 		btnRemoveFlightLine = new JButton("Remove Flight Route");
 		btnAddFlight.addActionListener(this);
 		btnAddFlightLine.addActionListener(this);
 		btnRemoveFlight.addActionListener(this);
 		btnEditFlight.addActionListener(this);
-		btnPlaceBooking.addActionListener(this);
 		btnRemoveFlightLine.addActionListener(this);
 		
 
@@ -82,10 +80,8 @@ public class GuiEmployees extends JPanel implements ActionListener{
 		bottomPanel.add(btnRemoveFlightLine);
 		bottomPanel2.add(btnRemoveFlight);
 		bottomPanel2.add(btnEditFlight);
-		bottomPanel2.add(btnPlaceBooking);
 		
 		
-
 		centrePanel.add(jlemp);
 		centrePanel.add(jlsf);
 		centrePanel.add(new JScrollPane(jlistsf));
@@ -205,25 +201,7 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			}
 
 		}
-		//TODO Fixa denna metoden så den skapar flightRequest och hämtar info från användare och flight-listorna
-		else if (e.getSource() == btnPlaceBooking) {
-			if(jlistsf.getSelectedIndex()>=0) {
-				currentScheduledFlightList = controller.getScheduledFlights();
-				ScheduledFlight schFlight = currentScheduledFlightList.get(jlistsf.getSelectedIndex());
-
-				int flightID = schFlight.getID();
-
-				InputDialog id = new InputDialog();
-				String[] arr = id.showBookFlightDialog();
-				
-				//controller.bookFlight(arr[0], arr[1], arr[2], arr[3], arr[4],arr[5], flightID);
-				updateScheduledFlights();
-				
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "You need to select a flight from the list to book it!");
-			}
-		}
+		
 	}
 
 	public void updateTexts() {

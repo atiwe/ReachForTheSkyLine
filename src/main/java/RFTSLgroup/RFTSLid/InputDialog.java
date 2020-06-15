@@ -74,6 +74,31 @@ public class InputDialog {
 		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
 		return dialogToArray(fields);
 	}
+	
+	public boolean showSureToBookDialog() {
+		Object[] options = {"Book flight", "Cancel"};
+	// int choice = JOptionPane.showConfirmDialog(null, options, "Are you sure",  JOptionPane.OK_CANCEL_OPTION);
+	int choice = JOptionPane.showOptionDialog(null, "Are you sure you want to book this flight?", "Please choose ",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, null, options, null);
+
+		if (choice == JOptionPane.NO_OPTION) {
+			return false;
+		}
+
+		return true;
+
+	}
+	
+	public boolean areYouASure() {
+		
+		int selectedOption = JOptionPane.showConfirmDialog(null, "Wanna book?", "do it", JOptionPane.YES_NO_OPTION);
+		
+		if (selectedOption == JOptionPane.YES_OPTION) {
+			return true;
+		}
+		
+		return false;
+		
+	}
 
 	public String[] showCancelFlightDialog() {
 		Object[] field = {
@@ -214,7 +239,7 @@ public class InputDialog {
 
 	public boolean showLoginOptions() {
 		Object[] options = {"Login", "Create new"};
-		int choice = JOptionPane.showOptionDialog(null, "Please choose: ", "New or Existing Customer?", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, null, options, null);
+		int choice = JOptionPane.showOptionDialog(null, "New or Existing Customer?", "Please choose: ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
 
 		if (choice == JOptionPane.NO_OPTION) {
 			return false;

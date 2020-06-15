@@ -128,39 +128,48 @@ public class HomePage implements ActionListener {
 			cardLayout.show(panelContainer, "GuiAdmin");
 		} 
 		else if (e.getSource() == menuItemCust) {
-			newOrExistingCustomer();
-			if(customerLoginWindow()) {
-			cardLayout.show(panelContainer, "GuiCustomer");
+			if (newOrExistingCustomer() == true) {
+				if (customerLoginWindow() == true) 
+				{
+					cardLayout.show(panelContainer, "GuiCustomer");
+				}
 			}
 			guiCustomer.updateTexts();
 		} 
 		else if (e.getSource() == menuItemEmp) {
-			employeeLoginWindow();
+			if (employeeLoginWindow()) {
 			cardLayout.show(panelContainer, "GuiEmployee");
+			}
 		}
 		else if (e.getSource() == btnAdmin) {
 			cardLayout.show(panelContainer, "GuiAdmin");
 		}
 		else if (e.getSource() == btnCust) {
-			newOrExistingCustomer();
-			if(customerLoginWindow()) {
-			cardLayout.show(panelContainer, "GuiCustomer");
+			if (newOrExistingCustomer() == true) {
+				if (customerLoginWindow() == true) 
+				{
+					cardLayout.show(panelContainer, "GuiCustomer");
+				}
 			}
 		}
+
 		else if (e.getSource() == btnEmp) {
-			if(employeeLoginWindow())
+			if(employeeLoginWindow()) {
 				cardLayout.show(panelContainer, "GuiEmployee");
+			}
 		}
 	}
 	
-	public void newOrExistingCustomer() {
+	public boolean newOrExistingCustomer() {
 		InputDialog id = new InputDialog();
 
 		boolean result = id.showLoginOptions();
 		if(result == true ) {
-			customerLoginWindow();
+			return true;
+			
 		} else {
 			createNewUser();
+			return false;
 		}
 	}
 

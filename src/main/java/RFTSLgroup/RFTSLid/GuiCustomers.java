@@ -33,18 +33,15 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	JLabel emp2 = new JLabel("");
 	JLabel emp3 = new JLabel("");
 	JList jlistsf;
-	JList jlistfl;
 	JList jlistbf;
 	JButton btnBookFlight, btnCancelFlight;
 	
 	DefaultListModel<String> modelsf;
-	DefaultListModel<String> modelfl;
 	DefaultListModel<String> modelbf;
 	
 	Object[] dreamFlights;
 	private Controller controller;
 	List<ScheduledFlight> currentflightList;
-	List<Route> currentRouteList;
 	List<Customer> currentCustomers;
 	private User currentUser;
 	
@@ -65,15 +62,12 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		jlemp = new JLabel("Customers", SwingConstants.CENTER);
 		jlemp.setFont(new Font("Serif", Font.BOLD, 24));
 		jlsf = new JLabel("Scheduled flights", SwingConstants.CENTER);
-		jlfl = new JLabel("Routes", SwingConstants.CENTER);
 		jlbf = new JLabel("Booked flights", SwingConstants.CENTER);
 		
 		//Lists
 		modelsf = new DefaultListModel<String>();
-		modelfl = new DefaultListModel<String>();
 		modelbf = new DefaultListModel<String>();
 		jlistsf = new JList(modelsf);
-		jlistfl = new JList(modelfl);
 		jlistbf = new JList(modelbf);
 		
 		updateTexts();
@@ -91,8 +85,6 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		centrePanel.add(jlemp);
 		centrePanel.add(jlsf);
 		centrePanel.add(new JScrollPane(jlistsf));
-		centrePanel.add(jlfl);
-		centrePanel.add(new JScrollPane(jlistfl));
 		centrePanel.add(jlbf);
 		centrePanel.add(new JScrollPane(jlistbf));
 		centrePanel.add(emp2);
@@ -110,7 +102,6 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	
 	public void updateTexts() {
 		updateBookedFlights();
-		updateFlightLines();
 		updateScheduledFlights();
 	}
 	
@@ -125,15 +116,6 @@ public class GuiCustomers extends JPanel implements ActionListener {
 				}
 			}	
 		}		 
-	}
-	
-	private void updateFlightLines() {
-		modelfl.clear();
-		currentRouteList = controller.getFlightLines();
-		for(Route route : currentRouteList){
-			modelfl.addElement("ID: " + route.getID() + " | Departure city: " + route.getDepartureCity() + " | Arrival city: " + route.getArrivalCity() + " | Flight time: "
-					+ route.getFlightDuration() + " | Price: " + route.getPrice());
-		}
 	}
 	
 	private void updateScheduledFlights() {
@@ -160,11 +142,11 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		if (e.getSource() == btnBookFlight) {
 			if(jlistsf.getSelectedIndex()>=0) {
 			InputDialog id = new InputDialog();
-			String[] arr = id.showBookFlightDialog();
+			boolean sure = id.areYouASure();
 			ScheduledFlight selectedFlight = currentflightList.get(jlistsf.getSelectedIndex());
 			int flightID = selectedFlight.getID();
 			Route route = controller.getRouteById(flightID);
-			if(id.confirmationDialog(arr)) {
+			if(sure == true) {
 				controller.bookFlight(currentUser.getRelatedID(), route.getDepartureCity(), route.getArrivalCity(), selectedFlight.getEstimatedStart());
 				updateBookedFlights();
 				}
