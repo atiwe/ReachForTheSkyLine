@@ -156,7 +156,8 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		} 
 		else if (e.getSource() == btnCancelFlight) {
 			if(jlistbf.getSelectedIndex()>=0) {
-				int customerID = currentCustomers.get(jlistbf.getSelectedIndex()).getID();
+				int customerID = currentUser.getRelatedID();
+			//	int customerID = currentCustomers.get(jlistbf.getSelectedIndex()).getID();
 				int dialogResult = JOptionPane.showConfirmDialog(null, "Remove Flight?", "Warning", JOptionPane.OK_CANCEL_OPTION);
 				if(dialogResult == JOptionPane.OK_OPTION) {
 					controller.cancelFlight(customerID);
