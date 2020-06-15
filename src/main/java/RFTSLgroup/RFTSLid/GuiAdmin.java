@@ -181,47 +181,59 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		if (e.getSource() == btnAddPilot) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddPilotDialog();
-			if(id.confirmationDialog(arr)) {
-				controller.addPilot( arr[0], arr[3], arr[2], arr[4], arr[5], arr[1]);
+			if(id.GetDialogOption() == JOptionPane.OK_OPTION) {
+				if(id.fieldCheckDialogConfirmation(arr)) {
+					controller.addPilot( arr[0], arr[3], arr[2], arr[4], arr[5], arr[1]);	
+				}
+				updatePilots();
 			}
-			updatePilots();
 		} 
 
 		else if (e.getSource() == btnAddEmp) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddEmployeeDialog();	
-			if(id.confirmationDialog(arr)) {
-				controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
-				
+			if(id.GetDialogOption() == JOptionPane.OK_OPTION) {
+				if(id.confirmationDialog(arr)) {
+					controller.addEmployee(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+					
+				}
+				updateEmployees();
 			}
-			updateEmployees();
+
 		} 
 
 		else if (e.getSource() == btnAddAir) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddAircraftDialog();
-			if(id.confirmationDialog(arr)) {
-				controller.addAircraft( arr[0], arr[1], arr[2], arr[3]);
+			if(id.GetDialogOption() == JOptionPane.OK_OPTION) {
+				if(id.confirmationDialog(arr)) {
+					controller.addAircraft( arr[0], arr[1], arr[2], arr[3]);
+				}
+				updateAircrafts();	
 			}
-			updateAircrafts();
 		}
 
 		else if (e.getSource() == btnAddDis) {
 			InputDialog id = new InputDialog();
 			String[] arr = id.showAddDiscountDialog();
-			if(id.confirmationDialog(arr)) {
-				controller.addCampaign(arr[0], arr[1], arr[2], arr[3]);
+			if(id.GetDialogOption() == JOptionPane.OK_OPTION) {
+				if(id.confirmationDialog(arr)) {
+					controller.addCampaign(arr[0], arr[1], arr[2], arr[3]);
+				}
+				updateDiscounts();	
 			}
-			updateDiscounts();
 		}
 
 		else if (e.getSource() == btnRemAir) {
 			if(jlistInfo.getSelectedIndex()>=0) {
 				currentAirplaneList = controller.getAircrafts();
 				int airID = currentAirplaneList.get(jlistInfo.getSelectedIndex()).getID();
-				JOptionPane.showMessageDialog(this, "Removing Flight with ID " + airID );
-				controller.removeAircraft(airID);
-				updateAircrafts();
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Remove Airplane?", "Warning", JOptionPane.OK_CANCEL_OPTION);
+				if(dialogResult == JOptionPane.OK_OPTION) {
+					JOptionPane.showMessageDialog(this, "Removing Flight with ID " + airID );
+					controller.removeAircraft(airID);
+					updateAircrafts();	
+				}
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "You need to select a aircraft from the list to remove it!");
@@ -233,9 +245,12 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			if(jlistInfo.getSelectedIndex()>=0) {
 				currentPilotList = controller.getPilots();
 				int pilotID = currentPilotList.get(jlistInfo.getSelectedIndex()).getID();
-				JOptionPane.showMessageDialog(this, "Removing Pilot with ID " + pilotID );
-				controller.removePilot(pilotID);
-				updatePilots();
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Remove Pilot?", "Warning", JOptionPane.OK_CANCEL_OPTION);
+				if(dialogResult == JOptionPane.OK_OPTION) {
+					JOptionPane.showMessageDialog(this, "Removing Pilot with ID " + pilotID );
+					controller.removePilot(pilotID);
+					updatePilots();	
+				}
 			} else {
 
 				JOptionPane.showMessageDialog(null, "You need to select a pilot from the list to remove it!");
@@ -246,9 +261,12 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			if(jlistInfo.getSelectedIndex()>=0) {
 				currentEmployeeList = controller.getEmployees(); 
 				int empID = currentEmployeeList.get(jlistInfo.getSelectedIndex()).getID();
-				JOptionPane.showMessageDialog(this, "Removing Employee with ID " + empID );
-				controller.removeEmployee(empID);
-				updateEmployees();
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Remove Employee?", "Warning", JOptionPane.OK_CANCEL_OPTION);
+				if(dialogResult == JOptionPane.OK_OPTION) {
+					JOptionPane.showMessageDialog(this, "Removing Employee with ID " + empID );
+					controller.removeEmployee(empID);
+					updateEmployees();	
+				}
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select an employee from the list to remove it!");
 			}
@@ -257,9 +275,12 @@ public class GuiAdmin extends JPanel implements ActionListener {
 			if(jlistInfo.getSelectedIndex()>=0) {
 				currentCampaignList = controller.getDiscounts();
 				int empID = currentCampaignList.get(jlistInfo.getSelectedIndex()).getID();
-				JOptionPane.showMessageDialog(this, "Removing Campaign with ID " + empID );
-				controller.removeCampaign(empID);
-				updateDiscounts();
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Remove Discount?", "Warning", JOptionPane.OK_CANCEL_OPTION);
+				if(dialogResult == JOptionPane.OK_OPTION) {
+					JOptionPane.showMessageDialog(this, "Removing Campaign with ID " + empID );
+					controller.removeCampaign(empID);
+					updateDiscounts();	
+				}
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select a Campaign from the list to remove it!");
 			}
@@ -277,10 +298,13 @@ public class GuiAdmin extends JPanel implements ActionListener {
 
 				InputDialog id = new InputDialog();
 				String[] arr = id.showEditAircraftDialog();
-				if(id.confirmationDialog(arr)) {
-					controller.editAircraft(airplaneID, arr[0], arr[1], arr[2], arr[3]);
+				if(id.GetDialogOption() == JOptionPane.OK_OPTION) {
+					if(id.confirmationDialog(arr)) {
+						controller.editAircraft(airplaneID, arr[0], arr[1], arr[2], arr[3]);
+					}
+					updateAircrafts();
 				}
-				updateAircrafts();
+
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select a airplane from the list to edit it!");	
 			}
@@ -299,10 +323,13 @@ public class GuiAdmin extends JPanel implements ActionListener {
 
 				InputDialog id = new InputDialog();
 				String[] arr = id.showEditEmployeeDialog();
-				if(id.confirmationDialog(arr)) {
-					controller.editEmployee(employeeID, arr[0], arr[1], arr[2], arr[3], arr[4]);
+				if(id.GetDialogOption() == JOptionPane.OK_OPTION) {
+					if(id.confirmationDialog(arr)) {
+						controller.editEmployee(employeeID, arr[0], arr[1], arr[2], arr[3], arr[4]);
+					}
+					updateEmployees();
 				}
-				updateEmployees();
+
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select a employee from the list to edit it!");	
 			}
@@ -327,10 +354,13 @@ public class GuiAdmin extends JPanel implements ActionListener {
 				InputDialog id = new InputDialog();
 				String[] arr = id.showEditPilotDialog();
 				
-				if(id.confirmationDialog(arr)) {
-					controller.editPilot(pilotID, pilotName, email, telephone, pilotSSN, pilotLicense, empDate, arr[0], arr[1], arr[2]);
+				if(id.GetDialogOption() == JOptionPane.OK_OPTION) {
+					if(id.confirmationDialog(arr)) {
+						controller.editPilot(pilotID, pilotName, email, telephone, pilotSSN, pilotLicense, empDate, arr[0], arr[1], arr[2]);
+					}
+					updatePilots();
 				}
-				updatePilots();
+
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select a pilot from the list to edit it!");	
 			}
@@ -350,10 +380,12 @@ public class GuiAdmin extends JPanel implements ActionListener {
 				InputDialog id = new InputDialog();
 				String[] arr = id.showEditCampaignDialog();
 
-				if(id.confirmationDialog(arr)) {
-					controller.editCampaign(campaignID, arr[0], arr[1], arr[2], arr[3]);
+				if(id.GetDialogOption() == JOptionPane.OK_OPTION) {
+					if(id.confirmationDialog(arr)) {
+						controller.editCampaign(campaignID, arr[0], arr[1], arr[2], arr[3]);
+					}
+					updateDiscounts();	
 				}
-				updateDiscounts();
 			} else {
 				JOptionPane.showMessageDialog(null, "You need to select a campaign from the list to edit it!");	
 			}
@@ -361,15 +393,63 @@ public class GuiAdmin extends JPanel implements ActionListener {
 		}
 		else if (rbtnPilot.isSelected()) {
 			updatePilots();
+			btnAddPilot.setEnabled(true);
+			btnRemPilot.setEnabled(true);
+			btnEditPilot.setEnabled(true);
+			btnAddEmp.setEnabled(false);
+			btnRemEmp.setEnabled(false);
+			btnEditEmp.setEnabled(false);
+			btnAddDis.setEnabled(false);
+			btnRemDis.setEnabled(false);
+			btnEditDis.setEnabled(false);
+			btnAddAir.setEnabled(false);
+			btnRemAir.setEnabled(false);
+			btnEditAir.setEnabled(false);
 		}
 		else if (rbtnEmp.isSelected()) {
 			updateEmployees();
+			btnAddPilot.setEnabled(false);
+			btnRemPilot.setEnabled(false);
+			btnEditPilot.setEnabled(false);
+			btnAddEmp.setEnabled(true);
+			btnRemEmp.setEnabled(true);
+			btnEditEmp.setEnabled(true);
+			btnAddDis.setEnabled(false);
+			btnRemDis.setEnabled(false);
+			btnEditDis.setEnabled(false);
+			btnAddAir.setEnabled(false);
+			btnRemAir.setEnabled(false);
+			btnEditAir.setEnabled(false);
 		}
 		else if(rbtnDis.isSelected()) {
 			updateDiscounts();
+			btnAddPilot.setEnabled(false);
+			btnRemPilot.setEnabled(false);
+			btnEditPilot.setEnabled(false);
+			btnAddEmp.setEnabled(false);
+			btnRemEmp.setEnabled(false);
+			btnEditEmp.setEnabled(false);
+			btnAddDis.setEnabled(true);
+			btnRemDis.setEnabled(true);
+			btnEditDis.setEnabled(true);
+			btnAddAir.setEnabled(false);
+			btnRemAir.setEnabled(false);
+			btnEditAir.setEnabled(false);
 		}
 		else if (rbtnAir.isSelected()) {
 			updateAircrafts();
+			btnAddPilot.setEnabled(false);
+			btnRemPilot.setEnabled(false);
+			btnEditPilot.setEnabled(false);
+			btnAddEmp.setEnabled(false);
+			btnRemEmp.setEnabled(false);
+			btnEditEmp.setEnabled(false);
+			btnAddDis.setEnabled(false);
+			btnRemDis.setEnabled(false);
+			btnEditDis.setEnabled(false);
+			btnAddAir.setEnabled(true);
+			btnRemAir.setEnabled(true);
+			btnEditAir.setEnabled(true);
 		}
 	}
 
