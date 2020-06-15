@@ -148,11 +148,13 @@ public class GuiEmployees extends JPanel implements ActionListener{
 			if(jlistsf.getSelectedIndex()>=0) {
 				currentScheduledFlightList = controller.getScheduledFlights();
 				int flightID = currentScheduledFlightList.get(jlistsf.getSelectedIndex()).getID();
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Remove Flight?", "Warning", JOptionPane.OK_CANCEL_OPTION);
+				if(dialogResult == JOptionPane.OK_OPTION) {
+					JOptionPane.showMessageDialog(this, "Removing Scheduled Flight with ID " + flightID );
 
-				JOptionPane.showMessageDialog(this, "Removing Scheduled Flight with ID " + flightID );
-
-				controller.removeFlight(flightID);
-				updateScheduledFlights();
+					controller.removeFlight(flightID);
+					updateScheduledFlights();	
+				}
 
 
 			} else {
@@ -168,10 +170,13 @@ public class GuiEmployees extends JPanel implements ActionListener{
 				currentRouteList = controller.getFlightLines();
 				int flightLineID = currentRouteList.get(jlistfl.getSelectedIndex()).getID();
 				
-				JOptionPane.showMessageDialog(this, "Removing Flight Route with ID " + flightLineID );
-				
-				controller.removeRoute(flightLineID);
-				updateFlightRoutes();
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Remove Flight?", "Warning", JOptionPane.OK_CANCEL_OPTION);
+				if(dialogResult == JOptionPane.OK_OPTION) {
+					JOptionPane.showMessageDialog(this, "Removing Flight Route with ID " + flightLineID );
+					
+					controller.removeRoute(flightLineID);
+					updateFlightRoutes();
+				}
 				
 			}
 			
