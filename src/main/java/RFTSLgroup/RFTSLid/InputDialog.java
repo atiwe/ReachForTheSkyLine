@@ -13,6 +13,8 @@ public class InputDialog {
 	JTextField field6;
 	JTextField field7;
 	JTextField field8;
+	
+	int dialogWindow;
 
 	public InputDialog() {
 		field1 = new JTextField();
@@ -33,7 +35,7 @@ public class InputDialog {
 				"Pilot", field4,
 				"Flightline ID", field5
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Flight", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Add Flight", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4, field5};
 		return dialogToArray(fields);
 	}
@@ -45,7 +47,7 @@ public class InputDialog {
 				"Flight Duration", field3,
 				"Price", field4
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Flight Line", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Add Flight Line", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
@@ -56,7 +58,7 @@ public class InputDialog {
 				"ETA", field2,
 				"Pilot", field3
 			};
-		JOptionPane.showConfirmDialog(null, field, "Edit Scheduled Flight", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Edit Scheduled Flight", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3};
 		return dialogToArray(fields);
 	}
@@ -70,7 +72,7 @@ public class InputDialog {
 				"Bank", field5,
 				"Discount code", field6
 			};
-		JOptionPane.showConfirmDialog(null, field, "Book Flight", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Book Flight", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
 		return dialogToArray(fields);
 	}
@@ -105,7 +107,7 @@ public class InputDialog {
 				"Social Security Number", field1,
 				"Flight ID", field2
 		};
-		JOptionPane.showConfirmDialog(null, field, "Cancel Flight", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Cancel Flight", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2};
 		return dialogToArray(fields);
 	}
@@ -119,7 +121,7 @@ public class InputDialog {
 				"Social Security #", field5,
 				"Employment Date", field6,
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Pilot", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Add Pilot", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4, field5, field6};
 		return dialogToArray(fields);
 	}
@@ -131,7 +133,7 @@ public class InputDialog {
 				"Next Flight", field3,
 
 			};
-		JOptionPane.showConfirmDialog(null, field, "Edit Pilot", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Edit Pilot", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3};
 		return dialogToArray(fields);
 	}
@@ -143,7 +145,7 @@ public class InputDialog {
 				"Reduction", field3,
 				"Discount code", field4
 			};
-		JOptionPane.showConfirmDialog(null, field, "Edit Discount", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Edit Discount", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
@@ -158,7 +160,7 @@ public class InputDialog {
 				"Username", field6,
 				"Password", field7
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Employee", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Add Employee", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4, field5, field6, field7};
 		return dialogToArray(fields);
 	}
@@ -171,7 +173,7 @@ public class InputDialog {
 				"Social", field4,
 				"Employment date", field5
 			};
-		JOptionPane.showConfirmDialog(null, field, "Edit Employee", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Edit Employee", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4, field5};
 		return dialogToArray(fields);
 	}
@@ -183,7 +185,7 @@ public class InputDialog {
 				"Capacity", field3,
 				"Flight Hours", field4
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Aircraft", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Add Aircraft", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
@@ -195,7 +197,7 @@ public class InputDialog {
 				"Capacity", field3,
 				"Flight Hours", field4
 			};
-		JOptionPane.showConfirmDialog(null, field, "Edit Aircraft", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Edit Aircraft", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
@@ -207,7 +209,7 @@ public class InputDialog {
 				"Reduction", field3,
 				"Discount code", field4
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Discount", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Add Discount", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
@@ -220,7 +222,7 @@ public class InputDialog {
 				"Reduction", field3,
 				"Discound code", field4
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Campain", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Add Campain", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
@@ -232,7 +234,7 @@ public class InputDialog {
 				"Arrival city", field3,
 				"Start time", field4
 			};
-		JOptionPane.showConfirmDialog(null, field, "Add Flight Request", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Add Flight Request", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4};
 		return dialogToArray(fields);
 	}
@@ -260,7 +262,7 @@ public class InputDialog {
 				"Password", field7
 		};
 
-		JOptionPane.showConfirmDialog(null, field, "Create new customer", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Create new customer", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2, field3, field4, field5, field6, field7};
 		return dialogToArray(fields);
 	}
@@ -270,7 +272,7 @@ public class InputDialog {
 				"Username", field1,
 				"Password", field2,
 		};
-		JOptionPane.showConfirmDialog(null, field, "Login as Customer", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Login as Customer", JOptionPane.OK_CANCEL_OPTION);
 
 		JTextField[] fields = {field1, field2};
 		return dialogToArray(fields);
@@ -281,7 +283,7 @@ public class InputDialog {
 				"Username", field1,
 				"Password", field2
 		};
-		JOptionPane.showConfirmDialog(null, field, "Login as Employee", JOptionPane.OK_CANCEL_OPTION);
+		dialogWindow = JOptionPane.showConfirmDialog(null, field, "Login as Employee", JOptionPane.OK_CANCEL_OPTION);
 		JTextField[] fields = {field1, field2};
 		return dialogToArray(fields);
 	}
@@ -297,6 +299,23 @@ public class InputDialog {
 		JOptionPane.showMessageDialog(null, "Changes saved!");
 		return true;
 
+	}
+	
+	public boolean fieldCheckDialogConfirmation(String[] textFields) {
+		for (String var : textFields)
+		{
+		    if(var.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "You have to fill in all the fields");
+		    	return false;
+		    }
+		}
+		JOptionPane.showMessageDialog(null, "Changes saved!");
+		return true;
+
+	}
+	
+	public int GetDialogOption() {
+		return dialogWindow;
 	}
 
 
