@@ -208,9 +208,8 @@ public class Controller {
     	flightRequestRepository.insertRequest(fr);
     }
     
-    public void cancelFlight(int customerID) {
-    	//customerRepository.deleteCustomerByID(customerID);
-    	flightRequestRepository.deleteRequestByID(customerID);
+    public void cancelFlight(int id) {
+    	flightRequestRepository.deleteRequestByID(id);
     }
     
     

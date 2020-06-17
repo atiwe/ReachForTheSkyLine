@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Console;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class GuiCustomers extends JPanel implements ActionListener {
 	List<ScheduledFlight> currentflightList;
 	List<Customer> currentCustomers;
 	private User currentUser;
+	List<FlightRequest> currentBookedFlights;
 	
 	public GuiCustomers(Controller controller) {
 		this.controller = controller;
@@ -156,11 +158,15 @@ public class GuiCustomers extends JPanel implements ActionListener {
 		} 
 		else if (e.getSource() == btnCancelFlight) {
 			if(jlistbf.getSelectedIndex()>=0) {
-				int customerID = currentUser.getRelatedID();
-			//	int customerID = currentCustomers.get(jlistbf.getSelectedIndex()).getID();
+				
+				System.out.println(jlistbf.getSelectedIndex());
+				currentBookedFlights = controller.getFlightRequests();
+				FlightRequest choosenBooked = currentBookedFlights.get(jlistbf.getSelectedIndex());
+				int bookedID = choosenBooked.getID();
+				
 				int dialogResult = JOptionPane.showConfirmDialog(null, "Remove Flight?", "Warning", JOptionPane.OK_CANCEL_OPTION);
 				if(dialogResult == JOptionPane.OK_OPTION) {
-					controller.cancelFlight(customerID);
+					controller.cancelFlight(bookedID);
 					JOptionPane.showMessageDialog(null, "Flight canceled!");
 					updateBookedFlights();
 				}

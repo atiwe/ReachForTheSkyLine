@@ -85,6 +85,7 @@ public class FlightRequestRepository {
 		session.execute(query);
 	}
 	
+	
 	public void deleteRequestByCustomer(int customer) {
 		StringBuilder sb = new StringBuilder("DELETE FROM ").append(TABLE_NAME).append(" WHERE customer_id = ").append(customer).append(";");
 		
